@@ -1,11 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
-
-@import "~bootstrap/dist/css/bootstrap.min.css";
+// All imports to be imported in this file
 
 
+// Project imports to be done here
 
 
-
+// ***Vendor imports [Bootstrap scss files] to be done here***
 // Import all the bootstrap scss files at the bottom of the file
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
@@ -15,5 +14,3 @@
 // (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px)
 // Available mixins: media-breakpoint-up, media-breakpoint-down, media-breakpoint-between, media-breakpoint-only
 @import "~bootstrap/scss/mixins/breakpoints";
-
-// Import other mixins here as per the requirement
