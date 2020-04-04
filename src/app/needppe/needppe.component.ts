@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-needppe',
+  selector: 'ncov-needppe',
   templateUrl: './needppe.component.html',
   styleUrls: ['./needppe.component.scss']
 })

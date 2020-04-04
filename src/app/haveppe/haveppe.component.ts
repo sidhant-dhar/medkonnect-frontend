@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'haveppe',
+  selector: 'ncov-haveppe',
   templateUrl: './haveppe.component.html',
   styleUrls: ['./haveppe.component.scss']
 })

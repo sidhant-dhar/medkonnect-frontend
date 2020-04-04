@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'buildppe',
+  selector: 'ncov-buildppe',
   templateUrl: './buildppe.component.html',
   styleUrls: ['./buildppe.component.scss']
 })
