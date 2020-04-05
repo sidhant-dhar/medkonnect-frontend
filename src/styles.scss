@@ -1,0 +1,18 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import './scss/bootstrap';
+
+.container {
+  padding: 0;
+}
+
+.text {
+  font-family: 'Nunito-Regular';
+}
+
+.header {
+  font-family: 'Montserrat-Regular';
+}
+
+
