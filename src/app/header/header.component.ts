@@ -1,7 +1,7 @@
 import { Component, AfterViewInit, HostBinding } from '@angular/core';
 import { fromEvent } from 'rxjs';
+import { VisibilityState, Direction } from '../common/enums/enums';
 import {
-  distinctUntilChanged,
   filter,
   map,
   pairwise,
@@ -16,17 +16,6 @@ import {
   transition,
   trigger
 } from '@angular/animations';
-
-enum Direction {
-  Up = 'Up',
-  Down = 'Down'
-}
-
-
-enum VisibilityState {
-  Visible = 'visible',
-  Hidden = 'hidden'
-}
 
 @Component({
   selector: 'ncov-header',
@@ -61,7 +50,7 @@ export class HeaderComponent implements AfterViewInit {
       map(() => window.pageYOffset),
       pairwise(),
       map(([y1, y2]): Direction => (y2 < y1 ? Direction.Up : Direction.Down)),
-      distinctUntilChanged(),
+      // distinctUntilChanged(),
       share()
     );
 
@@ -73,16 +62,10 @@ export class HeaderComponent implements AfterViewInit {
       filter(direction => direction === Direction.Down)
     );
 
-    goingUp$.subscribe(() => (this.isVisible = true));
+    goingUp$.subscribe(() => {
+        this.isVisible = true;
+        this.showActive = window.pageYOffset > 40;
+      });
     goingDown$.subscribe(() => (this.isVisible = false));
-
-    if (this.isVisible && window.pageYOffset > 0) {
-      this.showActive = true;
-    } else {
-      this.showActive = false;
-    }
-
   }
-
-
 }
