@@ -48,33 +48,8 @@ enum VisibilityState {
 })
 export class HeaderComponent implements AfterViewInit {
 
-  // private isVisible = true;
-  // constructor() { }
-
-  // ngAfterViewInit() {
-  //   const scroll$ = fromEvent(window, 'scroll').pipe(
-  //     throttleTime(10),
-  //     map(() => window.pageYOffset),
-  //     pairwise(),
-  //     map(([y1, y2]): Direction => (y2 < y1 ? Direction.Up : Direction.Down)),
-  //     distinctUntilChanged(),
-  //     share()
-  //   );
-  //   console.log(scroll$);
-
-  //   const scrollUp$ = scroll$.pipe(
-  //     filter(direction => direction === Direction.Up)
-  //   );
-  //   const scrollDown$ = scroll$.pipe(
-  //     filter(direction => direction === Direction.Down)
-  //   );
-  //   scrollUp$.subscribe(() => (this.isVisible = true));
-  //   scrollDown$.subscribe(() => (this.isVisible = false));
-
-  // }
-
   private isVisible = true;
-
+  private showActive = false;
   @HostBinding('@toggle')
   get toggle(): VisibilityState {
     return this.isVisible ? VisibilityState.Visible : VisibilityState.Hidden;
@@ -89,7 +64,6 @@ export class HeaderComponent implements AfterViewInit {
       distinctUntilChanged(),
       share()
     );
-    console.log(scroll$);
 
     const goingUp$ = scroll$.pipe(
       filter(direction => direction === Direction.Up)
@@ -102,7 +76,13 @@ export class HeaderComponent implements AfterViewInit {
     goingUp$.subscribe(() => (this.isVisible = true));
     goingDown$.subscribe(() => (this.isVisible = false));
 
-    console.log(this.isVisible);
+    if (this.isVisible && window.pageYOffset > 0) {
+      this.showActive = true;
+    } else {
+      this.showActive = false;
+    }
+
   }
+
 
 }

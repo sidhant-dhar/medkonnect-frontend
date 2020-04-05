@@ -1,5 +1,7 @@
 .ncovHeader{
     background-color: transparent;
+    padding-right: 5%;
+
 }
 
 .headerLogo{
@@ -21,5 +23,22 @@ img{
     font-weight: normal;
     font-size: 20px;
     line-height: 24px;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/****************************Sticky Header Class********************************/
+
+.active{
+    background-color: #ffffff !important;
+    -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+}
+
+.active .navbar-nav .nav-link{
+    color: #000000 !important;
 
 }
