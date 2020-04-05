@@ -10,6 +10,7 @@ import { HaveppeComponent } from './haveppe/haveppe.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { RemoteService } from './common/services/remote.service';
 import { HeaderComponent } from './header/header.component';
+import { MedkonnectLandingComponent } from './homepage/medkonnect-landing/medkonnect-landing.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HeaderComponent } from './header/header.component';
     NeedppeComponent,
     HaveppeComponent,
     HomepageComponent,
-    HeaderComponent
+    HeaderComponent,
+    MedkonnectLandingComponent
   ],
   imports: [
     BrowserModule,

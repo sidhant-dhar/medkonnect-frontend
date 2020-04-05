@@ -1,0 +1,31 @@
+.medkonnect-landing {
+  @import "../../../scss/bootstrap";
+
+  &__request-ppe,
+  &__provide-ppe {
+    display: flex;
+
+    @include media-breakpoint-up(lg) {
+      height: 50%;
+    }
+
+    @include media-breakpoint-down(lg) {
+      margin-top: $spacer * 2;
+    }
+  }
+
+  &__img-vector {
+    position: absolute;
+    left: -1rem;
+  }
+
+  &__img-vector,
+  &__img-doctor {
+    max-width: 100%;
+    height: auto;
+
+    @include media-breakpoint-up(lg) {
+      height: 768px;
+    }
+  }
+}
