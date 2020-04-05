@@ -9,7 +9,7 @@ export class HaveppeComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  public ngOnInit() {
   }
 
 }

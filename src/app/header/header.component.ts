@@ -55,7 +55,7 @@ export class HeaderComponent implements AfterViewInit {
     return this.isVisible ? VisibilityState.Visible : VisibilityState.Hidden;
   }
 
-  ngAfterViewInit() {
+  public ngAfterViewInit(): void {
     const scroll$ = fromEvent(window, 'scroll').pipe(
       throttleTime(10),
       map(() => window.pageYOffset),
