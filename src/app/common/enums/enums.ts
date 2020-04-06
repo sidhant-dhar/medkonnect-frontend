@@ -1,11 +1,8 @@
 export enum Direction {
-    Up = 'Up',
-    Down = 'Down'
-  }
+  Up = 'Up',
+  Down = 'Down'
+}
 export enum VisibilityState {
-    Visible = 'visible',
-    Hidden = 'hidden'
-  }
-
-//   export class EnumVariables {
-// }
+  Visible = 'visible',
+  Hidden = 'hidden'
+}
