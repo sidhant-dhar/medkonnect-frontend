@@ -1,0 +1,43 @@
+@import '../../scss/bootstrap';
+
+.ncovHeader{
+    background-color: transparent;
+    padding-right: 6%;
+
+}
+
+.imgLogo{
+    padding-bottom: 5px;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: $white;
+    opacity: 0.9;
+    font-size: $spacer * 1.25;
+    line-height: $spacer * 1.5;
+}
+
+.navbar-dark .navbar-brand{
+    color: $header-logo;
+    font-size: $spacer * 1.5;
+    line-height: $spacer * 1.8125;
+}
+
+@media ( max-width: 768px) {
+    .navbar-dark .navbar-brand{
+        color: $white;
+    }
+}
+
+/****************************Sticky Header Class********************************/
+
+.active{
+    background-color: $white !important;
+    -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+}
+
+.active .navbar-nav .nav-link{
+    color: $black !important;
+}
