@@ -1,14 +1,5 @@
-<!-- <nav class="navbar navbar-light navbar-expand-lg">
-  <a class="navbar-brand" href="#">
-    <img src="../../assets/Group 3logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-    edKonnect
-  </a>
-</nav> -->
-
-
-
-<nav class="navbar navbar-expand-sm navbar-light ncovHeader fixed-top" [ngClass]="{'active':showActive}">
-  <a class="navbar-brand headerLogo header" href="#">
+<nav class="navbar navbar-expand-sm navbar-dark ncovHeader fixed-top" [ngClass]="{'active':showActive}">
+  <a class="navbar-brand header" href="#">
     <img src="../../assets/Group 3logo.png" width="50" height="50" class="d-inline-block align-bottom imgLogo" alt="MedKonnect">edKonnect
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,13 +8,13 @@
   <div class="collapse navbar-collapse text-right" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item border-right border-white pr-lg-4 pr-md-2">
-        <a class="nav-link headerButton header" href="#" [routerLink]="'/need'">Request</a>
+        <a class="header nav-link" href="#" [routerLink]="'/need'">Request</a>
       </li>
       <li class="nav-item border-right border-white pr-lg-4 pl-lg-4 pr-md-2 pl-md-2">
-        <a class="nav-link headerButton header" href="#" [routerLink]="'/have'">Provide</a>
+        <a class="nav-link header" href="#" [routerLink]="'/have'">Provide</a>
       </li>
       <li class="nav-item pr-lg-5 pl-lg-4 pl-md-2 pr-md-4">
-        <a class="nav-link headerButton header" href="#" [routerLink]="'/build'">Build</a>
+        <a class="nav-link header" href="#" [routerLink]="'/build'">Build</a>
       </li>
           </ul>
       </div>

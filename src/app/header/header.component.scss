@@ -1,5 +1,3 @@
-@import '../../styles.scss';
-@import '../../scss/variables';
 @import '../../scss/bootstrap';
 
 .ncovHeader{
@@ -8,24 +6,27 @@
 
 }
 
-.headerLogo{
-    font-size: $spacer * 1.5;
-    line-height: $spacer * 1.8125;
-    color: $header-logo;
-}
-
 .imgLogo{
     padding-bottom: 5px;
 }
 
-.headerButton{
+.navbar-dark .navbar-nav .nav-link {
+    color: $white;
+    opacity: 0.9;
     font-size: $spacer * 1.25;
     line-height: $spacer * 1.5;
 }
 
-.navbar-light .navbar-nav .nav-link {
-    color: $white;
-    opacity: 0.9;
+.navbar-dark .navbar-brand{
+    color: $header-logo;
+    font-size: $spacer * 1.5;
+    line-height: $spacer * 1.8125;
+}
+
+@media ( max-width: 768px) {
+    .navbar-dark .navbar-brand{
+        color: $white;
+    }
 }
 
 /****************************Sticky Header Class********************************/

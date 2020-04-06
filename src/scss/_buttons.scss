@@ -19,7 +19,7 @@
   font-weight: $font-weight-bolder;
 
   &:hover {
-    background-color: darken($color: $btn-primary, $amount: 5%);
+    background-color: $btn-secondary;
   }
 
   @include media-breakpoint-down(md) {
