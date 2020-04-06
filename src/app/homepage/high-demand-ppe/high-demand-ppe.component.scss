@@ -1,0 +1,58 @@
+.high-demand-ppe {
+  @import "../../../scss/bootstrap";
+
+  &__heading {
+    font-family: 'Montserrat-Regular';
+  }
+
+  &__tiles {
+    &-image {
+      border-radius: 0.5rem;
+      max-width: 100%;
+      height: auto;
+      filter: brightness(0.5);
+
+      &:hover {
+        filter: brightness(0.8);
+      }
+    }
+
+    &-title {
+      color: white;
+      font-family: 'Nunito-Regular';
+      font-weight: bold;
+      font-size: 1.5 * $spacer;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 999;
+    }
+
+    &-btn {
+      display: none;
+    }
+
+    &:hover {
+      & .high-demand-ppe__tiles-title {
+        display: none;
+      }
+
+      & .high-demand-ppe__tiles-btn {
+        display: block;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999;
+      }
+    }
+
+    // Needs fix for below code
+    .mk-btn-primary:hover {
+      .high-demand-ppe__tiles-image {
+        filter: brightness(0.8);
+      }
+    }
+  }
+}

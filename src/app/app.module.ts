@@ -11,6 +11,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { RemoteService } from './common/services/remote.service';
 import { HeaderComponent } from './header/header.component';
 import { MedkonnectLandingComponent } from './homepage/medkonnect-landing/medkonnect-landing.component';
+import { HighDemandPpeComponent } from './homepage/high-demand-ppe/high-demand-ppe.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { MedkonnectLandingComponent } from './homepage/medkonnect-landing/medkon
     HaveppeComponent,
     HomepageComponent,
     HeaderComponent,
-    MedkonnectLandingComponent
+    MedkonnectLandingComponent,
+    HighDemandPpeComponent
   ],
   imports: [
     BrowserModule,
