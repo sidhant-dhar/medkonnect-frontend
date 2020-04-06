@@ -12,6 +12,7 @@ import { RemoteService } from './common/services/remote.service';
 import { HeaderComponent } from './header/header.component';
 import { MedkonnectLandingComponent } from './homepage/medkonnect-landing/medkonnect-landing.component';
 import { HighDemandPpeComponent } from './homepage/high-demand-ppe/high-demand-ppe.component';
+import { MedkonnectAboutusComponent } from './homepage/medkonnect-aboutus/medkonnect-aboutus.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { HighDemandPpeComponent } from './homepage/high-demand-ppe/high-demand-p
     HomepageComponent,
     HeaderComponent,
     MedkonnectLandingComponent,
-    HighDemandPpeComponent
+    HighDemandPpeComponent,
+    MedkonnectAboutusComponent
   ],
   imports: [
     BrowserModule,

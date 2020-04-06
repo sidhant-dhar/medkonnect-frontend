@@ -37,8 +37,8 @@ import {
 })
 export class HeaderComponent implements AfterViewInit {
 
-  private isVisible = true;
-  private showActive = false;
+  public isVisible = true;
+  public showActive = false;
   @HostBinding('@toggle')
   get toggle(): VisibilityState {
     return this.isVisible ? VisibilityState.Visible : VisibilityState.Hidden;
@@ -50,7 +50,6 @@ export class HeaderComponent implements AfterViewInit {
       map(() => window.pageYOffset),
       pairwise(),
       map(([y1, y2]): Direction => (y2 < y1 ? Direction.Up : Direction.Down)),
-      // distinctUntilChanged(),
       share()
     );
 
