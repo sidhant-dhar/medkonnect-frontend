@@ -1,19 +1,15 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'ncov-medkonnect-landing',
   templateUrl: './medkonnect-landing.component.html',
   styleUrls: ['./medkonnect-landing.component.scss']
 })
-export class MedkonnectLandingComponent {
+export class MedkonnectLandingComponent implements OnInit {
 
-  constructor(
-    private readonly router: Router
-  ) { }
+  constructor() { }
 
-  public onRoute(route: string): void {
-    this.router.navigate([route]);
+  public ngOnInit() {
   }
 
 }
