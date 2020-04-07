@@ -13,6 +13,7 @@ import { HeaderComponent } from './header/header.component';
 import { MedkonnectLandingComponent } from './homepage/medkonnect-landing/medkonnect-landing.component';
 import { HighDemandPpeComponent } from './homepage/high-demand-ppe/high-demand-ppe.component';
 import { MedkonnectAboutusComponent } from './homepage/medkonnect-aboutus/medkonnect-aboutus.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { MedkonnectAboutusComponent } from './homepage/medkonnect-aboutus/medkon
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ReactiveFormsModule
   ],
   providers: [
     RemoteService

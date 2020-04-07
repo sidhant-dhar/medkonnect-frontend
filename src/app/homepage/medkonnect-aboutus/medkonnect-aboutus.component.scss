@@ -2,14 +2,14 @@
 
 .aboutusHeader{
 font-weight: 600;
-font-size: 36px;
-line-height: 44px;
+font-size: $spacer * 2.25;
+line-height: $spacer * 2.75;
 text-transform: capitalize;
 color: $aboutusHeading;
 }
 
 .aboutusContent{
-    font-weight: 600;
+font-weight: 600;
 font-size: $spacer;
 line-height: $spacer * 1.375;
 text-align: justify;
