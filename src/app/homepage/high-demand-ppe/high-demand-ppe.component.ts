@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ppeItems } from './ppe-items';
 
 @Component({
   selector: 'ncov-high-demand-ppe',
@@ -8,11 +9,7 @@ import { Router } from '@angular/router';
 })
 export class HighDemandPpeComponent {
 
-  // Temporary array, later array with actual images will be created.
-  public tilesArray = Array(6).fill({
-    title: 'Covers All',
-    path: 'assets/images/coversall.png'
-  });
+  public tilesArray = ppeItems;
 
   constructor(
     private readonly router: Router
