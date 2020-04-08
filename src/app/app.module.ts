@@ -14,6 +14,7 @@ import { HeaderComponent } from './header/header.component';
 import { MedkonnectLandingComponent } from './homepage/medkonnect-landing/medkonnect-landing.component';
 import { AlphaNumericDirective } from './common/directives/alpha-numeric/alpha-numeric.directive';
 import { NumericDirective } from './common/directives/numeric/numeric.directive';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { NumericDirective } from './common/directives/numeric/numeric.directive'
     HeaderComponent,
     MedkonnectLandingComponent,
     AlphaNumericDirective,
-    NumericDirective
+    NumericDirective,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
