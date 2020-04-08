@@ -1,0 +1,66 @@
+@import "../../scss/bootstrap";
+.needppe{
+    background-color: $background-color;
+}
+.headerText{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 49px;    
+   text-indent: 3px;
+    color: $white;
+}
+
+.formStyle{
+    background-color: $white;
+    border-radius: 5%;
+}
+
+.formStyle .form-control{
+    border-bottom: 1px solid $black ;
+}
+
+.formStyle label{
+    font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 24px;
+line-height: 28px;
+display: flex;
+align-items: center;
+text-indent: 3px;
+}
+
+.no-border {
+    border: 0;
+    box-shadow: none;
+    width: 50%;
+}
+
+.no-border :focus{
+    border-bottom: 2px solid red;
+}
+
+.firstCard{
+    border-top: 10px solid $btn-primary;
+    margin-top: 150px;
+}
+
+.btnHospital{
+    background-color: $btn-primary;
+    border-radius: 15px;
+    color: $white;
+}
+
+@media ( max-width: 768px) {
+    .headerText{
+    font-size: 20px;
+    line-height: 29px;    
+   text-indent: 2px;
+   padding-top: 10px;
+    }
+
+    .no-border{
+        width: 100%;
+    }
+}

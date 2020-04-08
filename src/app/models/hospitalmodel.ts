@@ -10,13 +10,13 @@
     public mobile = '';
     public state = '';
     public hospitalAddress = '';
-    public pincode: Number = 0;
-    public homeMade = false;
+    public pincode = 0;
+    // public homeMade = false;
   }
 export class ContactRequest {
     public personalData: PersonalData;
-    public requestType: any = '';
-    public text = '';
+    public materialsRequired: any;
+    public homeMade = false;
   }
 
 //   export class PersonalData {

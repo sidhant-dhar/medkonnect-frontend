@@ -9,7 +9,7 @@ export class MedkonnectAboutusComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  public ngOnInit() {
   }
 
 }
