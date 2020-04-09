@@ -28,6 +28,7 @@ import { NumericDirective } from './common/directives/numeric/numeric.directive'
     MedkonnectLandingComponent,
     HighDemandPpeComponent,
     MedkonnectAboutusComponent,
+    HighDemandPpeComponent,
     AlphaNumericDirective,
     NumericDirective
   ],
