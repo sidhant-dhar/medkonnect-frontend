@@ -1,0 +1,20 @@
+<div class="high-demand-ppe container mt-3">
+  <h1 class="header text-center">HIGH DEMAND PPES</h1>
+  <div>
+    <div class="high-demand-ppe__tiles-container">
+      <div class="row mx-0">
+        <div *ngFor="let tile of tilesArray" class="high-demand-ppe__tiles col-12 col-md-6 col-lg-4 my-3">
+          <div class="high-demand-ppe__tiles_content">
+            <h3 class="high-demand-ppe__tiles-title">{{ tile.title }}</h3>
+            <p class="high-demand-ppe__tiles-description">{{ tile.description }}</p>
+            <div class="high-demand-ppe__tiles-btn">
+              <button class="mk-btn-primary my-2" (click)="onRoute('need')">REQUEST PPE</button>
+              <button class="mk-btn-primary my-2" (click)="onRoute('need')">PROVIDE PPE</button>
+            </div>
+            <img class="high-demand-ppe__tiles-image" src="{{ tile.path }}" alt="{{ tile.title }}" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

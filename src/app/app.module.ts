@@ -12,6 +12,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { RemoteService } from './common/services/remote.service';
 import { HeaderComponent } from './header/header.component';
 import { MedkonnectLandingComponent } from './homepage/medkonnect-landing/medkonnect-landing.component';
+import { HighDemandPpeComponent } from './homepage/high-demand-ppe/high-demand-ppe.component';
 import { AlphaNumericDirective } from './common/directives/alpha-numeric/alpha-numeric.directive';
 import { NumericDirective } from './common/directives/numeric/numeric.directive';
 
@@ -24,6 +25,7 @@ import { NumericDirective } from './common/directives/numeric/numeric.directive'
     HomepageComponent,
     HeaderComponent,
     MedkonnectLandingComponent,
+    HighDemandPpeComponent,
     AlphaNumericDirective,
     NumericDirective
   ],
