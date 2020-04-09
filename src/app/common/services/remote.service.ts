@@ -11,11 +11,11 @@ export class RemoteService {
     private readonly http: HttpClient
   ) { }
 
-  public get(url: string, headers: HttpHeaders): Observable<any> {
+  public get(url: string, headers?: HttpHeaders): Observable<any> {
     return this.http.get(url, { headers });
   }
 
-  public post(url: string, requestBody: any, headers: HttpHeaders): Observable<any> {
+  public post(url: string, requestBody: any, headers?: HttpHeaders): Observable<any> {
     return this.http.post(url, JSON.stringify(requestBody), { headers });
   }
 }

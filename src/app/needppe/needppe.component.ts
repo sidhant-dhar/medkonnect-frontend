@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, FormArray, Validator, Validators } from '@angular/forms';
 import { PersonalData, ContactRequest } from '../models/hospitalmodel';
+import {RemoteService} from '../common/services/remote.service';
+import { Key, element } from 'protractor';
 
 interface Item {
   ppe: string;
@@ -17,27 +19,25 @@ export class NeedppeComponent implements OnInit {
 
   public contactForm: FormGroup;
   public materialsRequired: FormGroup;
-  public list = [{ ppe: 'N95 respirators', required: 'amount' }, { ppe: 'Surgical Masks', required: 'amount' },
-                 { ppe: 'Gloves', required: 'amount' }, { ppe: 'Disinfectants', required: 'amount' },
-                 { ppe: 'Goggles', required: 'amount' }, { ppe: 'Coveralls', required: 'amount' },
-                 { ppe: 'Boots', required: 'amount' }] as Item[];
-
-
+  public list = [{ ppe: 'N95 respirators', required: 'quantity' }, { ppe: 'Surgical Masks', required: 'quantity' },
+                 { ppe: 'Gloves', required: 'quantity' }, { ppe: 'Disinfectants', required: 'quantity' },
+                 { ppe: 'Goggles', required: 'quantity' }, { ppe: 'Coveralls', required: 'quantity' },
+                 { ppe: 'Boots', required: 'quantity' }] as Item[];
   public states = ['USA', 'Germany', 'Italy', 'France'];
   public isDoctor = false;
   public addFlag = true;
+  public spinnerFlag = false;
+  public apiroot = 'http://httpbin.org';
+  public post;
 
-  // public requestTypes = ['Claim', 'Feedback', 'Help Request'];
-
-
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,private remoteService: RemoteService) {
     this.contactForm = this.createFormGroup(formBuilder);
    }
 
 
    public createFormGroup(formBuilder: FormBuilder) {
     return formBuilder.group({
-      personalData: formBuilder.group(new PersonalData()),
+      personalData: formBuilder.group(new PersonalData(), [Validators.required]),
       materialsRequired: new FormArray([
       ]),
       homeMade : false
@@ -49,31 +49,78 @@ export class NeedppeComponent implements OnInit {
     const result: ContactRequest = Object.assign({}, this.contactForm.value);
     result.personalData = Object.assign({}, result.personalData);
     result.materialsRequired = Object.assign({}, result.materialsRequired);
+    const homemade = result.homeMade;
+    const array = Object.keys(result.materialsRequired).map(function(k) {
+       return result.materialsRequired[k];
+    });
 
-    // Do useful stuff with the gathered data
-    console.log(result);
-  }
+    const newArray = array.filter(function (el) {
+      return el.quantity != null;
+    }) // remove null values
+    .map(v => ({...v, approved: homemade})); // add homeMade Flag
+    // .map( function (el) {
+    //   el  = Object.keys(el).reduce((obj, key) => ({ ...obj, [el[key]]: key }), {});
+    // }); Working on this for API call.
 
-  public revert() {
-    // Resets to blank object
-    this.contactForm.reset();
+    console.log(newArray);
+     }
 
-    // Resets to provided model
-    this.contactForm.reset({ personalData: new PersonalData(), requestType: '', text: '' });
-  }
+  // public revert() {
+  //   // Resets to blank object
+  //   this.contactForm.reset();
+
+  //   // Resets to provided model
+  //   this.contactForm.reset({ personalData: new PersonalData(), requestType: '', text: '' });
+  // }
 
   get formArr() {
     return this.contactForm.get('materialsRequired') as FormArray;
   }
 
-  public toggleSubmit() {
+  public toggleAdd( element ) {
     if (this.addFlag) {
     this.contactForm.controls['materialsRequired'].disable();
     this.addFlag = !this.addFlag;
+    element.textContent = 'Edit';
     } else {
       this.contactForm.controls['materialsRequired'].enable();
       this.addFlag = !this.addFlag;
+      element.textContent = 'Add';
     }
+  }
+
+  public toggleDoctor(doctorClick: boolean) {
+    if (doctorClick) {
+      this.isDoctor = true;
+      this.contactForm.controls.personalData['controls']['MCInumber'].enable();
+    } else {
+      this.isDoctor = false;
+      this.contactForm.controls.personalData['controls']['MCInumber'].disable();
+      // if (this.spinnerFlag) {
+      //   this.spinnerFlag = false;
+      // }
+    }
+  }
+
+  public verifyMCI(element, text: string) {
+    const headers = new Headers().set('Content-Type', 'application/json');
+    element.textContent = text;
+    element.disabled = true;
+    this.spinnerFlag = true;
+    const url = `${this.apiroot}/post`;
+    const result: ContactRequest = Object.assign({}, this.contactForm.value);
+    result.personalData = Object.assign({}, result.personalData);
+    delete result.personalData['email'];
+    delete result.personalData['mobile'];
+    delete result.personalData['state'];
+    delete result.personalData['pincode'];
+    delete result.personalData['hospitalAddress'];
+    const stringifyData = JSON.stringify(result.personalData);
+    this.remoteService.post(url, stringifyData)
+    .subscribe( res => {
+     console.log(res);
+    });
+    console.log(stringifyData);
   }
 
   public ngOnInit() {
@@ -83,6 +130,7 @@ export class NeedppeComponent implements OnInit {
       fg.addControl(this.list[i].required, this.formBuilder.control(null));
       this.formArr.push(fg);
     });
+    this.contactForm.controls.personalData['controls']['MCInumber'].disable();
   }
 
 }

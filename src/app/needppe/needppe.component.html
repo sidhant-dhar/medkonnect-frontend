@@ -11,7 +11,7 @@
 
 <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate >
   <div formGroupName="personalData" novalidate>
-  <div class="form-group formStyle col-sm-12 col-md-6 mx-auto p-5 mb-5 firstCard">
+  <div class="form-group formStyle col-sm-12 col-md-6 mx-auto p-5 mb-5 firstCard" [ngClass] = "{'has-error' : contactForm.get('personalData').errors}">
     <label for="InputName">Full Name</label>
     <input type="name" class="form-control mt-5 no-border" aria-describedby="Yourname" placeholder="Your name" formControlName="name" >
     <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
@@ -22,21 +22,32 @@
   </div>
   <div class="form-group formStyle col-sm-12 col-md-6 mx-auto p-5 mt-md-5 mb-5">
     <label for="areYouDoctor">Are you a doctor?</label>
-    <button type="button" class="btn btn-sm btnHospital px-3 px-md-4 mt-5">Yes</button>
-    <button type="button" class="btn btn-sm btnHospital px-3 px-md-4 ml-3 mt-5">No</button>
+    <button type="button" class="btn btn-sm btnHospital px-3 px-md-4 mt-5" (click) = "toggleDoctor(true)">Yes</button>
+    <button type="button" class="btn btn-sm btnHospital px-3 px-md-4 ml-3 mt-5" (click) = "toggleDoctor(false)">No</button>
     </div>
-  <div class="form-group formStyle col-sm-12 col-md-6 mx-auto p-5 mt-md-5 mb-5">
+  <div class="form-group formStyle col-sm-12 col-md-6 mx-auto p-5 mt-md-5 mb-5" [ngClass]="{'disabled': !isDoctor}">
     <label for="mciNumber">MCI Number</label>
-    <small class="form-text text-muted">MCI number to be used for verification purposes only</small>
-    <input type="email" class="form-control mt-5 no-border" placeholder="MCI Number">
-    <button type="button" class="btn btn-sm btnHospital px-3 px-md-4 mt-4">Verify</button>
-    <button type="button" class="btn btn-sm btnHospital px-3 px-md-4 ml-3 mt-4">Don't Have</button>
+    <small class="form-text text-muted">MCI number to be used for verification purposes only. Please ensure that your name and MCI number match the official MCI database.</small>
+    <div class="row">
+    <input type="email" class="form-control mt-5 no-border" placeholder="MCI Number" formControlName="MCInumber">
+    <div class="spinner-border mt-md-5 ml-md-3" role="status" *ngIf = spinnerFlag>
+      <span class="sr-only">Loading...</span>
+    </div>
   </div>
-  <div class="form-group formStyle col-sm-12 col-md-6 mx-auto p-5 mt-md-5 mb-5">
-    <label for="exampleInputPassword1">Email Address</label>
-    <small *ngIf = !isDoctor class="form-text text-muted">Please enter your corporate email address. Email Addresses from popular Email providers shall not be accepted</small>
+    <button type="button" class="btn btn-sm btnHospital px-3 px-md-4 mt-4"  (click)="verifyMCI($event.target, 'Verifying')">Verify</button>
+    <!-- <button type="button" class="btn btn-sm btnHospital px-3 px-md-4 ml-3 mt-4">Don't Have</button> -->
+  </div>
+  <!-- Email Address Begins-->
+  <div *ngIf = !isDoctor class="form-group formStyle col-sm-12 col-md-6 mx-auto p-5 mt-md-5 mb-5">
+    <label for="exampleInputPassword1">Corporate Email Address</label>
+    <small class="form-text text-muted">Please enter your corporate email address. Email Addresses from popular email providers shall not be accepted. If you do not have a corporate email address, please input your MCI number in the field above.</small>
     <input type="email" class="form-control mt-5 no-border" placeholder="Your Email"  formControlName="email">
   </div>
+  <div *ngIf = isDoctor class="form-group formStyle col-sm-12 col-md-6 mx-auto p-5 mt-md-5 mb-5">
+    <label for="exampleInputPassword1">Email Address</label>
+    <input type="email" class="form-control mt-5 no-border" placeholder="Your Email"  formControlName="email">
+  </div>
+  <!-- Email Address Ends -->
   <div class="form-group formStyle col-sm-12 col-md-6 mx-auto p-5 mt-md-5 mb-5">
     <label for="exampleInputPassword1">Hospital Address</label>
     <input type="address" class="form-control mt-5 no-border" placeholder="Hospital Address" formControlName="hospitalAddress">
@@ -52,29 +63,35 @@
     <input type="pincode" class="form-control mt-5 no-border" placeholder="Pincode" formControlName="pincode">
   </div>
 </div>
-<div formGroupName="materialsRequired">
   <div class="form-group formStyle col-sm-12 col-md-6 mx-auto p-5 mt-md-5 mb-5">
     <label for="homemade PPE">Are You Willing to Accept HomeMade PPE</label>
-    <button type="button" class="btn btn-sm btnHospital px-3 px-md-4 mt-5">Yes</button>
-    <button type="button" class="btn btn-sm btnHospital px-3 px-md-4 ml-3 mt-5">No</button>  
-  </div>
+    <div class = "px-3 px-md-4 mt-5">
+      <input type="radio" value="true" formControlName="homeMade">
+      <label for="true">Yes</label>
+      <input type="radio" value="false" formControlName="homeMade">
+      <label for="false">No</label>
+    </div>
+ </div>
+  <div formGroupName="materialsRequired">
   <div class="form-group formStyle col-sm-12 col-md-6 mx-auto p-5 mt-md-5 mb-5">
     <label for="PPE">What Do You Need</label>
       <div *ngFor="let ppe of contactForm.controls.materialsRequired.controls; let i = index " [formGroupName]="i"  class="row">
-      <div class="form-check col-4">
-        <input class="form-check-input" type="checkbox"  [formControlName]="list[i].ppe">
-        <label class="form-check-label" for="defaultCheck1">
+      <div class="form-check col-lg-8 col-md-6 mt-2 mb-2 checkbox">
+        <label class="form-check-label needLabel" for="defaultCheck1">
+          <input class="form-check-input" type="checkbox"  [formControlName]="list[i].ppe">
+          <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
           {{list[i].ppe}}
         </label>
       </div>
-      <div class="col-8">
+      <div class="col-lg-4 col-md-6 mt-2 mb-md-2 mb-4">
         <input type="required" class="form-control" placeholder="Amount" [formControlName]="list[i].required" >
+        <span class="checkmark"></span>
       </div>
     </div>
-    <button type="button" (click) = "toggleSubmit()" class="btn btn-primary">Add</button>
+    <button type="button" (click) = "toggleAdd($event.target)" class="btn btn-sm btnHospital px-3 px-md-4 mt-5">Add</button>
   </div>
 </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-sm btnHospital px-3 px-md-4 ml-3 mt-5">Submit</button>
 </form>
 
 <p>Form value: {{ contactForm.value | json }}</p>

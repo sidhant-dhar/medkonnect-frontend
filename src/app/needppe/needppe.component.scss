@@ -21,7 +21,7 @@
 }
 
 .formStyle label{
-    font-family: Roboto;
+font-family: Roboto-Regular,sans-serif;
 font-style: normal;
 font-weight: normal;
 font-size: 24px;
@@ -50,6 +50,69 @@ text-indent: 3px;
     background-color: $btn-primary;
     border-radius: 15px;
     color: $white;
+}
+
+.needLabel{
+    font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 20px !important;
+line-height: 26px !important;
+text-indent: 3px !important;
+}
+
+/**********************************************************************************/
+// .checkbox label:after {
+//     content: '';
+//     display: table;
+//     clear: both;
+// }
+
+// .checkbox .cr {
+//     position: relative;
+//     display: inline-block;
+//     border: 1px solid #a9a9a9;
+//     border-radius: .25em;
+//     width: 1.3em;
+//     height: 1.3em;
+//     margin-right: .5em;
+// }
+
+// .checkbox .cr .cr-icon {
+//     position: absolute;
+//     font-size: .8em;
+//     line-height: 0;
+//     top: 50%;
+//     left: 20%;
+// }
+
+// .checkbox label input[type="checkbox"] {
+//     display: none;
+// }
+
+// .checkbox label input[type="checkbox"] + .cr > .cr-icon {
+//     transform: scale(3) rotateZ(-20deg);
+//     opacity: 0;
+//     transition: all .3s ease-in;
+// }
+
+// .checkbox label input[type="checkbox"]:checked + .cr > .cr-icon {
+//     transform: scale(1) rotateZ(0deg);
+//     opacity: 1;
+// }
+
+// .checkbox label input[type="checkbox"]:disabled + .cr {
+//     opacity: .5;
+// }
+
+/**********************************************************************************/
+
+.disabled label{
+    color: grey;
+}
+
+.disabled button{
+    background-color: grey;
 }
 
 @media ( max-width: 768px) {
