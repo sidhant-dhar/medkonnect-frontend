@@ -14,7 +14,11 @@ export class NeedppeComponent {
   public needppeForm: FormGroup;
   public materialsRequired: FormGroup;
   public ppeList: PPEItem[];
-  public states = ['USA', 'Germany', 'Italy', 'France'];
+  public states = [ 'Andaman and Nicobar Islands', 'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chandigarh', 'Chhattisgarh',
+                    'Dadra and Nagar Haveli', 'Daman and Diu', 'Delhi', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh',
+                    'Jammu and Kashmir', 'Jharkhand', 'Karnataka', 'Kerala', 'Ladakh', 'Lakshadweep', 'Madhya Pradesh', 'Maharashtra',
+                    'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha', 'Puducherry', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu',
+                    'Telangana', 'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal'];
   public isDoctor = false;
   public addFlag = true;
   public spinnerFlag = false;
@@ -42,6 +46,7 @@ export class NeedppeComponent {
   }
 
   public onSubmit() {
+    this.needppeForm.controls['materialsRequired'].enable();
     // create a deep copy of the form-model
     const result = Object.assign({}, this.needppeForm.value);
     result.personalData = Object.assign({}, result.personalData);

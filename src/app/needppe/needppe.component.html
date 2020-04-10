@@ -34,7 +34,7 @@
           <small class="form-text text-muted">MCI number to be used for verification purposes only. Please ensure that
             your name and MCI number match the official MCI database.</small>
           <div class="row">
-            <input ncovNumeric id="mciNumber" type="text" class="form-control mt-5 no-border" placeholder="MCI Number"
+            <input ncovAlphaNumeric id="mciNumber" type="text" class="form-control mt-5 no-border" placeholder="MCI Number"
               formControlName="MCInumber">
             <div class="spinner-border mt-md-5 ml-md-3" role="status" *ngIf=spinnerFlag>
               <span class="sr-only">Loading...</span>
@@ -42,7 +42,7 @@
           </div>
           <button type="button" class="mk-btn-sm mk-btn-primary px-3 px-md-4 mt-4"
             (click)="verifyMCI()" [disabled]="spinnerFlag" >{{ spinnerFlag ? 'Verifying' : 'Verify'}}</button>
-          <button type="button" class="mk-btn-md mk-btn-primary px-3 px-md-4 ml-3 mt-4">Don't Have</button>
+          <button type="button" class="mk-btn-md mk-btn-primary px-3 px-md-4 ml-3 mt-4"  (click)="toggleDoctor(false)" >Don't Have</button>
         </div>
         <!-- Email Address Begins-->
         <div class="form-group formStyle p-5 mt-md-5 mb-5">
@@ -96,7 +96,6 @@
               <div class="form-check col-lg-8 col-md-6 mt-2 mb-2 checkbox">
                 <label class="mk-checkbox-container" for="defaultCheck{{i}}">
                   <input class="" id="defaultCheck{{i}}" type="checkbox" [formControlName]="ppeList[i].ppe">
-                  <!-- <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> -->
                   <i class="checkmark"></i>
                   {{ppeList[i].ppe}}
                 </label>
