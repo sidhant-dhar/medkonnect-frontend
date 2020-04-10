@@ -1,0 +1,26 @@
+.mk-form {
+  &__form {
+    max-width: 768px;
+    margin: 0 auto;
+  }
+}
+
+.formStyle {
+  background-color: $white;
+  border-radius: 12px;
+}
+
+.formStyle .form-control {
+  border-bottom: 1px solid $black;
+}
+
+.formStyle label {
+  font-family: 'Nunito-Regular';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 28px;
+  display: flex;
+  align-items: center;
+  text-indent: 3px;
+}

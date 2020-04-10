@@ -6,8 +6,20 @@
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins/breakpoints";
 
+.mk-btn-xs {
+  width: 80px !important;
+}
+
+.mk-btn-sm {
+  width: 128px !important;
+}
+
+.mk-btn-md {
+  width: 176px !important;
+}
+
 .mk-btn-primary {
-  width: 218px;
+  width: 208px;
   height: 32px;
   background-color: $btn-primary;
   border: none;

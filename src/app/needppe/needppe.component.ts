@@ -1,53 +1,49 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder, FormArray, Validator, Validators } from '@angular/forms';
-import { PersonalData, ContactRequest } from '../models/hospitalmodel';
-import {RemoteService} from '../common/services/remote.service';
-import { Key, element } from 'protractor';
-import { reverse } from 'dns';
-
-interface Item {
-  ppe: string;
-  required: string;
-}
-
+import { Component } from '@angular/core';
+import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
+import { NeedppeService } from './needppe.service';
+import { DataService } from '../common/services/data.service';
+import { PPEItemResponse, PPEItem } from '../common/models/models';
 
 @Component({
   selector: 'ncov-needppe',
   templateUrl: './needppe.component.html',
   styleUrls: ['./needppe.component.scss']
 })
-export class NeedppeComponent implements OnInit {
+export class NeedppeComponent {
 
-  public contactForm: FormGroup;
+  public needppeForm: FormGroup;
   public materialsRequired: FormGroup;
-  public list = [{ ppe: 'N95 respirators', required: 'quantity' }, { ppe: 'Surgical Masks', required: 'quantity' },
-                 { ppe: 'Gloves', required: 'quantity' }, { ppe: 'Disinfectants', required: 'quantity' },
-                 { ppe: 'Goggles', required: 'quantity' }, { ppe: 'Coveralls', required: 'quantity' },
-                 { ppe: 'Boots', required: 'quantity' }] as Item[];
+  public ppeList: PPEItem[];
   public states = ['USA', 'Germany', 'Italy', 'France'];
   public isDoctor = false;
   public addFlag = true;
   public spinnerFlag = false;
-  public apiroot = 'http://httpbin.org';
-  public post;
 
-  constructor(private formBuilder: FormBuilder, private remoteService: RemoteService) {
-    this.contactForm = this.createFormGroup(formBuilder);
-   }
-
-
-   public createFormGroup(formBuilder: FormBuilder) {
-    return formBuilder.group({
-      personalData: formBuilder.group(new PersonalData(), [Validators.required]),
-      materialsRequired: new FormArray([
-      ]),
-      homeMade : false
+  constructor(
+    private readonly formBuilder: FormBuilder,
+    private readonly needppeService: NeedppeService,
+    private readonly dataService: DataService
+  ) {
+    this.needppeForm = this.formBuilder.group({
+      name: ['', [ Validators.required ]],
+      mobile: ['', [ Validators.required ]],
+      MCInumber: [''],
+      email: ['', [ Validators.required ]],
+      hospitalAddress: ['', [ Validators.required ]],
+      state: ['', [ Validators.required ]],
+      pincode: ['', [ Validators.required ]],
+      homeMade: ['', [ Validators.required ]],
+      materialsRequired: new FormArray([])
+    });
+    this.dataService.getPPEList().subscribe((res: PPEItemResponse) => {
+      this.ppeList = res.list;
+      this.createRequiredPPeList();
     });
   }
 
   public onSubmit() {
     // create a deep copy of the form-model
-    const result: ContactRequest = Object.assign({}, this.contactForm.value);
+    const result = Object.assign({}, this.needppeForm.value);
     result.personalData = Object.assign({}, result.personalData);
     result.materialsRequired = Object.assign({}, result.materialsRequired);
     const homemade = result.homeMade;
@@ -90,17 +86,18 @@ export class NeedppeComponent implements OnInit {
   //   this.contactForm.reset({ personalData: new PersonalData(), requestType: '', text: '' });
   // }
 
-  get formArr() {
-    return this.contactForm.get('materialsRequired') as FormArray;
-  }
+  // get formArr() {
+  //   return this.contactForm.get('materialsRequired') as FormArray;
+  //   console.log(this.needppeForm.value);
+  // }
 
-  public toggleAdd( element ) {
+  public toggleAdd(element) {
     if (this.addFlag) {
-    this.contactForm.controls['materialsRequired'].disable();
-    this.addFlag = !this.addFlag;
-    element.textContent = 'Edit';
+      this.needppeForm.controls['materialsRequired'].disable();
+      this.addFlag = !this.addFlag;
+      element.textContent = 'Edit';
     } else {
-      this.contactForm.controls['materialsRequired'].enable();
+      this.needppeForm.controls['materialsRequired'].enable();
       this.addFlag = !this.addFlag;
       element.textContent = 'Add';
     }
@@ -109,45 +106,34 @@ export class NeedppeComponent implements OnInit {
   public toggleDoctor(doctorClick: boolean) {
     if (doctorClick) {
       this.isDoctor = true;
-      this.contactForm.controls.personalData['controls']['MCInumber'].enable();
+      this.needppeForm.controls['MCInumber'].enable();
     } else {
       this.isDoctor = false;
-      this.contactForm.controls.personalData['controls']['MCInumber'].disable();
-      // if (this.spinnerFlag) {
-      //   this.spinnerFlag = false;
-      // }
+      this.needppeForm.controls['MCInumber'].disable();
+      this.spinnerFlag = false;
     }
   }
 
-  public verifyMCI(element, text: string) {
-    const headers = new Headers().set('Content-Type', 'application/json');
-    element.textContent = text;
-    element.disabled = true;
+  public verifyMCI() {
     this.spinnerFlag = true;
-    const url = `${this.apiroot}/post`;
-    const result: ContactRequest = Object.assign({}, this.contactForm.value);
-    result.personalData = Object.assign({}, result.personalData);
-    delete result.personalData['email'];
-    delete result.personalData['mobile'];
-    delete result.personalData['state'];
-    delete result.personalData['pincode'];
-    delete result.personalData['hospitalAddress'];
-    const stringifyData = JSON.stringify(result.personalData);
-    this.remoteService.post(url, stringifyData)
-    .subscribe( res => {
-     console.log(res);
+    this.needppeService.verifyMCI(this.needppeForm.controls.MCInumber.value).subscribe(() => {
+      this.spinnerFlag = false;
+    }, () => {
+      this.spinnerFlag = false;
     });
-    console.log(stringifyData);
   }
 
-  public ngOnInit() {
-    this.list.forEach((item: Item, i) => {
+  get formArr() {
+    return this.needppeForm.get('materialsRequired') as FormArray;
+  }
+
+  public createRequiredPPeList(): void {
+    this.ppeList.forEach((item: PPEItem, i) => {
       const fg = this.formBuilder.group({});
-      fg.addControl(this.list[i].ppe, this.formBuilder.control(false));
-      fg.addControl(this.list[i].required, this.formBuilder.control(null));
+      fg.addControl(this.ppeList[i].ppe, this.formBuilder.control(false));
+      fg.addControl(this.ppeList[i].required, this.formBuilder.control(null));
       this.formArr.push(fg);
     });
-    this.contactForm.controls.personalData['controls']['MCInumber'].disable();
   }
 
 }
