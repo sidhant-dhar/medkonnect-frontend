@@ -1,0 +1,32 @@
+{
+  "list": [
+    {
+      "ppe": "N95 respirators",
+      "required": "quantity"
+    },
+    {
+      "ppe": "Surgical Masks",
+      "required": "quantity"
+    },
+    {
+      "ppe": "Gloves",
+      "required": "quantity"
+    },
+    {
+      "ppe": "Disinfectants",
+      "required": "quantity"
+    },
+    {
+      "ppe": "Goggles",
+      "required": "quantity"
+    },
+    {
+      "ppe": "Coveralls",
+      "required": "quantity"
+    },
+    {
+      "ppe": "Boots",
+      "required": "quantity"
+    }
+  ]
+}

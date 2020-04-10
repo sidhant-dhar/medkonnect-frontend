@@ -1,129 +1,91 @@
 @import "../../scss/bootstrap";
-.needppe{
-    background-color: $background-color;
-}
-.headerText{
-    font-style: normal;
-    font-weight: 600;
-    font-size: 40px;
-    line-height: 49px;    
-   text-indent: 3px;
-    color: $white;
-}
+@import "../../scss/forms/medkonnect-form";
+@import "../../scss/forms/checkbox";
+@import "../../scss/forms/radio";
 
-.formStyle{
-    background-color: $white;
-    border-radius: 5%;
+.needppe {
+  background-color: $background-color;
+  font-family: 'Nunito-Regular';
 }
-
-.formStyle .form-control{
-    border-bottom: 1px solid $black ;
-}
-
-.formStyle label{
-font-family: Roboto-Regular,sans-serif;
-font-style: normal;
-font-weight: normal;
-font-size: 24px;
-line-height: 28px;
-display: flex;
-align-items: center;
-text-indent: 3px;
+.headerText {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 49px;
+  text-indent: 3px;
+  color: $white;
 }
 
 .no-border {
-    border: 0;
-    box-shadow: none;
-    width: 50%;
+  border: 0;
+  box-shadow: none;
+  width: 50%;
 }
 
-.no-border :focus{
-    border-bottom: 2px solid red;
+.no-border :focus {
+  border-bottom: 2px solid red;
 }
 
-.firstCard{
-    border-top: 10px solid $btn-primary;
-    margin-top: 150px;
+.firstCard {
+  border-top: 10px solid $btn-primary;
+  margin-top: 150px;
 }
 
-.btnHospital{
-    background-color: $btn-primary;
-    border-radius: 15px;
-    color: $white;
+.needLabel {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px !important;
+  line-height: 26px !important;
+  text-indent: 3px !important;
 }
 
-.needLabel{
-    font-family: Roboto;
-font-style: normal;
-font-weight: normal;
-font-size: 20px !important;
-line-height: 26px !important;
-text-indent: 3px !important;
+.disabled label {
+  color: grey;
 }
 
-/**********************************************************************************/
-// .checkbox label:after {
-//     content: '';
-//     display: table;
-//     clear: both;
-// }
-
-// .checkbox .cr {
-//     position: relative;
-//     display: inline-block;
-//     border: 1px solid #a9a9a9;
-//     border-radius: .25em;
-//     width: 1.3em;
-//     height: 1.3em;
-//     margin-right: .5em;
-// }
-
-// .checkbox .cr .cr-icon {
-//     position: absolute;
-//     font-size: .8em;
-//     line-height: 0;
-//     top: 50%;
-//     left: 20%;
-// }
-
-// .checkbox label input[type="checkbox"] {
-//     display: none;
-// }
-
-// .checkbox label input[type="checkbox"] + .cr > .cr-icon {
-//     transform: scale(3) rotateZ(-20deg);
-//     opacity: 0;
-//     transition: all .3s ease-in;
-// }
-
-// .checkbox label input[type="checkbox"]:checked + .cr > .cr-icon {
-//     transform: scale(1) rotateZ(0deg);
-//     opacity: 1;
-// }
-
-// .checkbox label input[type="checkbox"]:disabled + .cr {
-//     opacity: .5;
-// }
-
-/**********************************************************************************/
-
-.disabled label{
-    color: grey;
+.disabled button {
+  background-color: grey;
 }
 
-.disabled button{
-    background-color: grey;
-}
-
-@media ( max-width: 768px) {
-    .headerText{
+@media (max-width: 768px) {
+  .headerText {
     font-size: 20px;
-    line-height: 29px;    
-   text-indent: 2px;
-   padding-top: 10px;
-    }
+    line-height: 29px;
+    text-indent: 2px;
+    padding-top: 10px;
+  }
 
-    .no-border{
-        width: 100%;
-    }
+  .no-border {
+    width: 100%;
+  }
+}
+
+select.mk-select {
+  width: 340px;
+  height: 36px;
+  background: url('/assets/images/select-webkit-box.png') no-repeat right;
+  border-radius: 8px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  &::after {
+    content: '<>';
+    font: 17px "Consolas", monospace;
+    color: #333;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+    right: 11px;
+    /*Adjust for position however you want*/
+
+    top: 18px;
+    padding: 0 0 2px;
+    border-bottom: 1px solid #999;
+    /*left line */
+
+    position: absolute;
+    pointer-events: none;
+  }
 }
