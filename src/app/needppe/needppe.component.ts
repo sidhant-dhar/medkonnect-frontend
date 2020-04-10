@@ -53,30 +53,42 @@ export class NeedppeComponent {
     result.materialsRequired = Object.assign({}, result.materialsRequired);
     const homemade = result.homeMade;
 
-    const array = Object.keys(result.materialsRequired).map(function(k) {
-       return result.materialsRequired[k];
-    }); // convert to array
+    // const array = Object.keys(result.materialsRequired).map(function(k) {
+    //    return result.materialsRequired[k];
+    // }); // convert to array
 
-    const newArray = array.filter(function (el) {
-      return el.quantity != null;
-    }) // remove null values
-    .map(v => ({...v, approved: homemade})) // add homeMade flag
-    .map(function (el) {
-      const reversed = {};
-      for (let key in el) {
-        if (key !== 'approved' && el[key] === true) {
-          reversed[el[key]] = key;
-          key = 'ppeName';
-        } else {
-          reversed[key] = el[key];
-        }
+    // const newArray = array.filter(function (el) {
+    //   return el.quantity != null;
+    // }) // remove null values
+    // .map(v => ({...v, approved: homemade})) // add homeMade flag
+    // .map(function (el) {
+    //   const reversed = {};
+    //   for (let key in el) {
+    //     if (key !== 'approved' && el[key] === true) {
+    //       reversed[el[key]] = key;
+    //       key = 'ppeName';
+    //     } else {
+    //       reversed[key] = el[key];
+    //     }
+    //   }
+    //   reversed['ppeName'] = reversed['true'];
+    //   delete reversed['true'];
+    //   return reversed;
+    // }); // reverse ppeNames
+    // Object.assign(result, {'ppeArray': newArray});
+
+    const reqBody = {...this.needppeForm.value};
+    const matRequired = reqBody.materialsRequired.reduce((acc, cur) => {
+      if (cur.quantity) {
+        acc.push({
+          quantity: cur.quantity,
+          approved: 'true',
+          ppeName: Object.keys(cur)[0]
+        });
       }
-      reversed['ppeName'] = reversed['true'];
-      delete reversed['true'];
-      return reversed;
-    }); // reverse ppeNames
-
-    Object.assign(result, {'ppeArray': newArray});
+      return acc;
+    }, []);
+    reqBody.materialsRequired = Object.assign(matRequired);
     delete result.materialsRequired;
     delete result.homeMade;
     const postrequest = JSON.stringify(result);
