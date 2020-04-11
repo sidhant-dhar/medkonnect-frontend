@@ -1,8 +1,15 @@
+@import "../bootstrap";
+
 .mk-form {
   &__form {
     max-width: 768px;
     margin: 0 auto;
   }
+}
+
+.mk-required::after {
+  content: "*";
+  color: $danger;
 }
 
 .formStyle {
@@ -23,4 +30,19 @@
   display: flex;
   align-items: center;
   text-indent: 3px;
+}
+
+select.mk-select {
+  width: 340px;
+  height: 45px;
+  background: url('/assets/images/drop.svg') no-repeat right;
+  border-radius: 8px;
+  padding-left: $spacer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  @include  media-breakpoint-down(md) {
+    width: 240px;
+  }
 }

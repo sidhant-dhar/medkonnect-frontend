@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { RegexPatterns } from '../regex/regex.patterns';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +19,10 @@ export class UtilityService {
       return true;
     }
     return false;
+  }
+
+  public validateEmail(email: string) {
+    const re = new RegExp(RegexPatterns.email);
+    return re.test(email);
   }
 }

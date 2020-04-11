@@ -34,6 +34,11 @@
     background-color: $btn-secondary;
   }
 
+  &[disabled] {
+    background-color: gray;
+    pointer-events: none;
+  }
+
   @include media-breakpoint-down(md) {
     font-size: 0.875 * $spacer;
   }
