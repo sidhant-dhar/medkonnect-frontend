@@ -96,6 +96,9 @@ export class HaveppeComponent implements OnInit {
     finalBody.ppeArray = Object.assign(matRequired);
     this.ppeItemSelected = finalBody.ppeArray.length > 0;
     console.log('reqBody ', finalBody);
+    if (!this.ppeItemSelected) {
+      return;
+    }
     this.haveppeService.vendorSignIn(finalBody).subscribe((res) => {
       console.log(res);
     });

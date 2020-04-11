@@ -4,6 +4,10 @@
 @import '../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
 @import './scss/bootstrap';
 
+body {
+  background-color: $background-color;
+}
+
 .container {
   padding: 0;
 }
