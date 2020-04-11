@@ -7,6 +7,7 @@
   background-color: $background-color;
   font-family: 'Nunito-Regular';
 }
+
 .headerText {
   font-style: normal;
   font-weight: 600;
@@ -21,10 +22,6 @@
   box-shadow: none;
   width: 50%;
 }
-
-// .no-border :focus {
-//   border-bottom: 2px solid red;
-// }
 
 .firstCard {
   border-top: 10px solid $btn-primary;
@@ -43,10 +40,6 @@
   color: grey;
 }
 
-.disabled button {
-  background-color: grey;
-}
-
 @media (max-width: 768px) {
   .headerText {
     font-size: 20px;
@@ -60,32 +53,3 @@
   }
 }
 
-select.mk-select {
-  width: 340px;
-  height: 36px;
-  background: url('/assets/images/select-webkit-box.png') no-repeat right;
-  border-radius: 8px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-
-  &::after {
-    content: '<>';
-    font: 17px "Consolas", monospace;
-    color: #333;
-    -webkit-transform: rotate(90deg);
-    -moz-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-    transform: rotate(90deg);
-    right: 11px;
-    /*Adjust for position however you want*/
-
-    top: 18px;
-    padding: 0 0 2px;
-    border-bottom: 1px solid #999;
-    /*left line */
-
-    position: absolute;
-    pointer-events: none;
-  }
-}

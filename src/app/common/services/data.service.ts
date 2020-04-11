@@ -14,4 +14,8 @@ export class DataService {
   public getPPEList(): Observable<any> {
     return this.remote.get('assets/data/ppe-list.json');
   }
+
+  public getStates(): Observable<any> {
+    return this.remote.get('assets/data/indian-states.json');
+  }
 }

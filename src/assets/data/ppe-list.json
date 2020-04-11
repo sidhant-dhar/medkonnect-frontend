@@ -2,31 +2,43 @@
   "list": [
     {
       "ppe": "N95 respirators",
-      "required": "quantity"
+      "required": "quantity",
+      "otherPpe": "other"
     },
     {
       "ppe": "Surgical Masks",
-      "required": "quantity"
+      "required": "quantity",
+      "otherPpe": "other"
     },
     {
       "ppe": "Gloves",
-      "required": "quantity"
+      "required": "quantity",
+      "otherPpe": "other"
     },
     {
       "ppe": "Disinfectants",
-      "required": "quantity"
+      "required": "quantity",
+      "otherPpe": "other"
     },
     {
       "ppe": "Goggles",
-      "required": "quantity"
+      "required": "quantity",
+      "otherPpe": "other"
     },
     {
       "ppe": "Coveralls",
-      "required": "quantity"
+      "required": "quantity",
+      "otherPpe": "other"
     },
     {
       "ppe": "Boots",
-      "required": "quantity"
+      "required": "quantity",
+      "otherPpe": "other"
+    },
+    {
+      "ppe": "Others",
+      "required": "quantity",
+      "otherPpe": "other"
     }
   ]
 }

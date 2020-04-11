@@ -14,14 +14,11 @@ export class NeedppeComponent {
   public needppeForm: FormGroup;
   public materialsRequired: FormGroup;
   public ppeList: PPEItem[];
-  public states = [ 'Andaman and Nicobar Islands', 'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chandigarh', 'Chhattisgarh',
-                    'Dadra and Nagar Haveli', 'Daman and Diu', 'Delhi', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh',
-                    'Jammu and Kashmir', 'Jharkhand', 'Karnataka', 'Kerala', 'Ladakh', 'Lakshadweep', 'Madhya Pradesh', 'Maharashtra',
-                    'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha', 'Puducherry', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu',
-                    'Telangana', 'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal'];
+  public states: string[];
   public isDoctor = false;
   public addFlag = true;
   public spinnerFlag = false;
+  public ppeItemSelected = true;
 
   constructor(
     private readonly formBuilder: FormBuilder,
@@ -34,79 +31,49 @@ export class NeedppeComponent {
       MCInumber: [''],
       email: ['', [ Validators.required ]],
       hospitalAddress: ['', [ Validators.required ]],
-      state: ['', [ Validators.required ]],
+      state: ['Andaman and Nicobar Islands', [ Validators.required ]],
       pincode: ['', [ Validators.required ]],
-      homeMade: ['', [ Validators.required ]],
+      homeMade: ['true', [ Validators.required ]],
+      tnc: [true, [ Validators.required ]],
       materialsRequired: new FormArray([])
     });
     this.dataService.getPPEList().subscribe((res: PPEItemResponse) => {
       this.ppeList = res.list;
       this.createRequiredPPeList();
     });
+    this.dataService.getStates().subscribe((res: {indianStates: string[]}) => {
+      this.states = res.indianStates;
+    });
+  }
+
+  public submitRequest(reqBody) {
+    this.needppeService.submitRequest(reqBody).subscribe((res) => {
+      console.log('res ', res);
+    }, (err) => {
+      console.log('err ', err);
+    });
   }
 
   public onSubmit() {
-    this.needppeForm.controls['materialsRequired'].enable();
-    // create a deep copy of the form-model
-    const result = Object.assign({}, this.needppeForm.value);
-    result.personalData = Object.assign({}, result.personalData);
-    result.materialsRequired = Object.assign({}, result.materialsRequired);
-    const homemade = result.homeMade;
-
-    // const array = Object.keys(result.materialsRequired).map(function(k) {
-    //    return result.materialsRequired[k];
-    // }); // convert to array
-
-    // const newArray = array.filter(function (el) {
-    //   return el.quantity != null;
-    // }) // remove null values
-    // .map(v => ({...v, approved: homemade})) // add homeMade flag
-    // .map(function (el) {
-    //   const reversed = {};
-    //   for (let key in el) {
-    //     if (key !== 'approved' && el[key] === true) {
-    //       reversed[el[key]] = key;
-    //       key = 'ppeName';
-    //     } else {
-    //       reversed[key] = el[key];
-    //     }
-    //   }
-    //   reversed['ppeName'] = reversed['true'];
-    //   delete reversed['true'];
-    //   return reversed;
-    // }); // reverse ppeNames
-    // Object.assign(result, {'ppeArray': newArray});
-
     const reqBody = {...this.needppeForm.value};
     const matRequired = reqBody.materialsRequired.reduce((acc, cur) => {
-      if (cur.quantity) {
+      const ppeItem = Object.keys(cur)[0];
+      if (cur.quantity && cur[ppeItem]) {
         acc.push({
           quantity: cur.quantity,
           approved: 'true',
-          ppeName: Object.keys(cur)[0]
+          ppeName: ppeItem === 'Others' ? cur.other : ppeItem
         });
       }
       return acc;
     }, []);
     reqBody.materialsRequired = Object.assign(matRequired);
-    delete result.materialsRequired;
-    delete result.homeMade;
-    const postrequest = JSON.stringify(result);
-    console.log(postrequest);
+    console.log('reqBody ', reqBody);
+    this.ppeItemSelected = matRequired.length > 0;
+    if (this.ppeItemSelected) {
+      this.submitRequest(reqBody);
+    }
   }
-
-  // public revert() {
-  //   // Resets to blank object
-  //   this.contactForm.reset();
-
-  //   // Resets to provided model
-  //   this.contactForm.reset({ personalData: new PersonalData(), requestType: '', text: '' });
-  // }
-
-  // get formArr() {
-  //   return this.contactForm.get('materialsRequired') as FormArray;
-  //   console.log(this.needppeForm.value);
-  // }
 
   public toggleAdd(element) {
     if (this.addFlag) {
@@ -140,6 +107,28 @@ export class NeedppeComponent {
     });
   }
 
+  public onTogglePpe(index: number): void {
+    console.log('controls ', this.needppeForm.controls.materialsRequired['controls']);
+    const ppeFormArray = this.needppeForm.get('materialsRequired') as FormArray;
+    const ppeFormArrayValue = ppeFormArray.value;
+    const ppeName = this.ppeList[index].ppe;
+    if (ppeFormArrayValue[index][ppeName]) {
+      ppeFormArray.controls[index]['controls'].quantity.enable();
+      if (ppeName === 'Others') {
+        ppeFormArray.controls[index]['controls'].other.enable();
+      }
+      // Adds validators when ppe item is checked
+      ppeFormArray.controls[index]['controls'].quantity.setValidators([Validators.required]);
+    } else {
+      if (ppeName === 'Others') {
+        ppeFormArray.controls[index]['controls'].other.disable();
+      }
+      ppeFormArray.controls[index]['controls'].quantity.disable();
+      // Removes validators when ppe item is unchecked
+      ppeFormArray.controls[index]['controls'].quantity.setValidators(null);
+    }
+  }
+
   get formArr() {
     return this.needppeForm.get('materialsRequired') as FormArray;
   }
@@ -149,8 +138,17 @@ export class NeedppeComponent {
       const fg = this.formBuilder.group({});
       fg.addControl(this.ppeList[i].ppe, this.formBuilder.control(false));
       fg.addControl(this.ppeList[i].required, this.formBuilder.control(null));
+      fg.addControl(this.ppeList[i].otherPpe, this.formBuilder.control(null));
+      fg.controls.quantity.disable();
+      if (this.ppeList[i].ppe === 'Others') {
+        fg.controls.other.disable();
+      }
       this.formArr.push(fg);
     });
+  }
+
+  public tncChange() {
+    console.log('tnc ', this.needppeForm);
   }
 
 }
