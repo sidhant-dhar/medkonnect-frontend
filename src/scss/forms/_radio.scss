@@ -1,4 +1,3 @@
-
 @import "../variables";
 
 /* The container */
@@ -37,9 +36,9 @@
 }
 
 /* On mouse-over, add a grey background color */
-.mk-radio-container:hover input ~ .radiomark {
-  // background-color: #ccc;
-}
+// .mk-radio-container:hover input ~ .radiomark {
+//   // background-color: #ccc;
+// }
 
 input[type="radio"] ~ .radiomark {
   border-radius: 50%;

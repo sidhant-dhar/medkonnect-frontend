@@ -16,6 +16,6 @@ export class RemoteService {
   }
 
   public post(url: string, requestBody: any, headers?: HttpHeaders): Observable<any> {
-    return this.http.post(url, JSON.stringify(requestBody), { headers });
+    return this.http.post(url, requestBody, { headers });
   }
 }

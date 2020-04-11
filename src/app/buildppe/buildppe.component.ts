@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ncov-buildppe',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BuildppeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   public ngOnInit() {
   }

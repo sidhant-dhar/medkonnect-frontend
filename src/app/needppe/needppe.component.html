@@ -8,20 +8,19 @@
         </div>
       </div>
     </div>
-    <div class="mk-form__form">
+    <div class="mk-form__form pb-5">
       <form [formGroup]="needppeForm">
         <div class="form-group formStyle p-5 mb-5 firstCard">
           <label class="mk-required" for="InputName">Full Name</label>
           <input ncovAlphaNumeric id="InputName" type="text" class="form-control mt-5 no-border" aria-describedby="Yourname"
             placeholder="Your name" formControlName="name">
-          <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
           <small class="text-danger" *ngIf="needppeForm.controls.name.touched && needppeForm.controls.name.errors?.required">This is a required field</small>
         </div>
         <div class="form-group formStyle p-5 mt-md-5 mb-5">
           <label class="mk-required" for="inputNumber">Phone number</label>
           <input ncovNumeric id="inputNumber" type="text" class="form-control mt-5 mr-3 no-border" placeholder="Your Number"
-            formControlName="mobile">
-            <small class="text-danger" *ngIf="needppeForm.controls.mobile.touched && needppeForm.controls.mobile.errors?.required">This is a required field</small>
+            formControlName="phoneNo">
+            <small class="text-danger" *ngIf="needppeForm.controls.phoneNo.touched && needppeForm.controls.phoneNo.errors?.required">This is a required field</small>
         </div>
         <div class="form-group formStyle p-5 mt-md-5 mb-5">
           <label class="mk-required" for="areYouDoctor">Are you a doctor?</label>
@@ -55,13 +54,15 @@
             number in the field above.</small>
           <input type="text" id="email" class="form-control mt-5 no-border" placeholder="Your Email" formControlName="email">
           <small class="text-danger" *ngIf="needppeForm.controls.email.touched && needppeForm.controls.email.errors?.required">This is a required field</small>
+          <small class="text-danger" *ngIf="needppeForm.controls.email.touched && needppeForm.controls.email.errors?.email && isDoctor">Please enter a valid email address</small>
+          <small class="text-danger" *ngIf="needppeForm.controls.email.touched && needppeForm.controls.email.errors?.pattern && !isDoctor">We only accept corporate email addresses. Gmail/Outlook/Hotmail/apple email addresses are not accepted</small>
         </div>
         <!-- Email Address Ends -->
         <div class="form-group formStyle p-5 mt-md-5 mb-5">
-          <label class="mk-required" for="hospitalAddress">Delivery Address</label>
-          <input type="address" id="hospitalAddress" class="form-control mt-5 no-border" placeholder="Hospital Address"
-            formControlName="hospitalAddress">
-            <small class="text-danger" *ngIf="needppeForm.controls.hospitalAddress.touched && needppeForm.controls.hospitalAddress.errors?.required">This is a required field</small>
+          <label class="mk-required" for="address">Delivery Address</label>
+          <input type="address" id="address" class="form-control mt-5 no-border" placeholder="Delivery Address"
+            formControlName="address">
+            <small class="text-danger" *ngIf="needppeForm.controls.address.touched && needppeForm.controls.address.errors?.required">This is a required field</small>
         </div>
         <div class="form-group formStyle p-5 mt-md-5 mb-5">
           <label class="mk-required" for="state">State</label>
@@ -70,10 +71,10 @@
           </select>
         </div>
         <div class="form-group formStyle  p-5 mt-md-5 mb-5">
-          <label class="mk-required" for="pincode">Pincode</label>
-          <input ncovNumeric id="pincode" type="pincode" class="form-control mt-5 no-border" placeholder="Pincode"
-            formControlName="pincode">
-            <small class="text-danger" *ngIf="needppeForm.controls.pincode.touched && needppeForm.controls.pincode.errors?.required">This is a required field</small>
+          <label class="mk-required" for="pinCode">Pincode</label>
+          <input ncovNumeric id="pinCode" type="pincode" class="form-control mt-5 no-border" placeholder="Pincode"
+            formControlName="pinCode">
+            <small class="text-danger" *ngIf="needppeForm.controls.pinCode.touched && needppeForm.controls.pinCode.errors?.required">This is a required field</small>
         </div>
         <!-- home made -->
         <div class="form-group formStyle p-5 mt-md-5 mb-5">
@@ -146,6 +147,5 @@
         </div>
       </form>
     </div>
-    <p>Form value: {{ needppeForm.value | json }}</p>
   </div>
 </div>

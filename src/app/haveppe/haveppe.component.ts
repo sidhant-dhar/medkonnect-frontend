@@ -16,6 +16,8 @@ export class HaveppeComponent implements OnInit {
   public ppeList: PPEItem[];
   public addFlag = true;
   public registrationFlag = false;
+  public ppeItemSelected = true;
+
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly dataService: DataService,
@@ -24,12 +26,13 @@ export class HaveppeComponent implements OnInit {
   ) {
     this.haveppeForm = this.formBuilder.group({
       materialsRequired: new FormArray([]),
-      pincode: ['', [ Validators.required ]],
-      registrationNo: ['', [Validators.required]],
-      homeMade: [''],
+      pinCode: ['', [ Validators.required ]],
+      companyRegistrationNo: [''],
+      homeMade: ['true', [Validators.required]],
       name: ['', [ Validators.required ]],
-      mobile: ['', [ Validators.required ]],
-      email: ['', [ Validators.required ]]
+      phoneNo: ['', [ Validators.required ]],
+      email: ['', [ Validators.required , Validators.email]],
+      tnc: [true, [ Validators.required ]]
     });
     this.dataService.getPPEList().subscribe((res: PPEItemResponse) => {
       this.ppeList = res.list;
@@ -41,11 +44,16 @@ export class HaveppeComponent implements OnInit {
     return this.haveppeForm.get('materialsRequired') as FormArray;
   }
 
-   public createRequiredPPeList(): void {
+  public createRequiredPPeList(): void {
     this.ppeList.forEach((item: PPEItem, i) => {
       const fg = this.formBuilder.group({});
       fg.addControl(this.ppeList[i].ppe, this.formBuilder.control(false));
       fg.addControl(this.ppeList[i].required, this.formBuilder.control(null));
+      fg.addControl(this.ppeList[i].otherPpe, this.formBuilder.control(null));
+      fg.controls.quantity.disable();
+      if (this.ppeList[i].ppe === 'Others') {
+        fg.controls.other.disable();
+      }
       this.formArr.push(fg);
     });
   }
@@ -63,6 +71,9 @@ export class HaveppeComponent implements OnInit {
   }
 
   public onSubmit() {
+    this.haveppeForm.controls['materialsRequired'].enable();
+    const result = Object.assign({}, this.haveppeForm.value);
+    result.materialsRequired = Object.assign({}, result.materialsRequired);
     const reqBody = {...this.haveppeForm.value};
     const matRequired = reqBody.materialsRequired.reduce((acc, cur) => {
       const ppeItem = Object.keys(cur)[0];
@@ -70,24 +81,46 @@ export class HaveppeComponent implements OnInit {
         acc.push({
           quantity: cur.quantity,
           approved: 'true',
-          ppeName: ppeItem
+          ppeName: ppeItem === 'Others' ? cur.other : ppeItem
         });
       }
       return acc;
     }, []);
     delete reqBody.homeMade;
     delete reqBody.materialsRequired;
+    delete reqBody.tnc;
     const finalBody =  {
-      newSupplierDetails : '' ,
-      ppeArray: ''
+      newConsumerDetails : { ...reqBody } ,
+      ppeArray: ''  // do not use spread operator as creates an array.
     };
-    finalBody.newSupplierDetails = Object.assign(reqBody);
     finalBody.ppeArray = Object.assign(matRequired);
+    this.ppeItemSelected = finalBody.ppeArray.length > 0;
     console.log('reqBody ', finalBody);
     this.haveppeService.vendorSignIn(finalBody).subscribe((res) => {
       console.log(res);
     });
 
+  }
+
+  public onTogglePpe(index: number): void {
+    const ppeFormArray = this.haveppeForm.get('materialsRequired') as FormArray;
+    const ppeFormArrayValue = ppeFormArray.value;
+    const ppeName = this.ppeList[index].ppe;
+    if (ppeFormArrayValue[index][ppeName]) {
+      ppeFormArray.controls[index]['controls'].quantity.enable();
+      if (ppeName === 'Others') {
+        ppeFormArray.controls[index]['controls'].other.enable();
+      }
+      // Adds validators when ppe item is checked
+      ppeFormArray.controls[index]['controls'].quantity.setValidators([Validators.required]);
+    } else {
+      if (ppeName === 'Others') {
+        ppeFormArray.controls[index]['controls'].other.disable();
+      }
+      ppeFormArray.controls[index]['controls'].quantity.disable();
+      // Removes validators when ppe item is unchecked
+      ppeFormArray.controls[index]['controls'].quantity.setValidators(null);
+    }
   }
 
   public ngOnInit() {

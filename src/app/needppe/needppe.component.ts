@@ -19,7 +19,7 @@ export class NeedppeComponent {
   public addFlag = true;
   public spinnerFlag = false;
   public ppeItemSelected = true;
-
+  public emailValidationRegex = '^\w+[-\.\w]*@(?!(?:gmail|outlook|apple|hotmail)\.com$)\w+[-\.\w]*?\.\w{2,4}$';
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly needppeService: NeedppeService,
@@ -27,12 +27,12 @@ export class NeedppeComponent {
   ) {
     this.needppeForm = this.formBuilder.group({
       name: ['', [ Validators.required ]],
-      mobile: ['', [ Validators.required ]],
+      phoneNo: ['', [ Validators.required ]],
       MCInumber: [''],
-      email: ['', [ Validators.required ]],
-      hospitalAddress: ['', [ Validators.required ]],
+      email: ['', [ Validators.required, Validators.email , Validators.pattern(this.emailValidationRegex) ]],
+      address: ['', [ Validators.required ]],
       state: ['Andaman and Nicobar Islands', [ Validators.required ]],
-      pincode: ['', [ Validators.required ]],
+      pinCode: ['', [ Validators.required ]],
       homeMade: ['true', [ Validators.required ]],
       tnc: [true, [ Validators.required ]],
       materialsRequired: new FormArray([])
@@ -65,14 +65,14 @@ export class NeedppeComponent {
       }
       return acc;
     }, []);
-    console.log('reqbody ', reqBody);
-    console.log('ppearray ', matRequired);
     delete reqBody.homeMade;
     delete reqBody.materialsRequired;
+    delete reqBody.tnc;
     const finalBody =  {
       newConsumerDetails : { ...reqBody } ,
-      ppeArray: { ...matRequired }
+      ppeArray: ''  // do not use spread operator as creates an array.
     };
+    finalBody.ppeArray = Object.assign(matRequired);
     this.ppeItemSelected = finalBody.ppeArray.length > 0;
     console.log('reqBody ', finalBody);
     this.needppeService.hospitalSignIn(finalBody).subscribe((res) => {

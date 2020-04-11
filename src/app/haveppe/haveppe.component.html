@@ -1,5 +1,5 @@
 <div class="haveppe">
-  <div class = "container fluid no-padding">
+  <div class = "container-fluid no-padding">
     <div class="row mb-5">
       <div class="col-md-12 px-0">
         <img src="assets/images/hospitalHeader.png" alt="hospitalHeader" class="w-100" />
@@ -8,53 +8,66 @@
         </div>
       </div>
     </div>
-    <div class="mk-form__form">
+    <div class="mk-form__form pb-5">
       <form [formGroup] = "haveppeForm">
-        
         <div formGroupName="materialsRequired">
-          <div class="form-group formStyle p-5 mb-5 firstCard">
-            <label for="PPE">What Do You Need</label>
-            <div *ngFor="let ppe of haveppeForm.controls.materialsRequired.controls; let i = index " [formGroupName]="i"
-              class="row">
-              <div class="form-check col-lg-8 col-md-6 mt-2 mb-2 checkbox">
-                <label class="mk-checkbox-container" for="defaultCheck{{i}}">
-                  <input class="" id="defaultCheck{{i}}" type="checkbox" [formControlName]="ppeList[i].ppe">
-                  <i class="checkmark"></i>
-                  {{ppeList[i].ppe}}
-                </label>
+          <div class="form-group formStyle p-5 firstCard mb-5">
+            <label class="mk-required" for="PPE">What Do You Wish to Provide?</label>
+            <div *ngFor="let ppe of haveppeForm.controls.materialsRequired['controls']; let i = index " [formGroupName]="i">
+              <div class="row" *ngIf="ppeList[i].ppe !== 'Others'">
+                <div class="form-check col-lg-8 col-md-6 mt-2 mb-2 checkbox">
+                  <label class="mk-checkbox-container pt-3" for="defaultCheck{{i}}">
+                    <input id="defaultCheck{{i}}" type="checkbox" [formControlName]="ppeList[i].ppe" (change)="onTogglePpe(i)" >
+                    <i class="checkmark mt-3"></i>
+                    {{ppeList[i].ppe}}
+                  </label>
+                </div>
+                <div class="col-lg-4 col-md-6 mt-2 mb-md-2 mb-4">
+                  <label>
+                    <input ncovNumeric type="text" class="form-control" placeholder="Amount" [formControlName]="ppeList[i].required" >
+                  </label>
+                </div>
               </div>
-              <div class="col-lg-4 col-md-6 mt-2 mb-md-2 mb-4">
-                <label>
+              <div class="row" *ngIf="ppeList[i].ppe === 'Others'">
+                <div class="form-check col-lg-4 col-md-6 mt-2 mb-2 checkbox">
+                  <label class="mk-checkbox-container pt-3" for="defaultCheck{{i}}">
+                    <input id="defaultCheck{{i}}" type="checkbox" [formControlName]="ppeList[i].ppe" (change)="onTogglePpe(i)">
+                    <i class="checkmark mt-3"></i>
+                    {{ppeList[i].ppe}}
+                  </label>
+                </div>
+                <div class="col-lg-4 col-md-6 mt-2 mb-md-2 mb-4">
+                  <input ncovAlphaNumeric type="text" class="form-control no-border w-100" placeholder="Other PPE Item" [formControlName]="ppeList[i].otherPpe" (change)="onTogglePpe(i)" >
+                </div>
+                <div class="col-lg-4 col-md-6 mt-2 mb-md-2 mb-4">
                   <input ncovNumeric type="text" class="form-control" placeholder="Amount" [formControlName]="ppeList[i].required">
-                </label>
+                </div>
               </div>
             </div>
+            <small *ngIf="!ppeItemSelected" class="text-danger d-block">Please select atleast one PPE item</small>
             <button type="button" (click)="toggleAdd($event.target)" class="mk-btn-sm mk-btn-primary px-3 px-md-4 mt-5">Add</button>
           </div>
         </div>
 
         <div class="form-group formStyle  p-5 mt-md-5 mb-5">
-          <label for="pincode">Pincode</label>
-          <input ncovNumeric id="pincode" type="pincode" class="form-control mt-5 no-border" placeholder="Pincode"
-            formControlName="pincode">
-            <small class="text-danger" *ngIf="this.haveppeForm.controls.pincode.touched && this.haveppeForm.controls.pincode.errors?.required" >
+          <label for="pinCode" class="mk-required">Pincode</label>
+          <input ncovNumeric id="pinCode" type="pincode" class="form-control mt-5 no-border" placeholder="Pincode"
+            formControlName="pinCode">
+            <small class="text-danger" *ngIf="this.haveppeForm.controls.pinCode.touched && this.haveppeForm.controls.pinCode.errors?.required" >
               This field is required
             </small> 
           </div>
 
         <div class="form-group formStyle  p-5 mt-md-5 mb-5">
-          <label for="registered">Is Your Organisation Registered?</label>
+          <label for="registered" class="mk-required">Is Your Organisation Registered?</label>
           <small class="form-text text-muted">It is preferable to provide a registration number for verification purposes. 
             Please leave the field blank if you are not registered.</small>
           <input ncovAlphaNumeric id="registered" type="registrationNo" class="form-control mt-5 no-border" placeholder="Registeration Number."
-          formControlName="registrationNo">
-          <small class="text-danger" *ngIf="this.haveppeForm.controls.registrationNo.touched && this.haveppeForm.controls.registrationNo.errors?.required" >
-            This field is required
-          </small> 
+          formControlName="companyRegistrationNo">
         </div>
 
         <div class="form-group formStyle p-5 mt-md-5 mb-5">
-          <label for="homemade PPE">Is Your PPE HomeMade?</label>
+          <label for="homemade PPE" class="mk-required">Is Your PPE HomeMade?</label>
           <div class="px-3 px-md-4 mt-5">
             <label for="homeMade_true" class="mk-radio-yes mk-radio-container" >
               <input type="radio" id="homeMade_true" value="true" formControlName="homeMade">
@@ -73,7 +86,7 @@
         </div>
 
         <div class="form-group formStyle p-5 mb-5 mt-md-5">
-          <label for="InputName">Full Name</label>
+          <label for="InputName" class="mk-required">Full Name</label>
           <input ncovAlphaNumeric id="InputName" type="text" class="form-control mt-5 no-border" aria-describedby="Yourname"
             placeholder="Your name" formControlName="name">
           <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
@@ -83,28 +96,40 @@
         </div>
 
         <div class="form-group formStyle p-5 mt-md-5 mb-5">
-          <label for="inputNumber">Phone number</label>
+          <label for="inputNumber" class="mk-required">Phone number</label>
           <input ncovNumeric id="inputNumber" type="text" class="form-control mt-5 mr-3 no-border" placeholder="Your Number"
-            formControlName="mobile">
-            <small class="text-danger" *ngIf="this.haveppeForm.controls.mobile.touched && this.haveppeForm.controls.mobile.errors?.required" >
+            formControlName="phoneNo">
+            <small class="text-danger" *ngIf="this.haveppeForm.controls.phoneNo.touched && this.haveppeForm.controls.phoneNo.errors?.required" >
               This field is required
             </small> 
           </div>
 
         <div class="form-group formStyle p-5 mt-md-5 mb-5">
-          <label for="inputNumber">Email Address</label>
+          <label for="inputNumber" class="mk-required">Email Address</label>
           <input type="text" class="form-control mt-5 mr-3 no-border" placeholder="Your Email"
             formControlName="email">
             <small class="text-danger" *ngIf="this.haveppeForm.controls.email.touched && this.haveppeForm.controls.email.errors?.required" >
               This field is required
             </small> 
+            <small class="text-danger" *ngIf="this.haveppeForm.controls.email.touched && this.haveppeForm.controls.email.errors?.email" >
+              Please input a valid Email address.
+            </small> 
           </div>
-        <div class="">
-          <button type="submit" class="mk-btn-primary px-3 px-md-4 mt-5"
-            (click)="onSubmit()">Submit</button>
-        </div>
+          <div class="form-submit">
+            <div class="terms-condition">
+              <label class="mk-checkbox-container pt-3" for="termsCondition">
+                <input id="termsCondition" type="checkbox" formControlName="tnc" >
+                <i class="checkmark mt-3"></i>
+                Terms and Conditions
+              </label>
+            </div>
+            <div class="email-copy-text">
+              <small>A copy of your responses will be emailed to the address you provided.</small>
+            </div>
+            <button type="submit" class="mk-btn-primary px-3 px-md-4 mt-5"
+              (click)="onSubmit()" [disabled]="!haveppeForm.valid || !haveppeForm.controls.tnc.value" >Submit</button>
+          </div>
       </form>
     </div>
-    <p>Form value: {{ haveppeForm.value | json }}</p>
   </div>
 </div>
