@@ -63,36 +63,6 @@ export class HaveppeComponent implements OnInit {
   }
 
   public onSubmit() {
-    this.haveppeForm.controls['materialsRequired'].enable();
-    // create a deep copy of the form-model
-    const result = Object.assign({}, this.haveppeForm.value);
-    result.materialsRequired = Object.assign({}, result.materialsRequired);
-    const homemade = result.homeMade;
-
-    // const array = Object.keys(result.materialsRequired).map(function(k) {
-    //    return result.materialsRequired[k];
-    // }); // convert to array
-
-    // const newArray = array.filter(function (el) {
-    //   return el.quantity != null;
-    // }) // remove null values
-    // .map(v => ({...v, approved: homemade})) // add homeMade flag
-    // .map(function (el) {
-    //   const reversed = {};
-    //   for (let key in el) {
-    //     if (key !== 'approved' && el[key] === true) {
-    //       reversed[el[key]] = key;
-    //       key = 'ppeName';
-    //     } else {
-    //       reversed[key] = el[key];
-    //     }
-    //   }
-    //   reversed['ppeName'] = reversed['true'];
-    //   delete reversed['true'];
-    //   return reversed;
-    // }); // reverse ppeNames
-
-    // Object.assign(result, {'ppeArray': newArray});
     const reqBody = {...this.haveppeForm.value};
     const matRequired = reqBody.materialsRequired.reduce((acc, cur) => {
       const ppeItem = Object.keys(cur)[0];
@@ -107,7 +77,6 @@ export class HaveppeComponent implements OnInit {
     }, []);
     delete reqBody.homeMade;
     delete reqBody.materialsRequired;
-    // reqBody.materialsRequired = Object.assign(matRequired);
     const finalBody =  {
       newSupplierDetails : '' ,
       ppeArray: ''
