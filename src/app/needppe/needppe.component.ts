@@ -46,15 +46,13 @@ export class NeedppeComponent {
     });
   }
 
-  public submitRequest(reqBody) {
-    this.needppeService.submitRequest(reqBody).subscribe((res) => {
-      console.log('res ', res);
-    }, (err) => {
-      console.log('err ', err);
-    });
-  }
-
   public onSubmit() {
+    this.needppeForm.controls['materialsRequired'].enable();
+    // create a deep copy of the form-model
+    const result = Object.assign({}, this.needppeForm.value);
+    // result.personalData = Object.assign({}, result.personalData);
+    result.materialsRequired = Object.assign({}, result.materialsRequired);
+    const homemade = result.homeMade;
     const reqBody = {...this.needppeForm.value};
     const matRequired = reqBody.materialsRequired.reduce((acc, cur) => {
       const ppeItem = Object.keys(cur)[0];
@@ -67,12 +65,19 @@ export class NeedppeComponent {
       }
       return acc;
     }, []);
-    reqBody.materialsRequired = Object.assign(matRequired);
-    console.log('reqBody ', reqBody);
-    this.ppeItemSelected = matRequired.length > 0;
-    if (this.ppeItemSelected) {
-      this.submitRequest(reqBody);
-    }
+    console.log('reqbody ', reqBody);
+    console.log('ppearray ', matRequired);
+    delete reqBody.homeMade;
+    delete reqBody.materialsRequired;
+    const finalBody =  {
+      newConsumerDetails : { ...reqBody } ,
+      ppeArray: { ...matRequired }
+    };
+    this.ppeItemSelected = finalBody.ppeArray.length > 0;
+    console.log('reqBody ', finalBody);
+    this.needppeService.hospitalSignIn(finalBody).subscribe((res) => {
+      console.log(res);
+    });
   }
 
   public toggleAdd(element) {
