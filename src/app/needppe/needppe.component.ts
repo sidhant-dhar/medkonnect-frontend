@@ -19,7 +19,8 @@ export class NeedppeComponent {
   public addFlag = true;
   public spinnerFlag = false;
   public ppeItemSelected = true;
-  public emailValidationRegex = '^\w+[-\.\w]*@(?!(?:gmail|outlook|apple|hotmail)\.com$)\w+[-\.\w]*?\.\w{2,4}$';
+  // tslint:disable-next-line: max-line-length
+  public emailValidationRegex = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(?!hotmail|gmail|yahoo)(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly needppeService: NeedppeService,
@@ -28,8 +29,8 @@ export class NeedppeComponent {
     this.needppeForm = this.formBuilder.group({
       name: ['', [ Validators.required ]],
       phoneNo: ['', [ Validators.required ]],
-      MCInumber: [''],
-      email: ['', [ Validators.required, Validators.email , Validators.pattern(this.emailValidationRegex) ]],
+      MCInumber: [{value: '', disabled: true}],
+      email: ['', [ Validators.required, Validators.email, Validators.pattern(this.emailValidationRegex) ]],
       address: ['', [ Validators.required ]],
       state: ['Andaman and Nicobar Islands', [ Validators.required ]],
       pinCode: ['', [ Validators.required ]],
@@ -47,10 +48,8 @@ export class NeedppeComponent {
   }
 
   public onSubmit() {
-    this.needppeForm.controls['materialsRequired'].enable();
     // create a deep copy of the form-model
     const result = Object.assign({}, this.needppeForm.value);
-    // result.personalData = Object.assign({}, result.personalData);
     result.materialsRequired = Object.assign({}, result.materialsRequired);
     const homemade = result.homeMade;
     const reqBody = {...this.needppeForm.value};
@@ -74,7 +73,9 @@ export class NeedppeComponent {
     };
     finalBody.ppeArray = Object.assign(matRequired);
     this.ppeItemSelected = finalBody.ppeArray.length > 0;
-    console.log('reqBody ', finalBody);
+    if (!this.ppeItemSelected) {
+      return;
+    }
     this.needppeService.hospitalSignIn(finalBody).subscribe((res) => {
       console.log(res);
     });
@@ -96,9 +97,12 @@ export class NeedppeComponent {
     if (doctorClick) {
       this.isDoctor = true;
       this.needppeForm.controls['MCInumber'].enable();
+      this.needppeForm.controls['MCInumber'].setValidators([Validators.required]);
     } else {
       this.isDoctor = false;
       this.needppeForm.controls['MCInumber'].disable();
+      this.needppeForm.controls['MCInumber'].setValidators(null);
+      this.needppeForm.controls['MCInumber'].setValue(null);
       this.spinnerFlag = false;
     }
   }
@@ -113,7 +117,6 @@ export class NeedppeComponent {
   }
 
   public onTogglePpe(index: number): void {
-    console.log('controls ', this.needppeForm.controls.materialsRequired['controls']);
     const ppeFormArray = this.needppeForm.get('materialsRequired') as FormArray;
     const ppeFormArrayValue = ppeFormArray.value;
     const ppeName = this.ppeList[index].ppe;
@@ -150,10 +153,6 @@ export class NeedppeComponent {
       }
       this.formArr.push(fg);
     });
-  }
-
-  public tncChange() {
-    console.log('tnc ', this.needppeForm);
   }
 
 }
