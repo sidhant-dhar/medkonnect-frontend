@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { DataService } from '../common/services/data.service';
 import { PPEItemResponse, PPEItem } from '../common/models/models';
-
+import {HaveppeService} from './haveppe.service'
 
 @Component({
   selector: 'ncov-haveppe',
@@ -18,7 +18,9 @@ export class HaveppeComponent implements OnInit {
   public registrationFlag = false;
   constructor(
     private readonly formBuilder: FormBuilder,
-    private readonly dataService: DataService
+    private readonly dataService: DataService,
+    private readonly haveppeService: HaveppeService,
+
   ) {
     this.haveppeForm = this.formBuilder.group({
       materialsRequired: new FormArray([]),
@@ -93,21 +95,30 @@ export class HaveppeComponent implements OnInit {
     // Object.assign(result, {'ppeArray': newArray});
     const reqBody = {...this.haveppeForm.value};
     const matRequired = reqBody.materialsRequired.reduce((acc, cur) => {
-      if (cur.quantity) {
+      const ppeItem = Object.keys(cur)[0];
+      if (cur.quantity && cur[ppeItem]) {
         acc.push({
           quantity: cur.quantity,
-          approved: 'y',
-          ppeName: Object.keys(cur)[0]
+          approved: 'true',
+          ppeName: ppeItem
         });
       }
       return acc;
     }, []);
-    reqBody.materialsRequired = Object.assign(matRequired);
+    delete reqBody.homeMade;
+    delete reqBody.materialsRequired;
+    // reqBody.materialsRequired = Object.assign(matRequired);
+    const finalBody =  {
+      newSupplierDetails : '' ,
+      ppeArray: ''
+    };
+    finalBody.newSupplierDetails = Object.assign(reqBody);
+    finalBody.ppeArray = Object.assign(matRequired);
+    console.log('reqBody ', finalBody);
+    this.haveppeService.vendorSignIn(finalBody).subscribe((res) => {
+      console.log(res);
+    });
 
-    delete result.materialsRequired;
-    delete result.homeMade;
-    const postrequest = JSON.stringify(result);
-    console.log(postrequest);
   }
 
   public ngOnInit() {

@@ -17,6 +17,7 @@ import { MedkonnectAboutusComponent } from './homepage/medkonnect-aboutus/medkon
 import { AlphaNumericDirective } from './common/directives/alpha-numeric/alpha-numeric.directive';
 import { NumericDirective } from './common/directives/numeric/numeric.directive';
 import { FooterComponent } from './footer/footer.component';
+import { HomepageBuildSectionComponent } from './homepage/homepage-build-section/homepage-build-section.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { FooterComponent } from './footer/footer.component';
     HighDemandPpeComponent,
     AlphaNumericDirective,
     NumericDirective,
-    FooterComponent
+    FooterComponent,
+    HomepageBuildSectionComponent
   ],
   imports: [
     BrowserModule,

@@ -46,53 +46,75 @@ export class NeedppeComponent {
   }
 
   public onSubmit() {
+    // // const array = Object.keys(result.materialsRequired).map(function(k) {
+    // //    return result.materialsRequired[k];
+    // // }); // convert to array
+
+    // // const newArray = array.filter(function (el) {
+    // //   return el.quantity != null;
+    // // }) // remove null values
+    // // .map(v => ({...v, approved: homemade})) // add homeMade flag
+    // // .map(function (el) {
+    // //   const reversed = {};
+    // //   for (let key in el) {
+    // //     if (key !== 'approved' && el[key] === true) {
+    // //       reversed[el[key]] = key;
+    // //       key = 'ppeName';
+    // //     } else {
+    // //       reversed[key] = el[key];
+    // //     }
+    // //   }
+    // //   reversed['ppeName'] = reversed['true'];
+    // //   delete reversed['true'];
+    // //   return reversed;
+    // // }); // reverse ppeNames
+    // // Object.assign(result, {'ppeArray': newArray});
+
+    // const reqBody = {...this.needppeForm.value};
+    // const matRequired = reqBody.materialsRequired.reduce((acc, cur) => {
+    //   if (cur.quantity) {
+    //     acc.push({
+    //       quantity: cur.quantity,
+    //       approved: 'true',
+    //       ppeName: Object.keys(cur)[0]
+    //     });
+    //   }
+    //   return acc;
+    // }, []);
+    // reqBody.materialsRequired = Object.assign(matRequired);
+    // delete result.materialsRequired;
+    // delete result.homeMade;
     this.needppeForm.controls['materialsRequired'].enable();
     // create a deep copy of the form-model
     const result = Object.assign({}, this.needppeForm.value);
-    result.personalData = Object.assign({}, result.personalData);
+    // result.personalData = Object.assign({}, result.personalData);
     result.materialsRequired = Object.assign({}, result.materialsRequired);
     const homemade = result.homeMade;
-
-    // const array = Object.keys(result.materialsRequired).map(function(k) {
-    //    return result.materialsRequired[k];
-    // }); // convert to array
-
-    // const newArray = array.filter(function (el) {
-    //   return el.quantity != null;
-    // }) // remove null values
-    // .map(v => ({...v, approved: homemade})) // add homeMade flag
-    // .map(function (el) {
-    //   const reversed = {};
-    //   for (let key in el) {
-    //     if (key !== 'approved' && el[key] === true) {
-    //       reversed[el[key]] = key;
-    //       key = 'ppeName';
-    //     } else {
-    //       reversed[key] = el[key];
-    //     }
-    //   }
-    //   reversed['ppeName'] = reversed['true'];
-    //   delete reversed['true'];
-    //   return reversed;
-    // }); // reverse ppeNames
-    // Object.assign(result, {'ppeArray': newArray});
-
     const reqBody = {...this.needppeForm.value};
     const matRequired = reqBody.materialsRequired.reduce((acc, cur) => {
-      if (cur.quantity) {
+      const ppeItem = Object.keys(cur)[0];
+      if (cur.quantity && cur[ppeItem]) {
         acc.push({
           quantity: cur.quantity,
           approved: 'true',
-          ppeName: Object.keys(cur)[0]
+          ppeName: ppeItem
         });
       }
       return acc;
     }, []);
-    reqBody.materialsRequired = Object.assign(matRequired);
-    delete result.materialsRequired;
-    delete result.homeMade;
-    const postrequest = JSON.stringify(result);
-    console.log(postrequest);
+    delete reqBody.homeMade;
+    delete reqBody.materialsRequired;
+    // reqBody.materialsRequired = Object.assign(matRequired);
+    const finalBody =  {
+      newConsumerDetails : '' ,
+      ppeArray: ''
+    };
+    finalBody.newConsumerDetails = Object.assign(reqBody);
+    finalBody.ppeArray = Object.assign(matRequired);
+    console.log('reqBody ', finalBody);
+    this.needppeService.hospitalSignIn(finalBody).subscribe((res) => {
+      console.log(res);
+    });
   }
 
   // public revert() {

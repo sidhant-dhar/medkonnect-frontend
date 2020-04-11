@@ -29,9 +29,6 @@
                 </label>
               </div>
             </div>
-            <small class="text-danger" *ngIf="this.haveppeForm.controls.mobile.touched && this.haveppeForm.controls.mobile.errors.required" >
-              This field is required
-            </small> 
             <button type="button" (click)="toggleAdd($event.target)" class="mk-btn-sm mk-btn-primary px-3 px-md-4 mt-5">Add</button>
           </div>
         </div>
@@ -40,7 +37,7 @@
           <label for="pincode">Pincode</label>
           <input ncovNumeric id="pincode" type="pincode" class="form-control mt-5 no-border" placeholder="Pincode"
             formControlName="pincode">
-            <small class="text-danger" *ngIf="this.haveppeForm.controls.mobile.touched && this.haveppeForm.controls.mobile.errors.required" >
+            <small class="text-danger" *ngIf="this.haveppeForm.controls.pincode.touched && this.haveppeForm.controls.pincode.errors?.required" >
               This field is required
             </small> 
           </div>
@@ -51,7 +48,7 @@
             Please leave the field blank if you are not registered.</small>
           <input ncovNumeric id="registered" type="registrationNo" class="form-control mt-5 no-border" placeholder="Registeration Number."
           formControlName="registrationNo">
-          <small class="text-danger" *ngIf="this.haveppeForm.controls.mobile.touched && this.haveppeForm.controls.mobile.errors.required" >
+          <small class="text-danger" *ngIf="this.haveppeForm.controls.registrationNo.touched && this.haveppeForm.controls.registrationNo.errors?.required" >
             This field is required
           </small> 
         </div>
@@ -70,7 +67,7 @@
               No
             </label>
           </div>
-          <small class="text-danger" *ngIf="this.haveppeForm.controls.mobile.touched && this.haveppeForm.controls.mobile.errors.required" >
+          <small class="text-danger" *ngIf="this.haveppeForm.controls.homeMade.touched && this.haveppeForm.controls.homeMade.errors?.required" >
             This field is required
           </small> 
         </div>
@@ -80,7 +77,7 @@
           <input ncovAlphaNumeric id="InputName" type="text" class="form-control mt-5 no-border" aria-describedby="Yourname"
             placeholder="Your name" formControlName="name">
           <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
-          <small class="text-danger" *ngIf="this.haveppeForm.controls.mobile.touched && this.haveppeForm.controls.mobile.errors.required" >
+          <small class="text-danger" *ngIf="this.haveppeForm.controls.name.touched && this.haveppeForm.controls.name.errors?.required" >
             This field is required
           </small> 
         </div>
@@ -89,7 +86,7 @@
           <label for="inputNumber">Phone number</label>
           <input ncovNumeric id="inputNumber" type="text" class="form-control mt-5 mr-3 no-border" placeholder="Your Number"
             formControlName="mobile">
-            <small class="text-danger" *ngIf="this.haveppeForm.controls.mobile.touched && this.haveppeForm.controls.mobile.errors.required" >
+            <small class="text-danger" *ngIf="this.haveppeForm.controls.mobile.touched && this.haveppeForm.controls.mobile.errors?.required" >
               This field is required
             </small> 
           </div>
@@ -98,7 +95,7 @@
           <label for="inputNumber">Email Address</label>
           <input ncovNumeric id="inputNumber" type="text" class="form-control mt-5 mr-3 no-border" placeholder="Your Email"
             formControlName="email">
-            <small class="text-danger" *ngIf="this.haveppeForm.controls.mobile.touched && this.haveppeForm.controls.mobile.errors.required" >
+            <small class="text-danger" *ngIf="this.haveppeForm.controls.email.touched && this.haveppeForm.controls.email.errors?.required" >
               This field is required
             </small> 
           </div>
