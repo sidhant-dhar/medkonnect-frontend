@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { DataService } from '../common/services/data.service';
 import { PPEItemResponse, PPEItem } from '../common/models/models';
-import {HaveppeService} from './haveppe.service'
+import {HaveppeService} from './haveppe.service';
 
 @Component({
   selector: 'ncov-haveppe',

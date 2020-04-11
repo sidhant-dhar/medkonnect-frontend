@@ -46,7 +46,7 @@
           <label for="registered">Is Your Organisation Registered?</label>
           <small class="form-text text-muted">It is preferable to provide a registration number for verification purposes. 
             Please leave the field blank if you are not registered.</small>
-          <input ncovNumeric id="registered" type="registrationNo" class="form-control mt-5 no-border" placeholder="Registeration Number."
+          <input ncovAlphaNumeric id="registered" type="registrationNo" class="form-control mt-5 no-border" placeholder="Registeration Number."
           formControlName="registrationNo">
           <small class="text-danger" *ngIf="this.haveppeForm.controls.registrationNo.touched && this.haveppeForm.controls.registrationNo.errors?.required" >
             This field is required
@@ -93,7 +93,7 @@
 
         <div class="form-group formStyle p-5 mt-md-5 mb-5">
           <label for="inputNumber">Email Address</label>
-          <input ncovNumeric id="inputNumber" type="text" class="form-control mt-5 mr-3 no-border" placeholder="Your Email"
+          <input type="text" class="form-control mt-5 mr-3 no-border" placeholder="Your Email"
             formControlName="email">
             <small class="text-danger" *ngIf="this.haveppeForm.controls.email.touched && this.haveppeForm.controls.email.errors?.required" >
               This field is required
