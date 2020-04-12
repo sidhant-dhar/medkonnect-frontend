@@ -79,7 +79,7 @@
         </div>
         <!-- home made -->
         <div class="form-group formStyle p-5 mt-md-5 mb-5">
-          <label class="mk-required" for="homemade PPE">Are You Willing to Accept HomeMade PPE</label>
+          <label class="mk-required" for="homemade PPE">Are You Willing to Accept HomeMade/Uncertified PPE</label>
           <div class="px-3 px-md-4 mt-5">
             <label class="mk-required" for="homeMade_true" class="mk-radio-yes mk-radio-container" >
               <input type="radio" id="homeMade_true" value="true" formControlName="homeMade">
@@ -108,7 +108,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6 mt-2 mb-md-2 mb-4">
                   <label>
-                    <input ncovNumeric type="text" class="form-control" placeholder="Amount" [formControlName]="ppeList[i].required" >
+                    <input ncovNumeric type="text" class="form-control" placeholder="Quantity" [formControlName]="ppeList[i].required" >
                   </label>
                 </div>
               </div>
@@ -124,7 +124,7 @@
                   <input ncovAlphaNumeric type="text" class="form-control no-border w-100" placeholder="Other PPE Item" [formControlName]="ppeList[i].otherPpe" (change)="onTogglePpe(i)" >
                 </div>
                 <div class="col-lg-4 col-md-6 mt-2 mb-md-2 mb-4">
-                  <input ncovNumeric type="text" class="form-control" placeholder="Amount" [formControlName]="ppeList[i].required">
+                  <input ncovNumeric type="text" class="form-control" placeholder="Quantity" [formControlName]="ppeList[i].required">
                 </div>
               </div>
             </div>
@@ -137,10 +137,17 @@
             <label class="mk-checkbox-container pt-3" for="termsCondition">
               <input id="termsCondition" type="checkbox" formControlName="tnc" >
               <i class="checkmark mt-3"></i>
-              Terms and Conditions
+              I have read and accepted the <span [routerLink]="'/build'" class="mk-terms">Terms and Conditions</span>
             </label>
           </div>
-          <div class="email-copy-text">
+          <div class="email-copy-text mt-3">
+            <small class="font-weight-bold">
+              Medkonnect does not give any quality assurance to the consumers and shall not be liable for any defects arising out of non-compliance of, 
+              medical or industrial standards or their quality in terms of any medical equipment or device. 
+              The consumer is hereby requested to apply due diligence and verify the quality of products requested.
+            </small>
+          </div>
+          <div class="email-copy-text mt-3">
             <small>A copy of your responses will be emailed to the address you provided.</small>
           </div>
           <button type="submit" class="mk-btn-primary px-3 px-md-4 mt-5"

@@ -27,6 +27,13 @@
 //     background-color: grey;
 //   }
   
+    .mk-terms{
+        color: $btn-primary;
+    
+        &:hover{
+        color: $btn-secondary;
+        }
+    }
   
 
   select.mk-select {

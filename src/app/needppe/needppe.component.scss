@@ -40,6 +40,14 @@
   color: grey;
 }
 
+.mk-terms{
+  color: $btn-primary;
+
+  &:hover{
+  color: $btn-secondary;
+  }
+}
+
 @media (max-width: 768px) {
   .headerText {
     font-size: 20px;
