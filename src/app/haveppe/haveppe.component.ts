@@ -101,6 +101,8 @@ export class HaveppeComponent implements OnInit {
     }
     this.haveppeService.vendorSignIn(finalBody).subscribe((res) => {
       console.log(res);
+      alert('Submited!');
+      this.haveppeForm.reset();
     });
 
   }

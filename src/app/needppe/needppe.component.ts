@@ -79,6 +79,8 @@ export class NeedppeComponent {
     this.needppeService.hospitalSignIn(finalBody).subscribe((res) => {
       console.log(res);
       alert('submitted!');
+      this.needppeForm.reset();
+
     });
   }
 
