@@ -42,7 +42,8 @@ select.mk-select {
   -moz-appearance: none;
   appearance: none;
 
-  @include  media-breakpoint-down(md) {
+  @include  media-breakpoint-down(sm) {
     width: 240px;
+    font-size: 0.75 * $font-size-base;
   }
 }
