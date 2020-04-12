@@ -18,7 +18,7 @@
 }
 
 .navbar-dark .navbar-brand{
-    color: $header-logo;
+    color: $btn-primary;
     font-size: $spacer * 1.5;
     line-height: $spacer * 1.8125;
 }
@@ -36,6 +36,24 @@
     -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
     -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+
+    .navbar-brand {
+      color: $btn-primary;
+    }
+
+    .border-right {
+      border-right: 1px solid $btn-primary !important;
+
+      @include media-breakpoint-down(md) {
+        border-right: none !important;
+      }
+    }
+
+    @include media-breakpoint-down(md) {
+      .navbar-toggler {
+        background-color: rgba(135, 135, 236, 0.8);
+      }
+    }
 }
 
 .active .navbar-nav .nav-link{
