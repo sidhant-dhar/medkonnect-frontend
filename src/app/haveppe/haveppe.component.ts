@@ -90,7 +90,7 @@ export class HaveppeComponent implements OnInit {
     delete reqBody.materialsRequired;
     delete reqBody.tnc;
     const finalBody =  {
-      newConsumerDetails : { ...reqBody } ,
+      newSupplierDetails : { ...reqBody } ,
       ppeArray: ''  // do not use spread operator as creates an array.
     };
     finalBody.ppeArray = Object.assign(matRequired);

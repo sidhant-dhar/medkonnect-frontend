@@ -49,6 +49,7 @@ export class NeedppeComponent {
 
   public onSubmit() {
     // create a deep copy of the form-model
+    this.needppeForm.controls['materialsRequired'].enable();
     const result = Object.assign({}, this.needppeForm.value);
     result.materialsRequired = Object.assign({}, result.materialsRequired);
     const homemade = result.homeMade;
