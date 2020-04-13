@@ -41,6 +41,10 @@
             <div class="spinner-border mt-md-5 ml-md-3" role="status" *ngIf=spinnerFlag>
               <span class="sr-only">Loading...</span>
             </div>
+            <div *ngIf = mciVerifiedFlag class="mt-md-5 ml-md-3">
+              <i class="fa fa-check text-success" aria-hidden="true"></i>
+              <span class="text-success ml-2">Verified!</span>
+            </div>
           </div>
           <div class="row mx-0">
             <button type="button" class="mk-btn-sm mk-btn-primary col-12 col-md-2 px-3 px-md-4 mt-4 mr-2"

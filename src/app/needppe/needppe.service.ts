@@ -14,9 +14,9 @@ export class NeedppeService {
     private readonly remote: RemoteService
   ) { }
 
-  public verifyMCI(mciNumber: string): Observable<any> {
+  public verifyMCI(mciNumber): Observable<any> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.remote.post(`${this.apiroot}/post`, JSON.stringify({ mciNumber }), headers);
+    return this.remote.post(`${this.apiroot}/mci/add`, mciNumber , headers);
   }
 
   public hospitalSignIn(signIn): Observable<any> {
