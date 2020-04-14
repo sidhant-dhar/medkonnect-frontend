@@ -1,0 +1,32 @@
+<div *ngIf="dialog" class="ncov-modal" >
+  <div class="ncov-modal-content" [style.width.px]="dialog.width">
+    <div class="card">
+      <div *ngIf="dialog.title" class="card-header alert-success">
+        <div class="row">
+          <h3 class="pl-3">
+            <div [innerHTML]="dialog.title"></div>
+          </h3>
+          <div class="ml-auto mr-3">
+            <button type="button" class="close" (click)="closeDialog('cancel')" data-dismiss="alert" aria-label="Close" >
+              <span class="ncov-modal__cross-btn" aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div [innerHTML]="dialog.content"></div>
+      </div>
+      <div class="card-footer px-3 py-0">
+        <div class="row">
+          <button
+          *ngFor="let action of dialog.actions"
+          [ngClass]="{'ncov-modal__action-btn-primary': action.primary, 'ncov-modal__action-btn-secondary': !action.primary}"
+          class="ncov-modal__action-btn col-{{colDiv}}"
+          (click)="closeDialog(action.text)">
+            {{action.text}}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

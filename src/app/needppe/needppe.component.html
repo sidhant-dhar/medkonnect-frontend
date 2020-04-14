@@ -1,4 +1,5 @@
 <div class="needppe">
+  <ncov-dialog></ncov-dialog>
   <div class="container-fluid no-padding">
     <div class="row mb-5">
       <div class="col-md-12 px-0">
@@ -9,6 +10,8 @@
       </div>
     </div>
     <div class="mk-form__form pb-5">
+      <button type="submit" class="mk-btn-primary px-3 px-md-4 mt-5"
+            (click)="dialogTest()" >Open Dialog</button>
       <form [formGroup]="needppeForm">
         <div class="form-group formStyle p-5 mb-5 firstCard">
           <label class="mk-required" for="InputName">Full Name</label>

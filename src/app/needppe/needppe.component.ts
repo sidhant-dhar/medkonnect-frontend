@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { NeedppeService } from './needppe.service';
 import { DataService } from '../common/services/data.service';
 import { PPEItemResponse, PPEItem } from '../common/models/models';
+import { DialogService } from '../common/components/dialog/dialog.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ncov-needppe',
@@ -24,7 +26,9 @@ export class NeedppeComponent {
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly needppeService: NeedppeService,
-    private readonly dataService: DataService
+    private readonly dataService: DataService,
+    private readonly dialogService: DialogService,
+    private readonly router: Router
   ) {
     this.needppeForm = this.formBuilder.group({
       name: ['', [ Validators.required ]],
@@ -152,6 +156,20 @@ export class NeedppeComponent {
         fg.controls.other.disable();
       }
       this.formArr.push(fg);
+    });
+  }
+
+  public dialogTest(): void {
+    this.dialogService.open({
+      title: 'This is a title',
+      content: 'This is a body',
+      actions: [{primary: false, text: 'Cancel'}, {primary: true, text: 'Ok'}]
+    });
+    this.dialogService.closeDialogEvent.subscribe((res) => {
+      if (res.action === 'Ok') {
+        this.router.navigate(['home']);
+      }
+      console.log('close event', res);
     });
   }
 

@@ -8,3 +8,16 @@ export interface PPEItem {
 export interface PPEItemResponse {
   list: PPEItem[];
 }
+
+export interface DialogActionOptions {
+  primary: boolean;
+  text: string;
+}
+
+export interface DialogOptions {
+  title?: string;
+  content?: string;
+  width?: number;
+  routePath?: string;
+  actions?: DialogActionOptions[];
+}
