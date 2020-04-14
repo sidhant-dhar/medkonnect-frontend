@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { NeedppeService } from './needppe.service';
 import { DataService } from '../common/services/data.service';
-import { PPEItemResponse, PPEItem } from '../common/models/models';
+import { PPEItemResponse, PPEItem, DialogActionOptions } from '../common/models/models';
 import { DialogService } from '../common/components/dialog/dialog.service';
 import { Router } from '@angular/router';
 
@@ -84,9 +84,20 @@ export class NeedppeComponent {
     }
     this.needppeService.hospitalSignIn(finalBody).subscribe((res) => {
       console.log(res);
-      alert('submitted!');
+      // alert('submitted!');
       this.needppeForm.reset();
       this.mciVerifiedFlag = false;
+      this.dialogService.open({
+        title: 'Success!',
+        content: 'Request submitted successfully',
+        actions: [{primary: true, text: 'Ok'}]
+      });
+      this.dialogService.closeDialogEvent.subscribe((event) => {
+        if (event.action === 'Ok') {
+          this.router.navigate(['home']);
+        }
+        console.log('close event', event);
+      });
 
     });
   }
@@ -172,20 +183,6 @@ export class NeedppeComponent {
         fg.controls.other.disable();
       }
       this.formArr.push(fg);
-    });
-  }
-
-  public dialogTest(): void {
-    this.dialogService.open({
-      title: 'This is a title',
-      content: 'This is a body',
-      actions: [{primary: false, text: 'Cancel'}, {primary: true, text: 'Ok'}]
-    });
-    this.dialogService.closeDialogEvent.subscribe((res) => {
-      if (res.action === 'Ok') {
-        this.router.navigate(['home']);
-      }
-      console.log('close event', res);
     });
   }
 
