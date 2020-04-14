@@ -28,4 +28,10 @@
       height: 768px;
     }
   }
+  @include media-breakpoint-down(sm) {
+    .header{
+      font-size: 30px;
+    }
+  }
+
 }

@@ -14,22 +14,22 @@
             (click)="dialogTest()" >Open Dialog</button>
       <form [formGroup]="needppeForm">
         <div class="form-group formStyle p-5 mb-5 firstCard">
-          <label class="mk-required" for="InputName">Full Name</label>
-          <input ncovAlphaNumeric id="InputName" type="text" class="form-control mt-5 no-border" aria-describedby="Yourname"
+          <label class="mk-required pl-sm-2" for="InputName">Full Name</label>
+          <input ncovAlphaNumeric id="InputName" type="text" class="form-control mt-md-5 mt-2 no-border" aria-describedby="Yourname"
             placeholder="Your name" formControlName="name">
           <small class="text-danger" *ngIf="needppeForm.controls.name.touched && needppeForm.controls.name.errors?.required">This is a required field</small>
         </div>
         <div class="form-group formStyle p-5 mt-md-5 mb-5">
           <label class="mk-required" for="inputNumber">Phone number</label>
-          <input ncovNumeric id="inputNumber" type="text" class="form-control mt-5 mr-3 no-border" placeholder="Your Number"
+          <input ncovNumeric id="inputNumber" type="text" class="form-control mt-md-5 mt-2 mr-3 no-border" placeholder="Your Number"
             formControlName="phoneNo">
             <small class="text-danger" *ngIf="needppeForm.controls.phoneNo.touched && needppeForm.controls.phoneNo.errors?.required">This is a required field</small>
         </div>
         <div class="form-group formStyle p-5 mt-md-5 mb-5">
           <label class="mk-required" for="areYouDoctor">Are you a doctor?</label>
-          <button type="button" class="mk-btn-xs mk-btn-primary px-3 px-md-4 mt-5"
+          <button type="button" class="mk-btn-xs mk-btn-primary px-3 px-md-4 mt-md-5 mt-2"
             (click)="toggleDoctor(true)">Yes</button>
-          <button type="button" class="mk-btn-xs mk-btn-primary px-3 px-md-4 ml-3 mt-5"
+          <button type="button" class="mk-btn-xs mk-btn-primary px-3 px-md-4 ml-3 mt-md-5 mt-2"
             (click)="toggleDoctor(false)">No</button>
         </div>
         <div class="form-group formStyle p-5 mt-md-5 mb-5"
@@ -43,6 +43,10 @@
               <small class="text-danger" *ngIf="needppeForm.controls.MCInumber.touched && needppeForm.controls.MCInumber.errors?.required">This is a required field</small>
             <div class="spinner-border mt-md-5 ml-md-3" role="status" *ngIf=spinnerFlag>
               <span class="sr-only">Loading...</span>
+            </div>
+            <div *ngIf = mciVerifiedFlag class="mt-md-5 ml-md-3">
+              <i class="fa fa-check text-success" aria-hidden="true"></i>
+              <span class="text-success ml-2">Verified!</span>
             </div>
           </div>
           <div class="row mx-0">
@@ -58,7 +62,7 @@
             Addresses from popular
             email providers shall not be accepted. If you do not have a corporate email address, please input your MCI
             number in the field above.</small>
-          <input type="text" id="email" class="form-control mt-5 no-border" placeholder="Your Email" formControlName="email">
+          <input type="text" id="email" class="form-control mt-md-5 mt-2 no-border" placeholder="Your Email" formControlName="email">
           <small class="text-danger" *ngIf="needppeForm.controls.email.touched && needppeForm.controls.email.errors?.required">This is a required field</small>
           <small class="text-danger" *ngIf="needppeForm.controls.email.touched && needppeForm.controls.email.errors?.email && isDoctor">Please enter a valid email address</small>
           <small class="text-danger" *ngIf="needppeForm.controls.email.touched && needppeForm.controls.email.errors?.pattern && !isDoctor">We only accept corporate email addresses. Gmail/Outlook/Hotmail/apple email addresses are not accepted</small>
@@ -66,7 +70,7 @@
         <!-- Email Address Ends -->
         <div class="form-group formStyle p-5 mt-md-5 mb-5">
           <label class="mk-required" for="address">Delivery Address</label>
-          <input type="address" id="address" class="form-control mt-5 no-border" placeholder="Delivery Address"
+          <input type="address" id="address" class="form-control mt-md-5 mt-2 no-border" placeholder="Delivery Address"
             formControlName="address">
             <small class="text-danger" *ngIf="needppeForm.controls.address.touched && needppeForm.controls.address.errors?.required">This is a required field</small>
         </div>
@@ -78,14 +82,14 @@
         </div>
         <div class="form-group formStyle  p-5 mt-md-5 mb-5">
           <label class="mk-required" for="pinCode">Pincode</label>
-          <input ncovNumeric id="pinCode" type="pincode" class="form-control mt-5 no-border" placeholder="Pincode"
+          <input ncovNumeric id="pinCode" type="pincode" class="form-control mt-md-5 mt-2 no-border" placeholder="Pincode"
             formControlName="pinCode">
             <small class="text-danger" *ngIf="needppeForm.controls.pinCode.touched && needppeForm.controls.pinCode.errors?.required">This is a required field</small>
         </div>
         <!-- home made -->
         <div class="form-group formStyle p-5 mt-md-5 mb-5">
-          <label class="mk-required" for="homemade PPE">Are You Willing to Accept HomeMade PPE</label>
-          <div class="px-3 px-md-4 mt-5">
+          <label class="mk-required" for="homemade PPE">Are You Willing to Accept HomeMade or Uncertified PPE</label>
+          <div class="px-3 px-md-4 mt-md-5 mt-2">
             <label class="mk-required" for="homeMade_true" class="mk-radio-yes mk-radio-container" >
               <input type="radio" id="homeMade_true" value="true" formControlName="homeMade">
               <i class="radiomark"></i>
@@ -94,7 +98,7 @@
             <label class="mk-required" for="homeMade_false" class="mk-radio-no mk-radio-container">
               <input type="radio" id="homeMade_false" value="false" formControlName="homeMade">
               <i class="radiomark"></i>
-              No
+              No 
             </label>
           </div>
         </div>
@@ -113,7 +117,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6 mt-2 mb-md-2 mb-4">
                   <label>
-                    <input ncovNumeric type="text" class="form-control" placeholder="Amount" [formControlName]="ppeList[i].required" >
+                    <input ncovNumeric type="text" class="form-control" placeholder="Quantity" [formControlName]="ppeList[i].required" >
                   </label>
                 </div>
               </div>
@@ -129,7 +133,7 @@
                   <input ncovAlphaNumeric type="text" class="form-control no-border w-100" placeholder="Other PPE Item" [formControlName]="ppeList[i].otherPpe" (change)="onTogglePpe(i)" >
                 </div>
                 <div class="col-lg-4 col-md-6 mt-2 mb-md-2 mb-4 ml-md-auto">
-                  <input ncovNumeric type="text" class="form-control" placeholder="Amount" [formControlName]="ppeList[i].required">
+                  <input ncovNumeric type="text" class="form-control" placeholder="Quantity" [formControlName]="ppeList[i].required">
                 </div>
               </div>
             </div>
@@ -142,10 +146,17 @@
             <label class="mk-checkbox-container pt-3" for="termsCondition">
               <input id="termsCondition" type="checkbox" formControlName="tnc" >
               <i class="checkmark mt-3"></i>
-              Terms and Conditions
+              I have read and accepted the <span [routerLink]="'/build'" class="mk-terms">Terms and Conditions</span>
             </label>
           </div>
-          <div class="email-copy-text">
+          <div class="email-copy-text mt-3">
+            <small class="font-weight-bold">
+              Medkonnect does not give any quality assurance to the consumers and shall not be liable for any defects arising out of non-compliance of, 
+              medical or industrial standards or their quality in terms of any medical equipment or device. 
+              The consumer is hereby requested to apply due diligence and verify the quality of products requested.
+            </small>
+          </div>
+          <div class="email-copy-text mt-3">
             <small>A copy of your responses will be emailed to the address you provided.</small>
           </div>
           <button type="submit" class="mk-btn-primary px-3 px-md-4 mt-5"
