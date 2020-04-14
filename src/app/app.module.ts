@@ -18,6 +18,7 @@ import { AlphaNumericDirective } from './common/directives/alpha-numeric/alpha-n
 import { NumericDirective } from './common/directives/numeric/numeric.directive';
 import { FooterComponent } from './footer/footer.component';
 import { HomepageBuildSectionComponent } from './homepage/homepage-build-section/homepage-build-section.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { HomepageBuildSectionComponent } from './homepage/homepage-build-section
     AlphaNumericDirective,
     NumericDirective,
     FooterComponent,
-    HomepageBuildSectionComponent
+    HomepageBuildSectionComponent,
+    AboutUsComponent
   ],
   imports: [
     BrowserModule,
