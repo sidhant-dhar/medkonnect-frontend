@@ -20,6 +20,7 @@ import { FooterComponent } from './footer/footer.component';
 import { HomepageBuildSectionComponent } from './homepage/homepage-build-section/homepage-build-section.component';
 import { DialogComponent } from './common/components/dialog/dialog.component';
 import { DialogService } from './common/components/dialog/dialog.service';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { DialogService } from './common/components/dialog/dialog.service';
     NumericDirective,
     FooterComponent,
     HomepageBuildSectionComponent,
-    DialogComponent
+    DialogComponent,
+    AboutUsComponent
   ],
   imports: [
     BrowserModule,
