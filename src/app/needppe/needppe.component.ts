@@ -75,7 +75,7 @@ export class NeedppeComponent {
     delete reqBody.tnc;
     const finalBody =  {
       newConsumerDetails : { ...reqBody } ,
-      ppeArray: [ ...reqBody ]
+      ppeArray: ''
     };
     finalBody.ppeArray = Object.assign(matRequired);
     this.ppeItemSelected = finalBody.ppeArray.length > 0;
