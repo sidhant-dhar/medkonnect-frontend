@@ -19,6 +19,7 @@ export class NeedppeComponent {
   public addFlag = true;
   public spinnerFlag = false;
   public ppeItemSelected = true;
+  public mciVerifiedFlag = false;
   // tslint:disable-next-line: max-line-length
   public emailValidationRegex = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(?!hotmail|gmail|yahoo)(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
   constructor(
@@ -49,6 +50,7 @@ export class NeedppeComponent {
 
   public onSubmit() {
     // create a deep copy of the form-model
+    this.needppeForm.controls['materialsRequired'].enable();
     const result = Object.assign({}, this.needppeForm.value);
     result.materialsRequired = Object.assign({}, result.materialsRequired);
     const homemade = result.homeMade;
@@ -69,7 +71,7 @@ export class NeedppeComponent {
     delete reqBody.tnc;
     const finalBody =  {
       newConsumerDetails : { ...reqBody } ,
-      ppeArray: ''  // do not use spread operator as creates an array.
+      ppeArray: [ ...reqBody ]
     };
     finalBody.ppeArray = Object.assign(matRequired);
     this.ppeItemSelected = finalBody.ppeArray.length > 0;
@@ -78,6 +80,10 @@ export class NeedppeComponent {
     }
     this.needppeService.hospitalSignIn(finalBody).subscribe((res) => {
       console.log(res);
+      alert('submitted!');
+      this.needppeForm.reset();
+      this.mciVerifiedFlag = false;
+
     });
   }
 
@@ -109,10 +115,20 @@ export class NeedppeComponent {
 
   public verifyMCI() {
     this.spinnerFlag = true;
-    this.needppeService.verifyMCI(this.needppeForm.controls.MCInumber.value).subscribe(() => {
+    const verifyMci = {
+      name : '',
+      regNo: ''
+    };
+    verifyMci.name = Object.assign(this.needppeForm.controls.name.value);
+    verifyMci.regNo = Object.assign(this.needppeForm.controls.MCInumber.value);
+    console.log(verifyMci);
+    this.needppeService.verifyMCI(verifyMci).subscribe((res) => {
+      console.log(res);
       this.spinnerFlag = false;
+      this.mciVerifiedFlag = true; // On reset of form will the flag be reset? Need to test.
     }, () => {
       this.spinnerFlag = false;
+      alert('The MCI number could not be verified!');
     });
   }
 

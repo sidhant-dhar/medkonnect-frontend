@@ -70,4 +70,22 @@
       }
     }
   }
+
+  @include media-breakpoint-down(sm) { 
+      .high-demand-ppe__tiles{
+        &-image {
+          filter: brightness(0.8);
+          @include transform-scale(1.05);
+        }
+
+        &-description {
+          opacity: 0;
+        }
+
+        &-btn {
+          opacity: 1;
+        }
+      }
+      
+  }
 }
