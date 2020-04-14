@@ -51,7 +51,7 @@
 
         <div class="form-group formStyle  p-5 mt-md-5 mb-5">
           <label for="pinCode" class="mk-required">Pincode</label>
-          <input ncovNumeric id="pinCode" type="pincode" class="form-control mt-5 no-border" placeholder="Pincode"
+          <input ncovNumeric id="pinCode" type="pincode" class="form-control mt-md-5 mt-2 no-border" placeholder="Pincode"
             formControlName="pinCode">
             <small class="text-danger" *ngIf="this.haveppeForm.controls.pinCode.touched && this.haveppeForm.controls.pinCode.errors?.required" >
               This field is required
@@ -62,13 +62,13 @@
           <label for="registered">Is Your Organisation Registered?</label>
           <small class="form-text text-muted">It is preferable to provide a registration number for verification purposes. 
             Please leave the field blank if you are not registered.</small>
-          <input ncovAlphaNumeric id="registered" type="registrationNo" class="form-control mt-5 no-border" placeholder="Registeration Number."
+          <input ncovAlphaNumeric id="registered" type="registrationNo" class="form-control mt-md-5 mt-2 no-border" placeholder="Registeration Number."
           formControlName="companyRegistrationNo">
         </div>
 
         <div class="form-group formStyle p-5 mt-md-5 mb-5">
           <label for="homemade PPE" class="mk-required">Is Your PPE Certified (ISO, ICMR, ICMED) ?</label>
-          <div class="px-3 px-md-4 mt-5">
+          <div class="px-3 px-md-4 mt-md-5 mt-2">
             <label for="homeMade_true" class="mk-radio-yes mk-radio-container" >
               <input type="radio" id="homeMade_true" value="true" formControlName="homeMade">
               <i class="radiomark"></i>
@@ -87,7 +87,7 @@
 
         <div class="form-group formStyle p-5 mb-5 mt-md-5">
           <label for="InputName" class="mk-required">Full Name</label>
-          <input ncovAlphaNumeric id="InputName" type="text" class="form-control mt-5 no-border" aria-describedby="Yourname"
+          <input ncovAlphaNumeric id="InputName" type="text" class="form-control mt-md-5 mt-2 no-border" aria-describedby="Yourname"
             placeholder="Your name" formControlName="name">
           <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
           <small class="text-danger" *ngIf="this.haveppeForm.controls.name.touched && this.haveppeForm.controls.name.errors?.required" >
@@ -97,7 +97,7 @@
 
         <div class="form-group formStyle p-5 mt-md-5 mb-5">
           <label for="inputNumber" class="mk-required">Phone number</label>
-          <input ncovNumeric id="inputNumber" type="text" class="form-control mt-5 mr-3 no-border" placeholder="Your Number"
+          <input ncovNumeric id="inputNumber" type="text" class="form-control mt-md-5 mt-2 mr-3 no-border" placeholder="Your Number"
             formControlName="phoneNo">
             <small class="text-danger" *ngIf="this.haveppeForm.controls.phoneNo.touched && this.haveppeForm.controls.phoneNo.errors?.required" >
               This field is required
@@ -106,7 +106,7 @@
 
         <div class="form-group formStyle p-5 mt-md-5 mb-5">
           <label for="inputNumber" class="mk-required">Email Address</label>
-          <input type="text" class="form-control mt-5 mr-3 no-border" placeholder="Your Email"
+          <input type="text" class="form-control mt-md-5 mt-2 mr-3 no-border" placeholder="Your Email"
             formControlName="email">
             <small class="text-danger" *ngIf="this.haveppeForm.controls.email.touched && this.haveppeForm.controls.email.errors?.required" >
               This field is required
