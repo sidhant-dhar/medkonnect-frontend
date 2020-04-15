@@ -1,33 +1,24 @@
 .about-us {
-  .font-icon {
-    font-size: 8rem;
-  }
-  .section {
-    height: 100vh !important;
-    &:first-child {
-      background: rgb(135, 135, 236);
-      background: linear-gradient(
-        180deg,
-        rgba(135, 135, 236, 0.9) 0%,
-        rgba(255, 255, 255, 1) 14%
-      );
-      @media (min-width: 576px) {
-        background: inherit;
-        background: inherit;
-      }
+  .page-header {
+    background: linear-gradient(
+        90deg,
+        #2c3a81 0%,
+        rgba(35, 36, 37, 0.705681) 0%,
+        rgba(18, 67, 194, 0.1) 100%
+      ),
+      rgba(0, 0, 0, 0.7);
+    h1::before,
+    h1::after {
+      display: inline-block;
+      content: "";
+      border-top: 0.1rem solid white;
+      width: 5rem;
+      margin: 0 1rem;
+      transform: translateY(-0.5rem);
     }
-  }
-  .who-are-we {
-    background-image: url("../../assets/images/who-are-we.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-
-  .how-we-do-it {
-    background-image: url("../../assets/images/how-we-do-it.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    img {
+      z-index: -1;
+      position: relative;
+    }
   }
 }
