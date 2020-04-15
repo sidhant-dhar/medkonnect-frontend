@@ -16,8 +16,9 @@ export class DialogService {
       title: undefined,
       content: undefined,
       width: 450,
+      top: 200,
       routePath: undefined,
-      actions: [{primary: true, text: 'Ok'}]
+      actions: []
     };
     this.dialogSubject.next();
     this.closeEventSubject.next();

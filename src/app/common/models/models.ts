@@ -18,6 +18,7 @@ export interface DialogOptions {
   title?: string;
   content?: string;
   width?: number;
+  top?: number;
   routePath?: string;
   actions?: DialogActionOptions[];
 }

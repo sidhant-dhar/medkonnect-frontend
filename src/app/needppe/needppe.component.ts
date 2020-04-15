@@ -84,7 +84,6 @@ export class NeedppeComponent {
     }
     this.needppeService.hospitalSignIn(finalBody).subscribe((res) => {
       console.log(res);
-      // alert('submitted!');
       this.needppeForm.reset();
       this.mciVerifiedFlag = false;
       this.dialogService.open({
@@ -99,6 +98,12 @@ export class NeedppeComponent {
         console.log('close event', event);
       });
 
+    }, () => {
+      this.dialogService.open({
+        title: 'Error!',
+        content: 'Request cannot be processed, please try again after sometime',
+        actions: [{primary: true, text: 'Ok'}]
+      });
     });
   }
 

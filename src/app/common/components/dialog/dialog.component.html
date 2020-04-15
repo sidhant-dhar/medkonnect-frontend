@@ -1,6 +1,8 @@
-<div *ngIf="dialog" class="ncov-modal" >
-  <div class="ncov-modal-content" [style.width.px]="dialog.width">
-    <div class="card">
+
+<div *ngIf="dialog" class="ncov-modal-backdrop"></div>
+<div *ngIf="dialog" class="ncov-modal" [style.width.px]="dialog.width" >
+  <div class="ncov-modal-content" [style.top.px]="dialog.top">
+    <div class="card d-flex align-self-center">
       <div *ngIf="dialog.title" class="card-header alert-success">
         <div class="row">
           <h3 class="pl-3">
@@ -16,7 +18,7 @@
       <div class="card-body">
         <div [innerHTML]="dialog.content"></div>
       </div>
-      <div class="card-footer px-3 py-0">
+      <div *ngIf="dialog.actions.length > 0" class="card-footer px-3 py-0">
         <div class="row">
           <button
           *ngFor="let action of dialog.actions"
