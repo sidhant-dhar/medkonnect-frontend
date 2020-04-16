@@ -1,0 +1,70 @@
+.ncov-modal {
+  @import "../../../../scss/bootstrap";
+
+  position: fixed;
+  border-radius: 10px;
+  left: 50%;
+  width: 450px;
+  z-index: 9999;
+
+  &-backdrop {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: $black;
+    opacity: 0.7;
+    z-index: 9999;
+  }
+
+  &-content {
+    position: relative;
+    top: 200px;
+    left: -50%;
+  }
+
+  &__action-btn {
+
+    border: none;
+    color: $white;
+    height: 40px;
+    border: 1px solid $white;
+
+    &-primary {
+      background-color: rgba($color: $btn-primary, $alpha: 0.8);
+
+      &:hover {
+        background-color: rgba($color: $btn-primary, $alpha: 1);
+      }
+    }
+
+    &-secondary {
+      background-color: rgba($color: $btn-secondary, $alpha: 0.8);
+
+      &:hover {
+        background-color: rgba($color: $btn-secondary, $alpha: 0.4);
+      }
+    }
+  }
+
+  &__cross-btn {
+    color: $white;
+  }
+
+  .card {
+    box-shadow: 0.2px 0.6px 0.5px 0.5px;
+  }
+
+  .card-body {
+    min-height: 96px;
+  }
+
+  .card-header {
+    background-color: rgba($color: $btn-primary, $alpha: 0.8);
+    color: $white;
+  }
+
+
+
+}

@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { NeedppeService } from './needppe.service';
 import { DataService } from '../common/services/data.service';
-import { PPEItemResponse, PPEItem } from '../common/models/models';
+import { PPEItemResponse, PPEItem, DialogActionOptions } from '../common/models/models';
+import { DialogService } from '../common/components/dialog/dialog.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ncov-needppe',
@@ -25,7 +27,9 @@ export class NeedppeComponent {
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly needppeService: NeedppeService,
-    private readonly dataService: DataService
+    private readonly dataService: DataService,
+    private readonly dialogService: DialogService,
+    private readonly router: Router
   ) {
     this.needppeForm = this.formBuilder.group({
       name: ['', [ Validators.required ]],
@@ -71,7 +75,7 @@ export class NeedppeComponent {
     delete reqBody.tnc;
     const finalBody =  {
       newConsumerDetails : { ...reqBody } ,
-      ppeArray: [ ...reqBody ]
+      ppeArray: ''
     };
     finalBody.ppeArray = Object.assign(matRequired);
     this.ppeItemSelected = finalBody.ppeArray.length > 0;
@@ -80,10 +84,26 @@ export class NeedppeComponent {
     }
     this.needppeService.hospitalSignIn(finalBody).subscribe((res) => {
       console.log(res);
-      alert('submitted!');
       this.needppeForm.reset();
       this.mciVerifiedFlag = false;
+      this.dialogService.open({
+        title: 'Success!',
+        content: 'Request submitted successfully',
+        actions: [{primary: true, text: 'Ok'}]
+      });
+      this.dialogService.closeDialogEvent.subscribe((event) => {
+        if (event.action === 'Ok') {
+          this.router.navigate(['home']);
+        }
+        console.log('close event', event);
+      });
 
+    }, () => {
+      this.dialogService.open({
+        title: 'Error!',
+        content: 'Request cannot be processed, please try again after sometime',
+        actions: [{primary: true, text: 'Ok'}]
+      });
     });
   }
 

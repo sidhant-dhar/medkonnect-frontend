@@ -18,6 +18,8 @@ import { AlphaNumericDirective } from './common/directives/alpha-numeric/alpha-n
 import { NumericDirective } from './common/directives/numeric/numeric.directive';
 import { FooterComponent } from './footer/footer.component';
 import { HomepageBuildSectionComponent } from './homepage/homepage-build-section/homepage-build-section.component';
+import { DialogComponent } from './common/components/dialog/dialog.component';
+import { DialogService } from './common/components/dialog/dialog.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { HomepageBuildSectionComponent } from './homepage/homepage-build-section
     AlphaNumericDirective,
     NumericDirective,
     FooterComponent,
-    HomepageBuildSectionComponent
+    HomepageBuildSectionComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +49,8 @@ import { HomepageBuildSectionComponent } from './homepage/homepage-build-section
     ReactiveFormsModule
   ],
   providers: [
-    RemoteService
+    RemoteService,
+    DialogService
   ],
   bootstrap: [AppComponent]
 })
