@@ -8,7 +8,7 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class HaveppeService {
 
-  public readonly apiroot = 'http://ec2-13-235-243-110.ap-south-1.compute.amazonaws.com:3045/temp';
+  public readonly apiroot = 'http://ec2-3-7-93-156.ap-south-1.compute.amazonaws.com:3045/temp';
 
   constructor(
     private readonly remote: RemoteService

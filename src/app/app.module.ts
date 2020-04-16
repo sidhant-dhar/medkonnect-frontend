@@ -19,6 +19,8 @@ import { NumericDirective } from './common/directives/numeric/numeric.directive'
 import { FooterComponent } from './footer/footer.component';
 import { HomepageBuildSectionComponent } from './homepage/homepage-build-section/homepage-build-section.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { DialogComponent } from './common/components/dialog/dialog.component';
+import { DialogService } from './common/components/dialog/dialog.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import { AboutUsComponent } from './about-us/about-us.component';
     NumericDirective,
     FooterComponent,
     HomepageBuildSectionComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +51,8 @@ import { AboutUsComponent } from './about-us/about-us.component';
     ReactiveFormsModule
   ],
   providers: [
-    RemoteService
+    RemoteService,
+    DialogService
   ],
   bootstrap: [AppComponent]
 })

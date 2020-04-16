@@ -3,6 +3,9 @@ import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { DataService } from '../common/services/data.service';
 import { PPEItemResponse, PPEItem } from '../common/models/models';
 import {HaveppeService} from './haveppe.service';
+import { DialogService } from '../common/components/dialog/dialog.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'ncov-haveppe',
@@ -22,6 +25,9 @@ export class HaveppeComponent implements OnInit {
     private readonly formBuilder: FormBuilder,
     private readonly dataService: DataService,
     private readonly haveppeService: HaveppeService,
+    private readonly dialogService: DialogService,
+    private readonly router: Router
+
 
   ) {
     this.haveppeForm = this.formBuilder.group({
@@ -100,9 +106,24 @@ export class HaveppeComponent implements OnInit {
       return;
     }
     this.haveppeService.vendorSignIn(finalBody).subscribe((res) => {
-      console.log(res);
-      alert('Submited!');
       this.haveppeForm.reset();
+      this.dialogService.open({
+        title: 'Success!',
+        content: 'Request submitted successfully',
+        actions: [{primary: true, text: 'Ok'}]
+      });
+      this.dialogService.closeDialogEvent.subscribe((event) => {
+        if (event.action === 'Ok') {
+          this.router.navigate(['home']);
+        }
+        console.log('close event', event);
+      });
+    }, () => {
+      this.dialogService.open({
+        title: 'Error!',
+        content: 'Request cannot be processed, please try again after sometime',
+        actions: [{primary: true, text: 'Ok'}]
+      });
     });
 
   }
