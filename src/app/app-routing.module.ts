@@ -5,6 +5,7 @@ import {BuildppeComponent } from './buildppe/buildppe.component';
 import {NeedppeComponent} from './needppe/needppe.component';
 import {HaveppeComponent} from './haveppe/haveppe.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { TncComponent } from './tnc/tnc.component';
 const routes: Routes = [
 
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -12,7 +13,9 @@ const routes: Routes = [
   {path: 'build', component: BuildppeComponent},
   {path: 'need', component: NeedppeComponent},
   {path: 'have', component: HaveppeComponent},
-  {path: 'about', component: AboutUsComponent}
+  {path: 'about', component: AboutUsComponent},
+  {path: 'tnc', component: TncComponent}
+
 ];
 
 @NgModule({
