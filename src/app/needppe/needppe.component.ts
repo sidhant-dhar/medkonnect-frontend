@@ -1,17 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { NeedppeService } from './needppe.service';
 import { DataService } from '../common/services/data.service';
 import { PPEItemResponse, PPEItem, DialogActionOptions } from '../common/models/models';
 import { DialogService } from '../common/components/dialog/dialog.service';
 import { Router } from '@angular/router';
+import { SharedService } from '../common/services/shared-service.service';
+
 
 @Component({
   selector: 'ncov-needppe',
   templateUrl: './needppe.component.html',
   styleUrls: ['./needppe.component.scss']
 })
-export class NeedppeComponent {
+export class NeedppeComponent implements OnInit {
 
   public needppeForm: FormGroup;
   public materialsRequired: FormGroup;
@@ -22,6 +24,7 @@ export class NeedppeComponent {
   public spinnerFlag = false;
   public ppeItemSelected = true;
   public mciVerifiedFlag = false;
+  public data: any;
   // tslint:disable-next-line: max-line-length
   public emailValidationRegex = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(?!hotmail|gmail|yahoo)(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
   constructor(
@@ -29,7 +32,8 @@ export class NeedppeComponent {
     private readonly needppeService: NeedppeService,
     private readonly dataService: DataService,
     private readonly dialogService: DialogService,
-    private readonly router: Router
+    private readonly router: Router,
+    private sharedService: SharedService
   ) {
     this.needppeForm = this.formBuilder.group({
       name: ['', [ Validators.required ]],
@@ -189,6 +193,11 @@ export class NeedppeComponent {
       }
       this.formArr.push(fg);
     });
+  }
+
+  public ngOnInit() {
+    this.sharedService.currentData.subscribe(data => this.data = data);
+    console.log(this.data);
   }
 
 }

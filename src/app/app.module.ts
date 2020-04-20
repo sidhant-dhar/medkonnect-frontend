@@ -22,6 +22,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { DialogComponent } from './common/components/dialog/dialog.component';
 import { DialogService } from './common/components/dialog/dialog.service';
 import { TncComponent } from './tnc/tnc.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { TncComponent } from './tnc/tnc.component';
     HomepageBuildSectionComponent,
     AboutUsComponent,
     DialogComponent,
-    TncComponent
+    TncComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

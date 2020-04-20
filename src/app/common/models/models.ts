@@ -21,4 +21,5 @@ export interface DialogOptions {
   top?: number;
   routePath?: string;
   actions?: DialogActionOptions[];
+  islogin?: boolean;
 }

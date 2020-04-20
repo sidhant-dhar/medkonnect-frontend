@@ -34,4 +34,13 @@
     }
   }
 
+  modal-title{
+    font-weight: 600;
+  }
+  
+  &__modalLink{
+    color: $btn-primary !important;
+  }
+
 }
+

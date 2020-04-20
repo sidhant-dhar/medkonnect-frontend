@@ -12,6 +12,7 @@ export class DialogComponent implements OnInit {
 
   public dialog: DialogOptions;
   public colDiv: number;
+  private isLogin = false;
 
   constructor(
     private readonly dialogService: DialogService,
@@ -25,6 +26,7 @@ export class DialogComponent implements OnInit {
   public ngOnInit() {
     this.dialogService.dialogProperties.subscribe((properties) => {
       this.dialog = properties;
+      this.isLogin = properties.islogin;
       this.colDiv = 12 / this.dialog.actions.length;
     });
   }
