@@ -16,11 +16,11 @@ export class NeedppeService {
 
   public verifyMCI(mciNumber): Observable<any> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.remote.post(`${this.apiroot}/mci/add`, mciNumber , headers);
+    return this.remote.post(`/mci/add`, mciNumber , headers);
   }
 
   public hospitalSignIn(signIn): Observable<any> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.remote.post(`${this.apiroot}/onboardConsumer`, signIn , headers);
+    return this.remote.post(`/onboardConsumer`, signIn , headers);
   }
 }

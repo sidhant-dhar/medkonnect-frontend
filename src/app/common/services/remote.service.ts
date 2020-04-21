@@ -7,6 +7,9 @@ import { Observable } from 'rxjs';
 })
 export class RemoteService {
 
+  public readonly apiroot = 'http://ec2-3-7-93-156.ap-south-1.compute.amazonaws.com:3045/api';
+
+
   constructor(
     private readonly http: HttpClient
   ) { }
@@ -16,6 +19,6 @@ export class RemoteService {
   }
 
   public post(url: string, requestBody: any, headers?: HttpHeaders): Observable<any> {
-    return this.http.post(url, requestBody, { headers });
+    return this.http.post(`${this.apiroot}${url}`, requestBody, { headers });
   }
 }

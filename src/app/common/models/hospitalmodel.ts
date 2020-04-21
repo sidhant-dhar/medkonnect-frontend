@@ -1,12 +1,14 @@
 export class PersonalData {
-    public name = '';
     public email = '';
-    public mobile = '';
+    public password: '';
+    public name = '';
     public state = '';
-    public hospitalAddress = '';
-    public pincode = '';
-    public MCInumber = '';
-    // public homeMade = false;
+    public city = '';
+    public address = '';
+    public phoneNo = '';
+    public pinCode = '';
+    public companyRegnNo = '';
+    public token?: '';
   }
 export class ContactRequest {
     public personalData: PersonalData;

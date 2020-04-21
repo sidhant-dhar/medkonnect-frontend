@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -23,6 +23,8 @@ import { DialogComponent } from './common/components/dialog/dialog.component';
 import { DialogService } from './common/components/dialog/dialog.service';
 import { TncComponent } from './tnc/tnc.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ErrorInterceptorService } from './common/services/authentication/errorInterceptor.service';
+import { JwtInterceptorService } from './common/services/authentication/jwt-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
   ],
   providers: [
     RemoteService,
-    DialogService
+    DialogService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true }
   ],
   bootstrap: [AppComponent]
 })

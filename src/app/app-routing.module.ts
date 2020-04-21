@@ -7,6 +7,7 @@ import {HaveppeComponent} from './haveppe/haveppe.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { TncComponent } from './tnc/tnc.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import {AuthguardService} from './common/services/authentication/authguard.service';
 
 const routes: Routes = [
 
@@ -17,7 +18,7 @@ const routes: Routes = [
   {path: 'have', component: HaveppeComponent},
   {path: 'about', component: AboutUsComponent},
   {path: 'tnc', component: TncComponent},
-  {path: 'dash', component: DashboardComponent}
+  {path: 'dash', component: DashboardComponent, canActivate: [AuthguardService]}
 
 ];
 

@@ -8,14 +8,12 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class HaveppeService {
 
-  public readonly apiroot = 'http://ec2-3-7-93-156.ap-south-1.compute.amazonaws.com:3045/temp';
-
   constructor(
     private readonly remote: RemoteService
   ) { }
 
   public vendorSignIn(signIn): Observable<any> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.remote.post(`${this.apiroot}/onboardSupplier`,  signIn , headers);
+    return this.remote.post(`/onboardSupplier`,  signIn , headers);
   }
 }
