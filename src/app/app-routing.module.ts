@@ -18,7 +18,8 @@ const routes: Routes = [
   {path: 'have', component: HaveppeComponent},
   {path: 'about', component: AboutUsComponent},
   {path: 'tnc', component: TncComponent},
-  {path: 'dash', component: DashboardComponent, canActivate: [AuthguardService]}
+  {path: 'dash', component: DashboardComponent, canActivate: [AuthguardService]},
+  { path: '**', component: HomepageComponent }
 
 ];
 

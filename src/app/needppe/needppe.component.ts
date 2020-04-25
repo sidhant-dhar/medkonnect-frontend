@@ -25,6 +25,8 @@ export class NeedppeComponent implements OnInit {
   public ppeItemSelected = true;
   public mciVerifiedFlag = false;
   public data: any;
+
+  public organisations = ['Hospitals', 'NGOs', 'Asha Workers'];
   // tslint:disable-next-line: max-line-length
   public emailValidationRegex = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(?!hotmail|gmail|yahoo)(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
   constructor(
@@ -36,39 +38,47 @@ export class NeedppeComponent implements OnInit {
     private sharedService: SharedService
   ) {
     this.needppeForm = this.formBuilder.group({
-      name: ['', [ Validators.required ]],
-      phoneNo: ['', [ Validators.required ]],
-      MCInumber: [{value: '', disabled: true}],
-      email: ['', [ Validators.required, Validators.email, Validators.pattern(this.emailValidationRegex) ]],
-      address: ['', [ Validators.required ]],
-      state: ['Andaman and Nicobar Islands', [ Validators.required ]],
-      pinCode: ['', [ Validators.required ]],
+      // name: ['', [ Validators.required ]],
+      // phoneNo: ['', [ Validators.required ]],
+      // MCInumber: [{value: '', disabled: true}],
+      // email: ['', [ Validators.required, Validators.email, Validators.pattern(this.emailValidationRegex) ]],
+      // address: ['', [ Validators.required ]],
+      // state: ['Andaman and Nicobar Islands', [ Validators.required ]],
+      // pinCode: ['', [ Validators.required ]],
       homeMade: ['true', [ Validators.required ]],
+      needBy: ['', [ Validators.required ]],
       tnc: [true, [ Validators.required ]],
+      hospitalNgo: ['Hospitals'],
+      maxPrice: ['1', Validators.required],
+      city: ['Delhi', Validators.required], // Handle this from profile information
       materialsRequired: new FormArray([])
     });
     this.dataService.getPPEList().subscribe((res: PPEItemResponse) => {
       this.ppeList = res.list;
       this.createRequiredPPeList();
     });
-    this.dataService.getStates().subscribe((res: {indianStates: string[]}) => {
-      this.states = res.indianStates;
-    });
+    // this.dataService.getStates().subscribe((res: {indianStates: string[]}) => {
+    //   this.states = res.indianStates;
+    // });
   }
 
   public onSubmit() {
     // create a deep copy of the form-model
-    this.needppeForm.controls['materialsRequired'].enable();
+   // this.needppeForm.controls['materialsRequired'].enable();
     const result = Object.assign({}, this.needppeForm.value);
     result.materialsRequired = Object.assign({}, result.materialsRequired);
-    const homemade = result.homeMade;
     const reqBody = {...this.needppeForm.value};
+    console.log(reqBody, 'reqbody');
     const matRequired = reqBody.materialsRequired.reduce((acc, cur) => {
       const ppeItem = Object.keys(cur)[0];
       if (cur.quantity && cur[ppeItem]) {
         acc.push({
           quantity: cur.quantity,
-          approved: 'true',
+          certifiedPpe: result.homeMade,
+          maxPrice: result.maxPrice,
+          needBy: result.needBy,
+          city: result.city,
+          hospitalNgo: result.hospitalNgo,
           ppeName: ppeItem === 'Others' ? cur.other : ppeItem
         });
       }
@@ -86,6 +96,7 @@ export class NeedppeComponent implements OnInit {
     if (!this.ppeItemSelected) {
       return;
     }
+    console.log(finalBody);
     this.needppeService.hospitalSignIn(finalBody).subscribe((res) => {
       console.log(res);
       this.needppeForm.reset();
@@ -123,38 +134,38 @@ export class NeedppeComponent implements OnInit {
     }
   }
 
-  public toggleDoctor(doctorClick: boolean) {
-    if (doctorClick) {
-      this.isDoctor = true;
-      this.needppeForm.controls['MCInumber'].enable();
-      this.needppeForm.controls['MCInumber'].setValidators([Validators.required]);
-    } else {
-      this.isDoctor = false;
-      this.needppeForm.controls['MCInumber'].disable();
-      this.needppeForm.controls['MCInumber'].setValidators(null);
-      this.needppeForm.controls['MCInumber'].setValue(null);
-      this.spinnerFlag = false;
-    }
-  }
+  // public toggleDoctor(doctorClick: boolean) {
+  //   if (doctorClick) {
+  //     this.isDoctor = true;
+  //     this.needppeForm.controls['MCInumber'].enable();
+  //     this.needppeForm.controls['MCInumber'].setValidators([Validators.required]);
+  //   } else {
+  //     this.isDoctor = false;
+  //     this.needppeForm.controls['MCInumber'].disable();
+  //     this.needppeForm.controls['MCInumber'].setValidators(null);
+  //     this.needppeForm.controls['MCInumber'].setValue(null);
+  //     this.spinnerFlag = false;
+  //   }
+  // }
 
-  public verifyMCI() {
-    this.spinnerFlag = true;
-    const verifyMci = {
-      name : '',
-      regNo: ''
-    };
-    verifyMci.name = Object.assign(this.needppeForm.controls.name.value);
-    verifyMci.regNo = Object.assign(this.needppeForm.controls.MCInumber.value);
-    console.log(verifyMci);
-    this.needppeService.verifyMCI(verifyMci).subscribe((res) => {
-      console.log(res);
-      this.spinnerFlag = false;
-      this.mciVerifiedFlag = true; // On reset of form will the flag be reset? Need to test.
-    }, () => {
-      this.spinnerFlag = false;
-      alert('The MCI number could not be verified!');
-    });
-  }
+  // public verifyMCI() {
+  //   this.spinnerFlag = true;
+  //   const verifyMci = {
+  //     name : '',
+  //     regNo: ''
+  //   };
+  //   verifyMci.name = Object.assign(this.needppeForm.controls.name.value);
+  //   verifyMci.regNo = Object.assign(this.needppeForm.controls.MCInumber.value);
+  //   console.log(verifyMci);
+  //   this.needppeService.verifyMCI(verifyMci).subscribe((res) => {
+  //     console.log(res);
+  //     this.spinnerFlag = false;
+  //     this.mciVerifiedFlag = true; // On reset of form will the flag be reset? Need to test.
+  //   }, () => {
+  //     this.spinnerFlag = false;
+  //     alert('The MCI number could not be verified!');
+  //   });
+  // }
 
   public onTogglePpe(index: number): void {
     const ppeFormArray = this.needppeForm.get('materialsRequired') as FormArray;

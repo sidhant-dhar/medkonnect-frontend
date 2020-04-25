@@ -25,6 +25,8 @@ import { TncComponent } from './tnc/tnc.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ErrorInterceptorService } from './common/services/authentication/errorInterceptor.service';
 import { JwtInterceptorService } from './common/services/authentication/jwt-interceptor.service';
+import { LiveDemandsComponent } from './dashboard/live-demands/live-demands.component';
+import { PersonalDetailsComponent } from './dashboard/personal-details/personal-details.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { JwtInterceptorService } from './common/services/authentication/jwt-inte
     AboutUsComponent,
     DialogComponent,
     TncComponent,
-    DashboardComponent
+    DashboardComponent,
+    LiveDemandsComponent,
+    PersonalDetailsComponent
   ],
   imports: [
     BrowserModule,

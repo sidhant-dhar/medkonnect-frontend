@@ -1,3 +1,75 @@
-<p>
-  dashboard works!
-</p>
+<div class="container-fluid px-0">
+<div class="row">
+  <div class="col-lg-3 col-md-4 backgroundNav">
+      <div class="text-center px-3 mt-2">
+        <img src="assets/images/Logo.png" alt="logo" class="w-50"/>
+      </div>
+      <div class="border-bottom border-white row pb-3 mb-3">
+        <div class="col-4 d-none d-md-block text-center mt-3">
+          <img src="../../assets/images/doctor-md-img.png" alt="profile" class="rounded-circle w-100"/>
+        </div>
+        <div class="col-8 d-none d-md-block text mt-4">
+         <span class="row ml-2 text-light"> welcome</span>
+          <button type="button" class="btn btn-outline-light profileBtn row ml-2">{{personalData.name}}</button>
+        </div>
+      </div>
+      <ul class="nav nav-pills flex-column" id="myTab" role="tablist">
+        <li class="nav-item mb-3">
+          <a class="nav-link active" id="live-demands-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Live Demands</a>
+        </li>
+        <li class="nav-item mb-3">
+          <a class="nav-link" id="personal-details-tab" data-toggle="tab" href="#personal" role="tab" aria-controls="Personal" aria-selected="true">Personal Details</a>
+        </li>
+        <li class="nav-item mb-3">
+          <a class="nav-link" id="request-history-tab" data-toggle="tab" href="#requesthistory" role="tab" aria-controls="profile" aria-selected="false">Request History</a>
+        </li>
+        <li class="nav-item mb-3">
+          <a class="nav-link" id="supply-history-tab" data-toggle="tab" href="#supplyhistory" role="tab" aria-controls="contact" aria-selected="false">Supply History</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="notifications-tab" data-toggle="tab" href="#notifications" role="tab" aria-controls="contact" aria-selected="false">Latest Updates</a>
+        </li>
+        
+      </ul>
+      <div class="contactUs d-none d-md-block">
+        <div class="text-center">
+          <p class="footerHeading text-center">Contact Us</p>
+
+        </div>
+      </div>
+  </div>
+  <!-- /.col-md-4 -->
+      <div class="col-lg-9 col-md-8 px-0">
+    <div class="tab-content" id="myTabContent">
+<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="live-demands-tab">
+  <ncov-live-demands (logoutFlag) = "logout($event)"></ncov-live-demands>
+</div>
+<div>
+
+</div>
+<div class="tab-pane fade" id="personal" role="tabpanel" aria-labelledby="profile-tab">
+<ncov-personal-details></ncov-personal-details>
+</div>
+<div class="tab-pane fade" id="requesthistory" role="tabpanel" aria-labelledby="contact-tab">
+<h2>Request History</h2>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque, eveniet earum. Sed accusantium eligendi molestiae quo hic velit nobis et, tempora placeat ratione rem blanditiis voluptates vel ipsam? Facilis, earum!</p>
+
+</div>
+<div class="tab-pane fade" id="supplyhistory" role="tabpanel" aria-labelledby="contact-tab">
+  <h2>Supply History</h2>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque, eveniet earum. Sed accusantium eligendi molestiae quo hic velit nobis et, tempora placeat ratione rem blanditiis voluptates vel ipsam? Facilis, earum!</p>  
+  </div>
+  <div class="tab-pane fade" id="notifications" role="tabpanel" aria-labelledby="contact-tab">
+    <h2>Latest Notifications</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque, eveniet earum. Sed accusantium eligendi molestiae quo hic velit nobis et, tempora placeat ratione rem blanditiis voluptates vel ipsam? Facilis, earum!</p>  
+    </div>
+</div>
+  </div>
+  <!-- /.col-md-8 -->
+</div>
+</div>
+<div *ngIf = 'this.mobile'>
+  <ncov-footer></ncov-footer>
+</div>
+
+<!-- /.container -->

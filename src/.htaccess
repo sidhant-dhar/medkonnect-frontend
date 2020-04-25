@@ -1,6 +1,10 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
+  #Redirect API calls
+  #RewriteCond %{REQUEST_URI} /api
+  #RewriteRule (.*) %{REQUEST_METHOD} http://3.7.93.156:3045%{REQUEST_URI}
+
   # Redirection of requests to index.html
   RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -f [OR]
   RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -d

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { SharedService } from '../../common/services/shared-service.service';
 import { AuthService } from '../../common/services/authentication/auth.service';
 import { first } from 'rxjs/operators';
+
 
 @Component({
   selector: 'ncov-medkonnect-landing',
@@ -35,8 +36,9 @@ export class MedkonnectLandingComponent implements OnInit {
     this.signupForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.min(6)]],
-      confirmPassword: ['', [Validators.required, Validators.min(6)]]
-    });
+      confirmPassword: ['', [Validators.required]]
+    },
+    {validator: this.passwordConfirming});
 
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -103,4 +105,10 @@ export class MedkonnectLandingComponent implements OnInit {
   // public onRoute(route: string): void {
   //   this.router.navigate([route]);
   // }
+
+  public passwordConfirming(c: AbstractControl): { invalid: boolean } {
+    if (c.get('password').value !== c.get('confirmPassword').value) {
+        return {invalid: true};
+    }
+}
 }

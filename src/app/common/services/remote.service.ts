@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class RemoteService {
 
-  public readonly apiroot = 'http://ec2-3-7-93-156.ap-south-1.compute.amazonaws.com:3045/api';
+ // public readonly apiroot = 'https://5ea14759eea7760016a9273a.mockapi.io';
+   public readonly apiroot = 'https://medkonnect.org/api';
 
 
   constructor(
@@ -15,10 +16,14 @@ export class RemoteService {
   ) { }
 
   public get(url: string, headers?: HttpHeaders): Observable<any> {
-    return this.http.get(url, { headers });
+    return this.http.get(`${this.apiroot}${url}`, { headers });
   }
 
   public post(url: string, requestBody: any, headers?: HttpHeaders): Observable<any> {
     return this.http.post(`${this.apiroot}${url}`, requestBody, { headers });
+  }
+
+  public getData(url: string, headers?: HttpHeaders): Observable<any> {
+    return this.http.get( url , { headers });
   }
 }

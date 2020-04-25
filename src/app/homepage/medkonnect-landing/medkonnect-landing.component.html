@@ -137,6 +137,9 @@
                   <small class="text-danger" *ngIf="this.signupForm.controls.confirmPassword.touched && this.signupForm.controls.confirmPassword.errors?.min" >
                     Please input a password of at least 6 characters.
                   </small>
+                  <small class="text-danger" *ngIf="this.signupForm.controls.errors?.invalid" >
+                    Please ensure the passwords are matching.
+                  </small>
                 </div>
 
                 <button type="button" class="mk-btn-primary mx-auto"
