@@ -19,8 +19,8 @@ export class NeedppeService {
     return this.remote.post(`/mci/add`, mciNumber , headers);
   }
 
-  public hospitalSignIn(signIn): Observable<any> {
+  public makeRequest(signIn): Observable<any> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.remote.post(`/onboardConsumer`, signIn , headers);
+    return this.remote.post(`/demands/add`, signIn , headers);
   }
 }

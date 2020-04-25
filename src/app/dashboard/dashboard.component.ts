@@ -25,12 +25,9 @@ export class DashboardComponent implements OnInit {
     });
    }
 
-   public logout(event): void {
-
-     if (event) {
+   public logout(): void {
      this.authService.logout();
      this.router.navigate(['/home']);
-     }
    }
 
   public ngOnInit() {
@@ -38,6 +35,4 @@ export class DashboardComponent implements OnInit {
         this.mobile = true;
       }
     }
-
-
 }

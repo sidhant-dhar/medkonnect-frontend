@@ -46,27 +46,27 @@ export class MedkonnectLandingComponent implements OnInit {
     });
    }
 
-   public setRequestFlag(flag: string): void {  // very crude method needs rework
-    if (flag === 'need') {                      // We have to set both flags as there is a scenarion in which the user clicks
-      this.needFlag = true;                     // on a modal and then pops out of it. That may result in both flags being true/false
-      this.provideFlag = false;
-    } else if (flag === 'provide') {
-      this.provideFlag = true;
-      this.needFlag = false;
-    }
-   }
+  //  public setRequestFlag(flag: string): void {  // very crude method needs rework
+  //   if (flag === 'need') {                      // We have to set both flags as there is a scenarion in which the user clicks
+  //     this.needFlag = true;                     // on a modal and then pops out of it. That may result in both flags being true/false
+  //     this.provideFlag = false;
+  //   } else if (flag === 'provide') {
+  //     this.provideFlag = true;
+  //     this.needFlag = false;
+  //   }
+  //  }
 
    public onSubmit(res: string): void {
       if (res === 'login') {
         console.log('Login api here');
         this.login();
-      } else if (res === 'signUp' && this.needFlag) {
-        this.router.navigate(['/need']);             // Have and need may be clubbed to a single page at a later date
+      } else if (res === 'signUp') {
+        this.router.navigate(['/have']);             // Have and need may be clubbed to a single page at a later date
         this.onChangeData(this.signupForm.controls.email.value, this.signupForm.controls.password.value);
-      } else if (res === 'signUp' && this.provideFlag) {
-        this.router.navigate(['/have']);
-        this.onChangeData(this.signupForm.controls.email, this.signupForm.controls.password);
-      }
+       }// else if (res === 'signUp' && this.provideFlag) {
+      //   this.router.navigate(['/have']);
+      //   this.onChangeData(this.signupForm.controls.email, this.signupForm.controls.password);
+      // }
    }
 
    public login(): void {
@@ -100,6 +100,7 @@ export class MedkonnectLandingComponent implements OnInit {
       email: email,
       password: pass
     };
+    console.log(newData);
     this.sharedService.changeData(newData);
   }
   // public onRoute(route: string): void {

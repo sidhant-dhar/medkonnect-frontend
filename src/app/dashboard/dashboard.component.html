@@ -20,29 +20,46 @@
         <li class="nav-item mb-3">
           <a class="nav-link" id="personal-details-tab" data-toggle="tab" href="#personal" role="tab" aria-controls="Personal" aria-selected="true">Personal Details</a>
         </li>
-        <li class="nav-item mb-3">
+        <!-- <li class="nav-item mb-3">
           <a class="nav-link" id="request-history-tab" data-toggle="tab" href="#requesthistory" role="tab" aria-controls="profile" aria-selected="false">Request History</a>
         </li>
         <li class="nav-item mb-3">
           <a class="nav-link" id="supply-history-tab" data-toggle="tab" href="#supplyhistory" role="tab" aria-controls="contact" aria-selected="false">Supply History</a>
-        </li>
+        </li> -->
         <li class="nav-item">
           <a class="nav-link" id="notifications-tab" data-toggle="tab" href="#notifications" role="tab" aria-controls="contact" aria-selected="false">Latest Updates</a>
         </li>
+
+        <div class=" text-center logoutDiv">
+          <button type="button" class="btn btn-outline-light logoutBtn row" (click) = "logout()">Logout</button>
+        </div>
         
       </ul>
-      <div class="contactUs d-none d-md-block">
-        <div class="text-center">
+      <div class="mt-md-5 text-center mb-5">
+     </div>  
+      <div class="contactUs d-none d-md-block mx-auto text-center">
           <p class="footerHeading text-center">Contact Us</p>
 
-        </div>
+          <div class="d-flex justify-content-center mb-5">
+            <a class="social-icon-link" href="https://www.facebook.com/groups/250268826009392/">
+              <i class="social-icon mx-1 fab fa-facebook-f"></i>
+            </a>
+            <a class="social-icon-link" href="mailto:support@medkonnect.org">
+              <i class="social-icon mx-1 fas fa-envelope-square"></i>
+            </a>
+            <a class="social-icon-link" href="https://api.whatsapp.com/send?phone=919911224333">
+              <i class="social-icon mx-1 fab fa-whatsapp"></i>
+            </a>
+          </div>
+
+        
       </div>
   </div>
   <!-- /.col-md-4 -->
       <div class="col-lg-9 col-md-8 px-0">
     <div class="tab-content" id="myTabContent">
 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="live-demands-tab">
-  <ncov-live-demands (logoutFlag) = "logout($event)"></ncov-live-demands>
+  <ncov-live-demands></ncov-live-demands>
 </div>
 <div>
 
@@ -50,7 +67,7 @@
 <div class="tab-pane fade" id="personal" role="tabpanel" aria-labelledby="profile-tab">
 <ncov-personal-details></ncov-personal-details>
 </div>
-<div class="tab-pane fade" id="requesthistory" role="tabpanel" aria-labelledby="contact-tab">
+<!-- <div class="tab-pane fade" id="requesthistory" role="tabpanel" aria-labelledby="contact-tab">
 <h2>Request History</h2>
   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque, eveniet earum. Sed accusantium eligendi molestiae quo hic velit nobis et, tempora placeat ratione rem blanditiis voluptates vel ipsam? Facilis, earum!</p>
 
@@ -58,7 +75,7 @@
 <div class="tab-pane fade" id="supplyhistory" role="tabpanel" aria-labelledby="contact-tab">
   <h2>Supply History</h2>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque, eveniet earum. Sed accusantium eligendi molestiae quo hic velit nobis et, tempora placeat ratione rem blanditiis voluptates vel ipsam? Facilis, earum!</p>  
-  </div>
+  </div> -->
   <div class="tab-pane fade" id="notifications" role="tabpanel" aria-labelledby="contact-tab">
     <h2>Latest Notifications</h2>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque, eveniet earum. Sed accusantium eligendi molestiae quo hic velit nobis et, tempora placeat ratione rem blanditiis voluptates vel ipsam? Facilis, earum!</p>  

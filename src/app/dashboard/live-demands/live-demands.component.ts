@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { LiveDemandsService } from './live-demands.service';
 
 @Component({
@@ -7,8 +7,6 @@ import { LiveDemandsService } from './live-demands.service';
   styleUrls: ['./live-demands.component.scss']
 })
 export class LiveDemandsComponent implements OnInit {
-
-  @Output() public logoutFlag = new EventEmitter<boolean>();
   public userData: any;
   public dashboardArray: any;
   public tableData = [
@@ -68,10 +66,6 @@ export class LiveDemandsComponent implements OnInit {
     }, error => {
       console.log(error);
     });
-  }
-
-  public logout(): void {
-    this.logoutFlag.emit(true);
   }
 
 }

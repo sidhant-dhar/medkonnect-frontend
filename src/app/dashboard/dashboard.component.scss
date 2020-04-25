@@ -23,6 +23,8 @@ li .active{
 .contactUs{
     position: absolute;
     bottom: 0;
+    left: 0;
+    right:0;
 }
 
 .footerHeading{
@@ -35,5 +37,40 @@ li .active{
 .profileBtn{
     border-radius: 10px;
     font-family: 'Roboto-Regular';
+    
 }
+
+.logoutBtn{
+    border-radius: 10px;
+    font-family: 'Roboto-Regular';
+    width: 110px;
+    height: 25px;  
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.logoutDiv{
+
+    margin-top: 10%;
+    
+    @include media-breakpoint-up(md)
+    {
+     margin-top: 20rem;   
+    }
+}
+
+.social-icon {
+    width: 24px;
+    background-color: $white;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.5 * $spacer;
+    text-align: center;
+  }
+
+  .social-icon-link {
+    color: $black;
+  }
 

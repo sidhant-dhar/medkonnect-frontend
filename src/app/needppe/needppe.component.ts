@@ -45,7 +45,7 @@ export class NeedppeComponent implements OnInit {
       // address: ['', [ Validators.required ]],
       // state: ['Andaman and Nicobar Islands', [ Validators.required ]],
       // pinCode: ['', [ Validators.required ]],
-      homeMade: ['true', [ Validators.required ]],
+      certifiedPpe : ['true', [ Validators.required ]],
       needBy: ['', [ Validators.required ]],
       tnc: [true, [ Validators.required ]],
       hospitalNgo: ['Hospitals'],
@@ -73,31 +73,31 @@ export class NeedppeComponent implements OnInit {
       const ppeItem = Object.keys(cur)[0];
       if (cur.quantity && cur[ppeItem]) {
         acc.push({
-          quantity: cur.quantity,
-          certifiedPpe: result.homeMade,
-          maxPrice: result.maxPrice,
-          needBy: result.needBy,
-          city: result.city,
-          hospitalNgo: result.hospitalNgo,
-          ppeName: ppeItem === 'Others' ? cur.other : ppeItem
+          qty: cur.quantity,
+        //  certifiedPpe: result.homeMade,
+        //  maxPrice: result.maxPrice,
+        //  needBy: result.needBy,
+        //  city: result.city,
+        //  hospitalNgo: result.hospitalNgo,
+          item: ppeItem === 'Others' ? cur.other : ppeItem
         });
       }
       return acc;
     }, []);
-    delete reqBody.homeMade;
+    // delete reqBody.homeMade;
     delete reqBody.materialsRequired;
     delete reqBody.tnc;
     const finalBody =  {
       newConsumerDetails : { ...reqBody } ,
-      ppeArray: ''
+      ppes: ''
     };
-    finalBody.ppeArray = Object.assign(matRequired);
-    this.ppeItemSelected = finalBody.ppeArray.length > 0;
+    finalBody.ppes = Object.assign(matRequired);
+    this.ppeItemSelected = finalBody.ppes.length > 0;
     if (!this.ppeItemSelected) {
       return;
     }
     console.log(finalBody);
-    this.needppeService.hospitalSignIn(finalBody).subscribe((res) => {
+    this.needppeService.makeRequest(finalBody).subscribe((res) => {
       console.log(res);
       this.needppeForm.reset();
       this.mciVerifiedFlag = false;
