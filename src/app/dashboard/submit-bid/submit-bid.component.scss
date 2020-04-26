@@ -1,0 +1,63 @@
+@import "../../../scss/bootstrap";
+@import "../../../scss/forms/medkonnect-form";
+@import "../../../scss/forms/checkbox";
+@import "../../../scss/forms/radio";
+
+.needppe {
+  background-color: $background-color;
+  font-family: 'Nunito-Regular';
+}
+
+.headerText {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 49px;
+  text-indent: 3px;
+  color: $white;
+}
+
+.no-border {
+  border: 0;
+  box-shadow: none;
+  width: 50%;
+}
+
+.firstCard {
+  border-top: 10px solid $btn-primary;
+  margin-top: 150px;
+}
+
+.needLabel {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px !important;
+  line-height: 26px !important;
+  text-indent: 3px !important;
+}
+
+.disabled label {
+  color: grey;
+}
+
+.mk-terms{
+  color: $btn-primary;
+
+  &:hover{
+  color: $btn-secondary;
+  }
+}
+
+@media (max-width: 768px) {
+  .headerText {
+    font-size: 20px;
+    line-height: 29px;
+    text-indent: 2px;
+    padding-top: 10px;
+  }
+
+  .no-border {
+    width: 100%;
+  }
+}
+

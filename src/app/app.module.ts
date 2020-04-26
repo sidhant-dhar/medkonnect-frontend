@@ -27,6 +27,7 @@ import { ErrorInterceptorService } from './common/services/authentication/errorI
 import { JwtInterceptorService } from './common/services/authentication/jwt-interceptor.service';
 import { LiveDemandsComponent } from './dashboard/live-demands/live-demands.component';
 import { PersonalDetailsComponent } from './dashboard/personal-details/personal-details.component';
+import { SubmitBidComponent } from './dashboard/submit-bid/submit-bid.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { PersonalDetailsComponent } from './dashboard/personal-details/personal-
     TncComponent,
     DashboardComponent,
     LiveDemandsComponent,
-    PersonalDetailsComponent
+    PersonalDetailsComponent,
+    SubmitBidComponent
   ],
   imports: [
     BrowserModule,

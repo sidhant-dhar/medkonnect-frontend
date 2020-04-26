@@ -100,8 +100,8 @@ export class LiveDemandsComponent implements OnInit {
     //     }
     //   }
     // });
-
-  console.log(this.dashboardArrayFinal);
+const final = this.getResultantArray(this.dashboardArrayFinal);
+  console.log(final, 'final');
       // const uuid = Object.values(result)[0];
       // const singleArray =  [].concat.apply([], uuid);
      console.log(this.dashboardArrayFinal);
@@ -109,6 +109,30 @@ export class LiveDemandsComponent implements OnInit {
       console.log(error);
     });
   }
+
+  public getResultantArray(res) {
+    const cache = [];
+    return res.reduce((acc, cur) => {
+      const c = Object.values(this.pick(cur, ['hospitalNgo', 'certifiedPpe'])).join();
+      if (cache.includes(c)) {
+        // const index = acc.findIndex(v => v['hospitalNgo'] === cur['hospitalNgo'] && v['certifiedPpe'] === cur['certifiedPpe']);
+        const index = acc.findIndex(v => v['uuid'] === cur['uuid']);
+        acc[index]['ppe'] = `${acc[index]['ppe']}, ${cur['quantity']} ${cur['ppeName']}`;
+      } else {
+        cache.push(c);
+        cur['ppe'] = `${cur['quantity']} ${cur['ppeName']}`;
+        acc.push(cur);
+      }
+      return acc;
+    }, []);
+  }
+
+  public pick(obj, arr) {
+    return arr.reduce((acc, cur) => {
+        acc[cur] = obj[cur];
+        return acc;
+    }, {});
+}
 
 
 }
