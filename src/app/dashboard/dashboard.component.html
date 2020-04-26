@@ -19,7 +19,7 @@
       </div>
       <div class=" navbar navbar-expand-lg">
       <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav nav-pills flex-column" id="myTab" role="tablist">
+        <ul class="nav nav-pills flex-column w-100" id="myTab" role="tablist">
           <li class="nav-item mb-3">
             <a class="nav-link active" id="live-demands-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Live Demands</a>
           </li>
@@ -35,16 +35,31 @@
           <li class="nav-item">
             <a class="nav-link" id="notifications-tab" data-toggle="tab" href="#notifications" role="tab" aria-controls="contact" aria-selected="false">Latest Updates</a>
           </li>
+          <button type="button" class="btn btn-outline-light logoutBtn row ml-2 mx-auto d-flex justify-content-center mt-lg-5 mt-2" (click) = logout()>LOGOUT</button>
 
         </ul>
       </div>
       </div>
+
       <div class="contactUs d-none d-lg-block">
         <div class="text-center">
           <p class="footerHeading text-center">Contact Us</p>
+          <div class="social-icons mb-5">
+            <div class="d-flex justify-content-center">
+              <a class="social-icon-link" href="https://www.facebook.com/groups/250268826009392/">
+                <i class="social-icon mx-1 fab fa-facebook-f"></i>
+              </a>
+              <a class="social-icon-link" href="mailto:support@medkonnect.org">
+                <i class="social-icon mx-1 fas fa-envelope-square"></i>
+              </a>
+              <a class="social-icon-link" href="https://api.whatsapp.com/send?phone=919911224333">
+                <i class="social-icon mx-1 fab fa-whatsapp"></i>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
-  </div>
+    </div>
   <!-- /.col-md-4 -->
       <div class="col-lg-8 px-0">
     <div class="tab-content" id="myTabContent">
