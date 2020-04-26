@@ -4,7 +4,7 @@
     background-color: #C8E0F5;
 }
 
-.navbar-light span{
+.navbar-light div{
     font-family: 'Roboto-Regular';
     font-style: italic;
     font-weight: bold;
@@ -35,7 +35,7 @@ line-height: 20px;
 }
 
 .liveDemandsTable{
-    width: 75%;
+    width: 90%;
     background-color: $white;
     @include media-breakpoint-down(md){
         width: 100%;
@@ -49,7 +49,7 @@ line-height: 20px;
         overflow:auto;
         height: 45vh;
     }
-    
+
 }
 
 .columnHeading{
@@ -70,6 +70,12 @@ line-height: 20px;
     font-family: 'Roboto-Regular';
 }
 
+.live-demands {
+  th, td {
+    padding: 0.25 * $spacer;
+  }
+}
+
 .carousel-caption{
     bottom: -10px;
 }
@@ -79,3 +85,8 @@ line-height: 20px;
         display: none;
     }
 }
+
+.live-demands__mobile {
+  background-color: $background-color;
+}
+

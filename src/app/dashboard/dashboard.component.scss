@@ -2,7 +2,7 @@
 
 .backgroundNav{
     background-color: $black;
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-up(lg) {
         height: 100vh;
     }
 }
@@ -35,5 +35,14 @@ li .active{
 .profileBtn{
     border-radius: 10px;
     font-family: 'Roboto-Regular';
+}
+
+.hamburger-btn {
+  border-color: $white;
+  height: 2.5rem;
+}
+
+.hamburger {
+  color: $white;
 }
 

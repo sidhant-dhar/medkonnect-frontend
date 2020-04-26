@@ -1,10 +1,10 @@
 <div class="live-demands">
-  <div class="container">
+  <div class="">
     <nav class="navbar navbar-expand-lg navbar-light w-100">
-      <span class="navbar-brand pl-md-3 pl-2">Live Demands</span>
-      <ul class="navbar-nav ml-auto mr-2">
+      <div class="navbar-brand pl-md-3 pl-2 mx-auto mr-md-auto">Live Demands</div>
+      <ul class="navbar-nav ml-auto mx-auto ml-md-auto mr-2">
         <li class="nav-item">
-          <button class="mk-btn-primary " (click)="logout()">Logout</button>   
+          <button class="mk-btn-primary " (click)="logout()">Logout</button>
         </li>
     </ul>
     </nav>
@@ -14,28 +14,48 @@
       <button type="button" class="btn request-btn" [routerLink]="'/need'">Reqest PPE</button>    </div>
     </div>
 
-    <p class="mt-5 mx-3 text-center captionClass">You can view live demands here and propose offers. You can also post your own Request by clicking the "Request PPE button"</p>
+    <p class="mt-5 px-3 px-sm-5 text-center captionClass">You can view live demands here and propose offers. You can also post your own Request by clicking the "Request PPE button"</p>
     <div class="liveDemandsTable mx-auto mt-md-5 mt-3">
-    <table class="table table-hover">
-      <thead class="columnHeading">
-        <tr class="d-flex">
-          <th class="col-md-2 col-3" scope="col">Requested By</th>
-          <th class="col-md-4 col-6" scope="col">PPE Needed</th>
-          <th class="col-md-2  d-none d-md-table-cell" scope="col">Location</th>
-          <th class="col-md-2  d-none d-md-table-cell" scope="col">Required By</th>
-          <th class="col-md-2 col-3" scope="col">Become a Supplier</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="d-flex" *ngFor = "let row of tableData">
-          <td class="col-md-2 col-3 text-center">{{row.name}}</td>
-          <td class="col-md-4 col-6 text-center">{{row.ppe}}</td>
-          <td class="col-md-2 d-none d-md-table-cell text-center">{{row.location}}</td>
-          <td class="col-md-2 d-none d-md-table-cell text-center">{{row.requiredBy}}</td>
-          <td class="col-md-2 col-3"><button type="button" class="mk-btn-primary mx-auto w-100">Submit</button></td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="d-none d-lg-block">
+      <div class="row columnHeading">
+        <div class="col-2 font-weight-bold"><p class="px-3">Requested By</p></div>
+        <div class="col-3 font-weight-bold"><p class="px-3">PPE Needed</p></div>
+        <div class="col-2 font-weight-bold"><p class="px-3">Location</p></div>
+        <div class="col-2 font-weight-bold"><p class="px-3">Required By</p></div>
+        <div class="col-3 font-weight-bold"><p class="px-3">Become a Supplier</p></div>
+      </div>
+      <div *ngFor="let row of tableData" class="row py-1">
+        <div class="col-2"><p class="px-3">{{row.name}}</p></div>
+        <div class="col-3"><p class="px-3">{{row.ppe}}</p></div>
+        <div class="col-2"><p class="px-3">{{row.location}}</p></div>
+        <div class="col-2"><p class="px-3">{{row.requiredBy}}</p></div>
+        <div class="col-3"><button type="button" class="mk-btn-primary mx-auto">Submit</button></div>
+      </div>
+    </div>
+    <div *ngFor = "let row of tableData" class="live-demands__mobile d-block d-lg-none px-3 px-sm-5 mx-auto pb-3" >
+      <div class="card">
+        <div class="card-header"><h5>{{row.name}}</h5></div>
+        <div class="card-body">
+          <div class="row py-1">
+            <div class="col-12 col-sm-3 py-1 font-weight-bold">PPE Needed</div>
+            <div class="col-12 col-sm-9 py-1">{{row.ppe}}</div>
+          </div>
+          <div class="row py-1">
+            <div class="col-12 col-sm-3 py-1 font-weight-bold">Location</div>
+            <div class="col-12 col-sm-9 py-1">{{row.location}}</div>
+          </div>
+          <div class="row py-1">
+            <div class="col-12 col-sm-3 py-1 font-weight-bold">Required By</div>
+            <div class="col-12 col-sm-9 py-1">{{row.requiredBy}}</div>
+          </div>
+          <div class="row">
+            <div class="col-6 ml-auto">
+              <button type="button" class="mk-btn-primary mx-auto w-100">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   </div>
 </div>
