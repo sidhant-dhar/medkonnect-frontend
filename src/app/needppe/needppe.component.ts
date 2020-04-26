@@ -88,7 +88,7 @@ export class NeedppeComponent implements OnInit {
     delete reqBody.materialsRequired;
     delete reqBody.tnc;
     const finalBody =  {
-      newConsumerDetails : { ...reqBody } ,
+      ...reqBody ,
       ppes: ''
     };
     finalBody.ppes = Object.assign(matRequired);

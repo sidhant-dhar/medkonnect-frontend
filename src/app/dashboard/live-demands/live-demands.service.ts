@@ -14,7 +14,7 @@ export class LiveDemandsService {
 
   public  dashboardDetails(): Observable<any> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-   return this.remote.get(`/demands/getAll` , headers);
+   return this.remote.get(`/demands/get-all` , headers);
 // return this.remote.get(`/users` , headers);
 }
 }
