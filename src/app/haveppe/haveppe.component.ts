@@ -100,8 +100,8 @@ export class HaveppeComponent implements OnInit {
 
     // this.haveppeForm.controls['materialsRequired'].enable();
     const result = Object.assign({}, this.haveppeForm.value);
-    result.email = this.data.email.value;
-    result.password = this.data.password.value;
+    result.email = this.data.email;
+    result.password = this.data.password;
     // result.materialsRequired = Object.assign({}, result.materialsRequired);
     // const reqBody = {...this.haveppeForm.value};
     // const matRequired = reqBody.materialsRequired.reduce((acc, cur) => {
@@ -123,7 +123,6 @@ export class HaveppeComponent implements OnInit {
     // };
     // finalBody.ppeArray = Object.assign(matRequired);
     // this.ppeItemSelected = finalBody.ppeArray.length > 0;
-    console.log(result);
     // if (!this.ppeItemSelected) {
     //   return;
     // }
@@ -165,7 +164,7 @@ export class HaveppeComponent implements OnInit {
         .subscribe(
             res => {
 
-              this.authService.login(this.data.email.value, this.data.password.value)
+              this.authService.login(this.data.email, this.data.password)
               .pipe(first())
               .subscribe(
                     data => {
@@ -180,7 +179,6 @@ export class HaveppeComponent implements OnInit {
                       if (event.action === 'Ok') {
                         this.router.navigate(['dash']);
                       }
-                      console.log('close event', event);
                     });
             },
             error => {
@@ -228,8 +226,8 @@ export class HaveppeComponent implements OnInit {
     this.sharedService.currentData.subscribe(data => this.data = data);
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dash';  // test
 
-    console.log(this.data.email.value);
-    console.log(this.data.password.value);
+    console.log(this.data.email);
+    console.log(this.data.password);
   }
 
 }

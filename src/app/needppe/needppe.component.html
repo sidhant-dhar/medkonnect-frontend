@@ -130,18 +130,18 @@
             <option class="mk-select-option" *ngFor="let organisation of organisations" [value]="organisation">{{organisation}}</option>
           </select>
         </div>
-        
+
           <!-- home made -->
           <div class="form-group formStyle p-5 mt-md-5 mb-5">
             <label class="mk-required" for="homemade PPE">Are You Willing to Accept HomeMade or Uncertified PPE</label>
             <div class="px-3 px-md-4 mt-md-5 mt-2">
               <label class="mk-required" for="homeMade_true" class="mk-radio-yes mk-radio-container" >
-                <input type="radio" id="homeMade_true" value="true" formControlName="homeMade">
+                <input type="radio" id="homeMade_true" value="true" formControlName="certifiedPpe">
                 <i class="radiomark"></i>
                 Yes
               </label>
               <label class="mk-required" for="homeMade_false" class="mk-radio-no mk-radio-container">
-                <input type="radio" id="homeMade_false" value="false" formControlName="homeMade">
+                <input type="radio" id="homeMade_false" value="false" formControlName="certifiedPpe">
                 <i class="radiomark"></i>
                 No
               </label>
