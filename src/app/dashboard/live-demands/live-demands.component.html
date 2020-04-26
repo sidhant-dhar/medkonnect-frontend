@@ -16,6 +16,7 @@
 
     <p class="mt-5 px-3 px-sm-5 text-center captionClass">You can view live demands here and propose offers. You can also post your own Request by clicking the "Request PPE button"</p>
     <div class="liveDemandsTable mx-auto mt-md-5 mt-3">
+    <!-- Desktop view -->
     <div class="d-none d-lg-block">
       <div class="row columnHeading">
         <div class="col-2 font-weight-bold"><p class="px-3">Requested By</p></div>
@@ -29,9 +30,11 @@
         <div class="col-3"><p class="px-3">{{row.ppe}}</p></div>
         <div class="col-2"><p class="px-3">{{row.location}}</p></div>
         <div class="col-2"><p class="px-3">{{row.requiredBy}}</p></div>
-        <div class="col-3"><button type="button" class="mk-btn-primary mx-auto">Submit</button></div>
+        <div class="col-3"><button type="button" class="mk-btn-primary mx-auto w-100">Submit</button></div>
       </div>
     </div>
+    <!-- Desktop view ends -->
+    <!-- Mobile View -->
     <div *ngFor = "let row of tableData" class="live-demands__mobile d-block d-lg-none px-3 px-sm-5 mx-auto pb-3" >
       <div class="card">
         <div class="card-header"><h5>{{row.name}}</h5></div>
@@ -56,6 +59,7 @@
         </div>
       </div>
     </div>
+    <!-- Mobile view ends -->
   </div>
   </div>
 </div>
