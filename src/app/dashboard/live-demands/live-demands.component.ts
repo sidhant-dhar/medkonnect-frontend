@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { LiveDemandsService } from './live-demands.service';
-
+import { Router } from '@angular/router';
+import { SharedService } from '../../common/services/shared-service.service';
 @Component({
   selector: 'ncov-live-demands',
   templateUrl: './live-demands.component.html',
@@ -11,115 +12,45 @@ export class LiveDemandsComponent implements OnInit {
   public dashboardArray: any;
   public uuid: any;
   public dashboardArrayFinal = new Array();
-  public tableData = [
-    {
-      name: 'Shiva Hospital',
-      ppe: '100 N95 masks, 1000 boxes of gloves,100 surgical masks',
-      location: 'Bangalore',
-      requiredBy : '20/5/2020'
-    },
-    {
-      name: 'Vishnu Hospital',
-      ppe: 'lots of coveralls, 1000 boxes of gloves,100 surgical masks',
-      location: 'Kerala',
-      requiredBy : '25/4/2020'
-    },
-    {
-      name: 'Pooja Hospital',
-      ppe: ' 1000 boxes of gloves,100 surgical masks',
-      location: 'Bangalore',
-      requiredBy : '26/4/2020'
-    },
-    {
-      name: 'Manoj Hospital',
-      ppe: ' 1000 boxes of gloves,100 surgical masks',
-      location: 'Bangalore',
-      requiredBy : '26/4/2020'
-    },
-    {
-      name: 'Ashmita Hospital',
-      ppe: ' 1000 boxes of gloves,100 surgical masks',
-      location: 'Bangalore',
-      requiredBy : '26/4/2020'
-    },
-    {
-      name: 'Aditya Hospital',
-      ppe: ' 1000 boxes of gloves,100 surgical masks',
-      location: 'Bangalore',
-      requiredBy : '26/4/2020'
-    },
-    {
-      name: 'Sidhant Hospital',
-      ppe: ' 1000 boxes of gloves,100 surgical masks',
-      location: 'Bangalore',
-      requiredBy : '26/4/2020'
-    }
-  ];
+  public tableData = new Array();
+  public data: any;
 
   constructor(
-    private livedemandsService: LiveDemandsService
+    private livedemandsService: LiveDemandsService,
+    private sharedService: SharedService,
+    private router: Router
       ) { }
 
   public ngOnInit() {
+    this.sharedService.bidData.subscribe( data => this.data = data);
+
     this.livedemandsService.dashboardDetails()
     .subscribe((data: any[]) => {
       this.dashboardArray = data;
-      console.log(data);
-      this.dashboardArray.map(res => {
-        res.name = res.requestorDetails[0].name;
-        res.uuid = res.requestorDetails[0].userId;
-        delete res.requestorDetails;
-      });
-
-      const result = this.dashboardArray.reduce(function(acc, cur) {
-        acc[cur.uuid] = (acc[cur.uuid] || []).concat(cur);
-        return acc;
-      }, {});
-      for (const key in result) {
-        if (result.hasOwnProperty(key)) {
-          const grouping = result[key].reduce(function(acc, cur) {
-            acc[cur.hospitalNgo] = (acc[cur.hospitalNgo] || []).concat(cur);
-            return acc;
-          }, {});
-          this.dashboardArrayFinal.push(grouping);
-        }
-    }
-
-    // this.dashboardArrayFinal.map(obj => {
-    //   for (const key in obj) {
-    //     if (obj.hasOwnProperty(key)) {
-    //       const city = obj[key][0].city;
-    //       const name = obj[key][0].name;
-    //       const type = obj[key][0].hospitalNgo;
-    //       const uuid = obj[key][0].uuid;
-    //       for (let index = 0; index < obj[key].length; index++) {
-    //         if (obj[key].certifiedPpe){
-    //             console.log('happens');
-    //         }
-    //       }
-    //     }
-    //   }
-    // });
-const final = this.getResultantArray(this.dashboardArrayFinal);
-  console.log(final, 'final');
-      // const uuid = Object.values(result)[0];
-      // const singleArray =  [].concat.apply([], uuid);
-     console.log(this.dashboardArrayFinal);
+      console.log('response ', data);
+      this.tableData = this.getResultantArray(data);
+      console.log('result ', this.tableData);
     }, error => {
       console.log(error);
     });
   }
 
+
   public getResultantArray(res) {
     const cache = [];
     return res.reduce((acc, cur) => {
-      const c = Object.values(this.pick(cur, ['hospitalNgo', 'certifiedPpe'])).join();
-      if (cache.includes(c)) {
-        // const index = acc.findIndex(v => v['hospitalNgo'] === cur['hospitalNgo'] && v['certifiedPpe'] === cur['certifiedPpe']);
-        const index = acc.findIndex(v => v['uuid'] === cur['uuid']);
+      // const userId = cur['requestorDetails'][0]['userId'];
+      const userId = Object.values(this.pick(cur, ['hospitalNgo', 'certifiedPpe'])).join();
+      if (cache.includes(userId)) {
+      // const index = acc.findIndex(v => v['requestorDetails'][0]['userId'] === userId);
+      const index = acc.findIndex(v => v['hospitalNgo'] === cur['hospitalNgo'] && v['certifiedPpe'] === cur['certifiedPpe']);
+      console.log('index ', index);
+      console.log('acc ', acc);
+      if (index !== -1) {
         acc[index]['ppe'] = `${acc[index]['ppe']}, ${cur['quantity']} ${cur['ppeName']}`;
+      }
       } else {
-        cache.push(c);
+        cache.push(userId);
         cur['ppe'] = `${cur['quantity']} ${cur['ppeName']}`;
         acc.push(cur);
       }
@@ -132,6 +63,18 @@ const final = this.getResultantArray(this.dashboardArrayFinal);
         acc[cur] = obj[cur];
         return acc;
     }, {});
+}
+
+public onSelectRow(row) {
+  console.log(row);
+  this.onChangeData(row);
+  this.router.navigate(['/submitbid']);
+
+}
+
+public onChangeData(data) {
+
+  this.sharedService.changeBid(data);
 }
 
 

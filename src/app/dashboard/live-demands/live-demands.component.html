@@ -15,24 +15,24 @@
     <div class="d-none d-lg-block">
       <div class="row columnHeading">
         <div class="col-2 font-weight-bold"><p class="px-3">Requested By</p></div>
-        <div class="col-3 font-weight-bold"><p class="px-3">PPE Needed</p></div>
+        <div class="col-4 font-weight-bold"><p class="px-3">PPE Needed</p></div>
         <div class="col-2 font-weight-bold"><p class="px-3">Location</p></div>
         <div class="col-2 font-weight-bold"><p class="px-3">Required By</p></div>
-        <div class="col-3 font-weight-bold"><p class="px-3">Become a Supplier</p></div>
+        <div class="col-2 font-weight-bold"><p class="px-3">Become a Supplier</p></div>
       </div>
       <div *ngFor="let row of tableData" class="row py-1">
-        <div class="col-2"><p class="px-3">{{row.name}}</p></div>
-        <div class="col-3"><p class="px-3">{{row.ppe}}</p></div>
-        <div class="col-2"><p class="px-3">{{row.location}}</p></div>
-        <div class="col-2"><p class="px-3">{{row.requiredBy}}</p></div>
-        <div class="col-3"><button type="button" class="mk-btn-primary mx-auto w-100"  [routerLink]="'/submitbid'" >Submit</button></div>
+        <div class="col-2"><p class="px-3">{{row.requestorDetails[0].name}}  {{row.hospitalNgo}}</p></div>
+        <div class="col-4"><p class="px-3">{{row.ppe}}</p></div>
+        <div class="col-2"><p class="px-3">{{row.city}}</p></div>
+        <div class="col-2"><p class="px-3">{{row.needBy | date: 'dd/mm/yyyy'}}</p></div>
+        <div class="col-2"><button type="button" class="mk-btn-primary mx-auto w-100"  (click)="onSelectRow(row)" >Submit</button></div>
       </div>
     </div>
     <!-- Desktop view ends -->
     <!-- Mobile View -->
     <div *ngFor = "let row of tableData" class="live-demands__mobile d-block d-lg-none px-3 px-sm-5 mx-auto pb-3" >
       <div class="card">
-        <div class="card-header"><h5>{{row.name}}</h5></div>
+        <div class="card-header"><h5>{{row.requestorDetails[0].name}} {{row.hospitalNgo}}</h5></div>
         <div class="card-body">
           <div class="row py-1">
             <div class="col-12 col-sm-3 py-1 font-weight-bold">PPE Needed</div>
@@ -40,15 +40,15 @@
           </div>
           <div class="row py-1">
             <div class="col-12 col-sm-3 py-1 font-weight-bold">Location</div>
-            <div class="col-12 col-sm-9 py-1">{{row.location}}</div>
+            <div class="col-12 col-sm-9 py-1">{{row.city}}</div>
           </div>
           <div class="row py-1">
             <div class="col-12 col-sm-3 py-1 font-weight-bold">Required By</div>
-            <div class="col-12 col-sm-9 py-1">{{row.requiredBy}}</div>
+            <div class="col-12 col-sm-9 py-1">{{row.needBy | date: 'dd/mm/yyyy'}}</div>
           </div>
           <div class="row">
             <div class="col-6 ml-auto">
-              <button type="button" class="mk-btn-primary mx-auto w-100">Submit</button>
+              <button type="button" class="mk-btn-primary mx-auto w-100"  (click)="onSelectRow(row)">Submit</button>
             </div>
           </div>
         </div>
