@@ -1,6 +1,8 @@
 import { Component, AfterViewInit, HostBinding } from '@angular/core';
 import { fromEvent } from 'rxjs';
 import { VisibilityState, Direction } from '../common/enums/enums';
+import { SharedService } from '../common/services/shared-service.service';
+import { Router } from '@angular/router';
 import {
   filter,
   map,
@@ -36,6 +38,12 @@ import {
   ]
 })
 export class HeaderComponent implements AfterViewInit {
+  constructor(
+  private router: Router,
+  public sharedService: SharedService
+  ) {
+
+  }
 
   public isVisible = true;
   public showActive = false;
@@ -66,5 +74,8 @@ export class HeaderComponent implements AfterViewInit {
         this.showActive = window.pageYOffset > 40;
       });
     goingDown$.subscribe(() => (this.isVisible = false));
+  }
+
+  public login() {
   }
 }

@@ -170,7 +170,7 @@ export class SubmitBidComponent implements OnInit {
   }
 
   public createRequiredPPeList(): void {
-    this.newlist.forEach((item, i) => {
+    this.newlist.forEach((item: PPEListInterface, i) => {
       const fg = this.formBuilder.group({});
       fg.addControl(this.newlist[i].ppeName, this.formBuilder.control(false));
       fg.addControl(this.newlist[i].ppeCost, this.formBuilder.control(0));
