@@ -4,9 +4,7 @@ import { PPEItemResponse, PPEItem, DialogActionOptions } from '../../common/mode
 import { DialogService } from '../../common/components/dialog/dialog.service';
 import { Router } from '@angular/router';
 import { SharedService } from '../../common/services/shared-service.service';
-import { NeedppeService } from '../../needppe/needppe.service';
 import { SubmitBidService } from './submit-bid.service';
-
 export interface PPEListInterface {
   ppeName: string;
   ppeCost: string;
@@ -35,11 +33,10 @@ export class SubmitBidComponent implements OnInit {
     private readonly dialogService: DialogService,
     private readonly router: Router,
     private sharedService: SharedService,
-    private needppeService: NeedppeService,
     private submitBidService: SubmitBidService
   ) {
     this.submitbidForm = this.formBuilder.group({
-      logistics: [false],
+      logisticsHelp: ['false'],
       hospitalNgo: [''],
       requesterId: [''],
       ppes : new FormArray([]),
@@ -67,9 +64,9 @@ export class SubmitBidComponent implements OnInit {
 
   public submitdummy() {
    const object = {                     // how payload must be sent
-      logisticsHelp: false,
-      hospitalNgo: 'Hospitals',
-      requesterId: 'ae482a48-f294-4527-8338-2ceb312f2835',
+     // logisticsHelp: false,
+     // hospitalNgo: 'Hospitals',
+     // requesterId: 'ae482a48-f294-4527-8338-2ceb312f2835',
       ppes: [
         {
           ppeName: 'respirators',
@@ -84,7 +81,7 @@ export class SubmitBidComponent implements OnInit {
           ppeCost: 2233
         }
       ],
-      's3Key': null
+     // 's3Key': null
     };
 
     this.submitBidService.submit(object)
@@ -94,42 +91,67 @@ export class SubmitBidComponent implements OnInit {
 
   }
 
+  public onTogglePpe(index: number): void {
+    const ppeFormArray = this.submitbidForm.get('ppes') as FormArray;
+    const ppeFormArrayValue = ppeFormArray.value;
+    const ppeName = this.newlist[index].ppeName;
+    if (ppeFormArrayValue[index][ppeName]) {
+      ppeFormArray.controls[index]['controls'].ppeCost.enable();
+      // if (ppeName === 'Others') {
+      //   ppeFormArray.controls[index]['controls'].other.enable();
+      // }
+      // Adds validators when ppe item is checked
+      ppeFormArray.controls[index]['controls'].ppeCost.setValidators([Validators.required]);
+     } // else {
+    //   if (ppeName === 'Others') {
+    //     ppeFormArray.controls[index]['controls'].other.disable();
+    //   }
+    //   ppeFormArray.controls[index]['controls'].quantity.disable();
+    //   // Removes validators when ppe item is unchecked
+    //   ppeFormArray.controls[index]['controls'].quantity.setValidators(null);
+    // }
+  }
+
 
   public onSubmit() {
     // create a deep copy of the form-model
-   // this.needppeForm.controls['materialsRequired'].enable();
+   this.submitbidForm.controls['ppes'].enable();
     const result = Object.assign({}, this.submitbidForm.value);
-    result.materialsRequired = Object.assign({}, result.materialsRequired);
+    result.ppes = Object.assign({}, result.ppes);
     const reqBody = {...this.submitbidForm.value};
     console.log(reqBody, 'reqbody');
-    const matRequired = reqBody.materialsRequired.reduce((acc, cur) => {
+    const matRequired = reqBody.ppes.reduce((acc, cur) => {
       const ppeItem = Object.keys(cur)[0];
-      if (cur.quantity && cur[ppeItem]) {
+      const lastElementOfString = ppeItem.split(/[, ]+/).pop();
+      if (cur.ppeCost && cur[ppeItem]) {
         acc.push({
-          qty: cur.quantity,
+          ppeCost: cur.ppeCost,
         //  certifiedPpe: result.homeMade,
         //  maxPrice: result.maxPrice,
         //  needBy: result.needBy,
         //  city: result.city,
         //  hospitalNgo: result.hospitalNgo,
-          item: ppeItem === 'Others' ? cur.other : ppeItem
+          ppeName: ppeItem === 'Others' ? cur.other : lastElementOfString
         });
       }
       return acc;
     }, []);
-    delete reqBody.materialsRequired;
-    delete reqBody.tnc;
-    const finalBody =  {
-      ...reqBody ,
-      ppes: ''
-    };
-    finalBody.ppes = Object.assign(matRequired);
-    this.ppeItemSelected = finalBody.ppes.length > 0;
-    if (!this.ppeItemSelected) {
-      return;
-    }
-    console.log(finalBody);
-    this.needppeService.makeRequest(finalBody).subscribe((res) => {
+    // delete reqBody.materialsRequired;
+    // delete reqBody.tnc;
+    // const finalBody =  {
+    //   ...reqBody ,
+    //   ppes: ''
+    // };
+    // finalBody.ppes = Object.assign(matRequired);
+    // this.ppeItemSelected = matRequired.ppes.length > 0;
+    // if (!this.ppeItemSelected) {
+    //   return;
+    // // }
+    // reqBody.push(matRequired);
+    delete reqBody.ppes;
+    reqBody.ppes = matRequired;
+    console.log(reqBody);
+    this.submitBidService.submit(reqBody).subscribe((res) => {
       console.log(res);
       this.submitbidForm.reset();
       this.dialogService.open({
@@ -139,7 +161,7 @@ export class SubmitBidComponent implements OnInit {
       });
       this.dialogService.closeDialogEvent.subscribe((event) => {
         if (event.action === 'Ok') {
-          this.router.navigate(['home']);
+          this.router.navigate(['dash']);
         }
         console.log('close event', event);
       });
@@ -175,7 +197,7 @@ export class SubmitBidComponent implements OnInit {
     this.newlist.forEach((item: PPEListInterface, i) => {
       const fg = this.formBuilder.group({});
       fg.addControl(this.newlist[i].ppeName, this.formBuilder.control(false));
-      fg.addControl(this.newlist[i].ppeCost, this.formBuilder.control(0));
+      fg.addControl(this.newlist[i].ppeCost, this.formBuilder.control(null));
       this.formArr.push(fg);
     });
   }

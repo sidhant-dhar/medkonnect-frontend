@@ -1,4 +1,4 @@
- <div class="needppe">
+ <div class="submitbid">
   <ncov-dialog></ncov-dialog>
   <div class="container-fluid no-padding">
     <div class="row mb-5">
@@ -12,8 +12,6 @@
 
     <div class="mk-form__form pb-5">
       <form [formGroup]="submitbidForm">
-        <pre>{{submitbidForm.value | json }}</pre>
-
         <div class="form-group formStyle  p-5 mb-5 firstCard">
           <label for="state">Hospital Details</label>
           <p> Name:<span class="ml-3">{{data.requestorDetails[0].name}}</span></p>
@@ -62,7 +60,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6 mt-2 mb-md-2 mb-4">
                   <label>
-                    <input ncovNumeric type="text" class="form-control" placeholder="Quantity" [formControlName]="newlist[i].ppeCost" >
+                    <input ncovNumeric type="text" class="form-control" placeholder="Cost/Unit" [formControlName]="newlist[i].ppeCost" >
                   </label>
                 </div>
               </div>
@@ -87,22 +85,21 @@
           </div>
         </div>
 
-           <div class="form-group formStyle p-5 mt-md-5 mb-5">
-            <label class="mk-required" for="logistics PPE">Do You need MedKonnect to help you with Logistics?</label>
-            <div class="px-3 px-md-4 mt-md-5 mt-2">
-              <label class="mk-required" for="logistics" class="mk-radio-yes mk-radio-container" >
-                <input type="radio" id="logistics" value="true" formControlName="logistics">
-                <i class="radiomark"></i>
-                Yes
-              </label>
-              <label class="mk-required" for="logistics_false" class="mk-radio-no mk-radio-container">
-                <input type="radio" id="logistics" value="false" formControlName="logistics">
-                <i class="radiomark"></i>
-                No
-              </label>
-            </div>
+        <div class="form-group formStyle p-5 mt-md-5 mb-5">
+          <label class="mk-required" for="homemade PPE">Are You Willing to Accept HomeMade or Uncertified PPE</label>
+          <div class="px-3 px-md-4 mt-md-5 mt-2">
+            <label class="mk-required" for="homeMade_true" class="mk-radio-yes mk-radio-container" >
+              <input type="radio" id="homeMade_true" value="true" formControlName="logisticsHelp">
+              <i class="radiomark"></i>
+              Yes
+            </label>
+            <label class="mk-required" for="homeMade_false" class="mk-radio-no mk-radio-container">
+              <input type="radio" id="homeMade_false" value="false" formControlName="logisticsHelp">
+              <i class="radiomark"></i>
+              No
+            </label>
           </div>
-
+        </div>
 
         <div class="form-submit">
 
