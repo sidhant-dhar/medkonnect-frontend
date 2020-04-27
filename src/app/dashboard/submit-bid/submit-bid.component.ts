@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
-import { DataService } from '../../common/services/data.service';
 import { PPEItemResponse, PPEItem, DialogActionOptions } from '../../common/models/models';
 import { DialogService } from '../../common/components/dialog/dialog.service';
 import { Router } from '@angular/router';
@@ -8,6 +7,10 @@ import { SharedService } from '../../common/services/shared-service.service';
 import { NeedppeService } from '../../needppe/needppe.service';
 import { SubmitBidService } from './submit-bid.service';
 
+export interface PPEListInterface {
+  ppeName: string;
+  ppeCost: string;
+}
 
 @Component({
   selector: 'ncov-submit-bid',
@@ -21,19 +24,14 @@ export class SubmitBidComponent implements OnInit {
   public submitbidForm: FormGroup;
   public materialsRequired: FormGroup;
   // public ppeList: PPEItem[];
-  public states: string[];
-  public isDoctor = false;
   public addFlag = true;
-  public spinnerFlag = false;
   public ppeItemSelected = true;
-  public mciVerifiedFlag = false;
   public data: any;
-  public ppeList: any;
+  public ppeList: PPEListInterface[];
   public newlist: any;
 
   constructor(
     private readonly formBuilder: FormBuilder,
-    private readonly dataService: DataService,
     private readonly dialogService: DialogService,
     private readonly router: Router,
     private sharedService: SharedService,
@@ -59,9 +57,11 @@ export class SubmitBidComponent implements OnInit {
     console.log(this.newlist);
     this.submitbidForm.patchValue({
       hospitalNgo: this.data.hospitalNgo,
-      requesterid: this.data.requestorDetails[0].userId
+      requesterId: this.data.requestorDetails[0].userId
     });
     this.createRequiredPPeList();
+
+    console.log(this.submitbidForm);
 
   }
 
@@ -132,7 +132,6 @@ export class SubmitBidComponent implements OnInit {
     this.needppeService.makeRequest(finalBody).subscribe((res) => {
       console.log(res);
       this.submitbidForm.reset();
-      this.mciVerifiedFlag = false;
       this.dialogService.open({
         title: 'Success!',
         content: 'Request submitted successfully',

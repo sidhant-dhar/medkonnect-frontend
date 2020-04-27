@@ -23,7 +23,9 @@
           <p> Only certified PPE required:<span class="ml-3">{{data.certifiedPpe}}</span></p> 
          </div>
       
-        <div formGroupName="ppes">
+        <!-- <div formGroupName="ppes">
+
+
           <div class="form-group formStyle p-5 mb-5 firstCard">
             <label class="mk-required" for="PPE">Submit Bid</label>
             <div *ngFor="let ppe of submitbidForm.controls.ppes['controls']; let i = index " [formGroupName]="i">
@@ -42,6 +44,45 @@
                 </div>
               </div>
             </div>
+            <button type="button" (click)="toggleAdd($event.target)" class="mk-btn-sm mk-btn-primary px-3 px-md-4 mt-5">Add</button>
+          </div>
+        </div> -->
+
+        <div formGroupName="ppes">
+          <div class="form-group formStyle p-5 mb-5 firstCard">
+            <label class="mk-required" for="PPE">What Do You Need</label>
+            <div *ngFor="let ppe of submitbidForm.controls.ppes['controls']['controls']; let i = index " [formGroupName]="i">
+              <div class="row" >
+                <div class="form-check col-lg-8 col-md-6 mt-2 mb-2 checkbox">
+                  <label class="mk-checkbox-container pt-3" for="defaultCheck{{i}}">
+                    <input id="defaultCheck{{i}}" type="checkbox" [formControlName]="newList[i].ppe" (change)="onTogglePpe(i)" >
+                    <i class="checkmark mt-3"></i>
+                    {{newList[i].ppe}}
+                  </label>
+                </div>
+                <div class="col-lg-4 col-md-6 mt-2 mb-md-2 mb-4">
+                  <label>
+                    <input ncovNumeric type="text" class="form-control" placeholder="Quantity" [formControlName]="ppeList[i].ppeCost" >
+                  </label>
+                </div>
+              </div>
+              <!-- <div class="row">
+                <div class="form-check col-lg-4 col-md-6 mt-2 mb-2 checkbox">
+                  <label class="mk-checkbox-container pt-3" for="defaultCheck{{i}}">
+                    <input id="defaultCheck{{i}}" type="checkbox" [formControlName]="ppeList[i].ppe" (change)="onTogglePpe(i)">
+                    <i class="checkmark mt-3"></i>
+                    {{ppeList[i].ppe}}
+                  </label>
+                </div>
+                <div class="col-lg-4 col-md-6 mt-2 mb-md-2 mb-4">
+                  <input ncovAlphaNumeric type="text" class="form-control no-border w-100" placeholder="Other PPE Item" [formControlName]="ppeList[i].otherPpe" (change)="onTogglePpe(i)" >
+                </div>
+                <div class="col-lg-4 col-md-6 mt-2 mb-md-2 mb-4 ml-md-auto">
+                  <input ncovNumeric type="text" class="form-control" placeholder="Quantity" [formControlName]="ppeList[i].required">
+                </div>
+              </div> -->
+            </div>
+            <small *ngIf="!ppeItemSelected" class="text-danger d-block">Please select atleast one PPE item</small>
             <button type="button" (click)="toggleAdd($event.target)" class="mk-btn-sm mk-btn-primary px-3 px-md-4 mt-5">Add</button>
           </div>
         </div>
