@@ -67,24 +67,24 @@ export class SubmitBidComponent implements OnInit {
 
   public submitdummy() {
    const object = {                     // how payload must be sent
-      "logisticsHelp": false,
-      "hospitalNgo": "Hospitals",
-      "requesterId": "ae482a48-f294-4527-8338-2ceb312f2835",
-      "ppes": [
+      logisticsHelp: false,
+      hospitalNgo: 'Hospitals',
+      requesterId: 'ae482a48-f294-4527-8338-2ceb312f2835',
+      ppes: [
         {
-          ppeName: "respirators",
-          "ppeCost": 123
+          ppeName: 'respirators',
+          ppeCost: 123
         },
         {
-          ppeName:  "Surgical Masks",
-          "ppeCost": 234
+          ppeName:  'Surgical Masks',
+          ppeCost: 234
         },
         {
-          ppeName: "Gloves",
-          "ppeCost": 2233
+          ppeName: 'Gloves',
+          ppeCost: 2233
         }
       ],
-      "s3Key": null
+      's3Key': null
     };
 
     this.submitBidService.submit(object)
@@ -154,12 +154,13 @@ export class SubmitBidComponent implements OnInit {
   }
 
   public toggleAdd(element) {
+    console.log('toggleAdd: ', this.submitbidForm);
     if (this.addFlag) {
-      this.submitbidForm.controls['ppe'].disable();
+      this.submitbidForm.controls['ppes'].disable();
       this.addFlag = !this.addFlag;
       element.textContent = 'Edit';
     } else {
-      this.submitbidForm.controls['ppe'].enable();
+      this.submitbidForm.controls['ppes'].enable();
       this.addFlag = !this.addFlag;
       element.textContent = 'Add';
     }
@@ -170,6 +171,7 @@ export class SubmitBidComponent implements OnInit {
   }
 
   public createRequiredPPeList(): void {
+    console.log('new list ', this.newlist);
     this.newlist.forEach((item: PPEListInterface, i) => {
       const fg = this.formBuilder.group({});
       fg.addControl(this.newlist[i].ppeName, this.formBuilder.control(false));

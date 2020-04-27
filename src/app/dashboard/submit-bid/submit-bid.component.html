@@ -16,13 +16,13 @@
 
         <div class="form-group formStyle  p-5 mb-5 firstCard">
           <label for="state">Hospital Details</label>
-          <p> Name:<span class="ml-3">{{data.requestorDetails[0].name}}</span></p> 
-          <p> Organisation:<span class="ml-3">{{data.hospitalNgo}}</span></p> 
-          <p> City:<span class="ml-3">{{data.city}}</span></p> 
-          <p> Date by which PPE is required:<span class="ml-3">{{data.needBy | date: 'dd/mm/yyyy'}}</span></p> 
-          <p> Only certified PPE required:<span class="ml-3">{{data.certifiedPpe}}</span></p> 
+          <p> Name:<span class="ml-3">{{data.requestorDetails[0].name}}</span></p>
+          <p> Organisation:<span class="ml-3">{{data.hospitalNgo}}</span></p>
+          <p> City:<span class="ml-3">{{data.city}}</span></p>
+          <p> Date by which PPE is required:<span class="ml-3">{{data.needBy | date: 'dd/mm/yyyy'}}</span></p>
+          <p> Only certified PPE required:<span class="ml-3">{{data.certifiedPpe}}</span></p>
          </div>
-      
+
         <!-- <div formGroupName="ppes">
 
 
@@ -51,18 +51,18 @@
         <div formGroupName="ppes">
           <div class="form-group formStyle p-5 mb-5 firstCard">
             <label class="mk-required" for="PPE">Submit Bid</label>
-            <div *ngFor="let ppe of submitbidForm.controls.ppes['controls']['controls']; let i = index " [formGroupName]="i">
+            <div *ngFor="let ppe of submitbidForm.controls.ppes['controls']; let i = index " [formGroupName]="i">
               <div class="row" >
                 <div class="form-check col-lg-8 col-md-6 mt-2 mb-2 checkbox">
                   <label class="mk-checkbox-container pt-3" for="defaultCheck{{i}}">
-                    <input id="defaultCheck{{i}}" type="checkbox" [formControlName]="newList[i].ppeName" (change)="onTogglePpe(i)" >
+                    <input id="defaultCheck{{i}}" type="checkbox" [formControlName]="newlist[i].ppeName" (change)="onTogglePpe(i)" >
                     <i class="checkmark mt-3"></i>
-                    {{newList[i].ppeName}}
+                    {{newlist[i].ppeName}}
                   </label>
                 </div>
                 <div class="col-lg-4 col-md-6 mt-2 mb-md-2 mb-4">
                   <label>
-                    <input ncovNumeric type="text" class="form-control" placeholder="Quantity" [formControlName]="newList[i].ppeCost" >
+                    <input ncovNumeric type="text" class="form-control" placeholder="Quantity" [formControlName]="newlist[i].ppeCost" >
                   </label>
                 </div>
               </div>
@@ -101,11 +101,11 @@
                 No
               </label>
             </div>
-          </div> 
+          </div>
 
 
         <div class="form-submit">
-         
+
           <div class="email-copy-text mt-3">
             <small class="font-weight-bold">
               Medkonnect does not give any quality assurance to the consumers and shall not be liable for any defects arising out of non-compliance of,
@@ -122,4 +122,4 @@
       </form>
     </div>
   </div>
-</div> 
+</div>
