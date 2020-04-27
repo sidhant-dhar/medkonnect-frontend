@@ -56,6 +56,7 @@ export class NeedppeComponent implements OnInit {
     this.dataService.getPPEList().subscribe((res: PPEItemResponse) => {
       this.ppeList = res.list;
       this.createRequiredPPeList();
+      console.log(this.needppeForm);
     });
     // this.dataService.getStates().subscribe((res: {indianStates: string[]}) => {
     //   this.states = res.indianStates;

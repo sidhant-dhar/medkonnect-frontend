@@ -12,7 +12,7 @@ export class DashboardComponent implements OnInit {
 
   public mobile: boolean;
   public logoutFlag: boolean;
-  private personalData: PersonalData;
+  public personalData: PersonalData;
 
   constructor(
     private router: Router,
