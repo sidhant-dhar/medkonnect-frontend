@@ -52,102 +52,22 @@ export class HaveppeComponent implements OnInit {
       name: ['', [ Validators.required ]],
       city: ['', [ Validators.required ]],
       state: ['Andaman and Nicobar Islands', [ Validators.required ]],
-      address: ['', [ Validators.required ]],
+      address: [''],
       phoneNo: ['', [ Validators.required ]],
-      tnc: [true, [ Validators.required ]]
+      tnc: ['false', [ Validators.required ]]
     });
-    // this.dataService.getPPEList().subscribe((res: PPEItemResponse) => {
-    //   this.ppeList = res.list;
-    //   this.createRequiredPPeList();
-    // });
-
       this.dataService.getStates().subscribe((res: {indianStates: string[]}) => {
        this.states = res.indianStates;
      });
    }
 
-  //  get formArr() {
-  //   return this.haveppeForm.get('materialsRequired') as FormArray;
-  // }
-
-  // public createRequiredPPeList(): void {
-  //   this.ppeList.forEach((item: PPEItem, i) => {
-  //     const fg = this.formBuilder.group({});
-  //     fg.addControl(this.ppeList[i].ppe, this.formBuilder.control(false));
-  //     fg.addControl(this.ppeList[i].required, this.formBuilder.control(null));
-  //     fg.addControl(this.ppeList[i].otherPpe, this.formBuilder.control(null));
-  //     fg.controls.quantity.disable();
-  //     if (this.ppeList[i].ppe === 'Others') {
-  //       fg.controls.other.disable();
-  //     }
-  //     this.formArr.push(fg);
-  //   });
-  // }
-
-  // public toggleAdd(element) {
-  //   if (this.addFlag) {
-  //     this.haveppeForm.controls['materialsRequired'].disable();
-  //     this.addFlag = !this.addFlag;
-  //     element.textContent = 'Edit';
-  //   } else {
-  //     this.haveppeForm.controls['materialsRequired'].enable();
-  //     this.addFlag = !this.addFlag;
-  //     element.textContent = 'Add';
-  //   }
-  // }
-
   public onSubmit() {
 
-    // this.haveppeForm.controls['materialsRequired'].enable();
     const result = Object.assign({}, this.haveppeForm.value);
     result.email = this.data.email;
     result.password = this.data.password;
-    // result.materialsRequired = Object.assign({}, result.materialsRequired);
-    // const reqBody = {...this.haveppeForm.value};
-    // const matRequired = reqBody.materialsRequired.reduce((acc, cur) => {
-    //   const ppeItem = Object.keys(cur)[0];
-    //   if (cur.quantity && cur[ppeItem]) {
-    //     acc.push({
-    //       quantity: cur.quantity,
-    //       approved: 'true',
-    //       ppeName: ppeItem === 'Others' ? cur.other : ppeItem
-    //     });
-    //   }
-    //   return acc;
-    // }, []);
-
     delete result.tnc;
-    // const finalBody =  {
-    //   newSupplierDetails : { ...reqBody } ,
-    //   ppeArray: ''  // do not use spread operator as creates an array.
-    // };
-    // finalBody.ppeArray = Object.assign(matRequired);
-    // this.ppeItemSelected = finalBody.ppeArray.length > 0;
-    // if (!this.ppeItemSelected) {
-    //   return;
-    // }
     this.login(result);
-    // this.haveppeService.vendorSignIn(result).subscribe((res) => {
-    //   this.haveppeForm.reset();
-
-    //   this.dialogService.open({
-    //     title: 'Success!',
-    //     content: 'Request submitted successfully',
-    //     actions: [{primary: true, text: 'Ok'}]
-    //   });
-    //   this.dialogService.closeDialogEvent.subscribe((event) => {
-    //     if (event.action === 'Ok') {
-    //       this.router.navigate(['home']);
-    //     }
-    //     console.log('close event', event);
-    //   });
-    // }, () => {
-    //   this.dialogService.open({
-    //     title: 'Error!',
-    //     content: 'Request cannot be processed, please try again after sometime',
-    //     actions: [{primary: true, text: 'Ok'}]
-    //   });
-    // });
 
   }
 
@@ -191,43 +111,15 @@ export class HaveppeComponent implements OnInit {
                   actions: [{primary: true, text: 'Ok'}]
                 });
             });
-                // console.log('success', data);
-
-                // this.router.navigate([this.returnUrl]);
             },
             (error) => {
               console.log(error, 'error signup');
             });
    }
 
-
-  // public onTogglePpe(index: number): void {
-  //   const ppeFormArray = this.haveppeForm.get('materialsRequired') as FormArray;
-  //   const ppeFormArrayValue = ppeFormArray.value;
-  //   const ppeName = this.ppeList[index].ppe;
-  //   if (ppeFormArrayValue[index][ppeName]) {
-  //     ppeFormArray.controls[index]['controls'].quantity.enable();
-  //     if (ppeName === 'Others') {
-  //       ppeFormArray.controls[index]['controls'].other.enable();
-  //     }
-  //     // Adds validators when ppe item is checked
-  //     ppeFormArray.controls[index]['controls'].quantity.setValidators([Validators.required]);
-  //   } else {
-  //     if (ppeName === 'Others') {
-  //       ppeFormArray.controls[index]['controls'].other.disable();
-  //     }
-  //     ppeFormArray.controls[index]['controls'].quantity.disable();
-  //     // Removes validators when ppe item is unchecked
-  //     ppeFormArray.controls[index]['controls'].quantity.setValidators(null);
-  //   }
-  // }
-
   public ngOnInit() {
     this.sharedService.currentData.subscribe(data => this.data = data);
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dash';  // test
-
-    console.log(this.data.email);
-    console.log(this.data.password);
   }
 
 }

@@ -2,6 +2,8 @@ import { Component, OnInit} from '@angular/core';
 import { LiveDemandsService } from './live-demands.service';
 import { Router } from '@angular/router';
 import { SharedService } from '../../common/services/shared-service.service';
+import { formatDate } from '@angular/common';
+
 @Component({
   selector: 'ncov-live-demands',
   templateUrl: './live-demands.component.html',
@@ -27,7 +29,13 @@ export class LiveDemandsComponent implements OnInit {
     this.livedemandsService.dashboardDetails()
     .subscribe((data: any[]) => {
       this.dashboardArray = data;
-      console.log('response ', data);
+      this.dashboardArray.map(obj => {
+        const format = 'dd/MM/yyyy';
+        const locale = 'en-US';
+        const formattedDate = formatDate(obj.needBy, format, locale);
+        obj.date = formattedDate;
+      });
+      console.log('date dekho ', this.dashboardArray);
       this.tableData = this.getResultantArray(data);
       console.log('result ', this.tableData);
     }, error => {
@@ -66,7 +74,6 @@ export class LiveDemandsComponent implements OnInit {
 }
 
 public onSelectRow(row) {
-  console.log(row);
   this.onChangeData(row);
   this.router.navigate(['/submitbid']);
 

@@ -219,6 +219,7 @@ export class SubmitBidComponent implements OnInit {
     // Return the new array
     return objects;
   }
+
   public ngOnInit() {
 
   }

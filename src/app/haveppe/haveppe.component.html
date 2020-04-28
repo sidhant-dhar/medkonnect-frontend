@@ -70,7 +70,7 @@
           </div>
 
                   <div class="form-group formStyle p-5 mt-md-5 mb-5">
-          <label class="mk-required" for="address">Delivery Address</label>
+          <label for="address">Address(Optional)</label>
           <input type="address" id="address" class="form-control mt-md-5 mt-2 no-border" placeholder="Delivery Address"
             formControlName="address">
             <small class="text-danger" *ngIf="haveppeForm.controls.address.touched && haveppeForm.controls.address.errors?.required">This is a required field</small>
@@ -98,7 +98,7 @@
             </div>
   
           <div class="form-group formStyle  p-5 mt-md-5 mb-5">
-            <label for="registered">Is Your Organisation Registered?</label>
+            <label for="registered">Is Your Organisation Registered? Enter Registeration Number</label>
             <small class="form-text text-muted">It is preferable to provide a registration number for verification purposes. 
               Please leave the field blank if you are not registered.</small>
             <input ncovAlphaNumeric id="registered" type="registrationNo" class="form-control mt-md-5 mt-2 no-border" placeholder="Registeration Number."
@@ -129,7 +129,7 @@
               <label class="mk-checkbox-container pt-3" for="termsCondition">
                 <input id="termsCondition" type="checkbox" formControlName="tnc" >
                 <i class="checkmark mt-3"></i>
-                I have read and accepted the <span [routerLink]="'/build'" class="mk-terms">Terms and Conditions</span>
+                I have read and accepted the <span [routerLink]="'/tnc'" class="mk-terms">Terms and Conditions</span>
               </label>
             </div>
             <div class="email-copy-text mt-3">

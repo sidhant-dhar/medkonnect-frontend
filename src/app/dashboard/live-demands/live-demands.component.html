@@ -24,7 +24,7 @@
         <div class="col-2"><p class="px-3">{{row.requestorDetails[0].name}}  {{row.hospitalNgo}}</p></div>
         <div class="col-4"><p class="px-3">{{row.ppe}}</p></div>
         <div class="col-2"><p class="px-3">{{row.city}}</p></div>
-        <div class="col-2"><p class="px-3">{{row.needBy | date: 'dd/mm/yyyy'}}</p></div>
+        <div class="col-2"><p class="px-3">{{row.date}}</p></div>
         <div class="col-2"><button type="button" class="mk-btn-primary mx-auto w-100"  (click)="onSelectRow(row)" >Submit</button></div>
       </div>
     </div>
@@ -44,7 +44,7 @@
           </div>
           <div class="row py-1">
             <div class="col-12 col-sm-3 py-1 font-weight-bold">Required By</div>
-            <div class="col-12 col-sm-9 py-1">{{row.needBy | date: 'dd/mm/yyyy'}}</div>
+            <div class="col-12 col-sm-9 py-1">{{row.needBy | date: 'dd/MM/yyyy'}}</div>
           </div>
           <div class="row">
             <div class="col-6 ml-auto">

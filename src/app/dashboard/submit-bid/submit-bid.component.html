@@ -17,8 +17,8 @@
           <p> Name:<span class="ml-3">{{data.requestorDetails[0].name}}</span></p>
           <p> Organisation:<span class="ml-3">{{data.hospitalNgo}}</span></p>
           <p> City:<span class="ml-3">{{data.city}}</span></p>
-          <p> Date by which PPE is required:<span class="ml-3">{{data.needBy | date: 'dd/mm/yyyy'}}</span></p>
-          <p> Only certified PPE required:<span class="ml-3">{{data.certifiedPpe}}</span></p>
+          <p> Date by which PPE is required:<span class="ml-3">{{data.date}}</span></p>
+          <p> Only certified PPE required:<span class="ml-3">{{data.certifiedPpe? 'Yes' : 'No'}}</span></p>
          </div>
 
         <!-- <div formGroupName="ppes">
@@ -47,7 +47,7 @@
         </div> -->
 
         <div formGroupName="ppes">
-          <div class="form-group formStyle p-5 mb-5 firstCard">
+          <div class="form-group formStyle p-5 mt-md-5 mb-5">
             <label class="mk-required" for="PPE">Submit Bid</label>
             <div *ngFor="let ppe of submitbidForm.controls.ppes['controls']; let i = index " [formGroupName]="i">
               <div class="row" >
