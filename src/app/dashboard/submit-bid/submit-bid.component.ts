@@ -54,7 +54,7 @@ export class SubmitBidComponent implements OnInit {
     console.log(this.newlist);
     this.submitbidForm.patchValue({
       hospitalNgo: this.data.hospitalNgo,
-      requesterId: this.data.requestorDetails[0].userId
+      requesterId: this.data.requestorId
     });
     this.createRequiredPPeList();
 

@@ -61,3 +61,19 @@
   }
 }
 
+.carousel-caption{
+    @include media-breakpoint-up(sm){
+     top: 60%;
+   transform: translateY(-60%);
+   bottom: initial;
+ }
+   }
+ 
+   .item {
+     @include media-breakpoint-up(sm){
+     -webkit-transform-style: preserve-3d;
+     -moz-transform-style: preserve-3d;
+     transform-style: preserve-3d;
+   }
+}
+

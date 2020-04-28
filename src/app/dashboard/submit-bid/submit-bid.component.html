@@ -2,7 +2,7 @@
   <ncov-dialog></ncov-dialog>
   <div class="container-fluid no-padding">
     <div class="row mb-5">
-      <div class="col-md-12 px-0">
+      <div class="col-md-12 px-0 item">
         <img src="assets/images/hospitalHeader.png" alt="hospitalHeader" class="w-100" />
         <div class="carousel-caption">
           <h1 class="d-none d-sm-block pb-lg-4 headerText header">Please submit your bids here</h1>
@@ -14,7 +14,7 @@
       <form [formGroup]="submitbidForm">
         <div class="form-group formStyle  p-5 mb-5 firstCard">
           <label for="state">Hospital Details</label>
-          <p> Name:<span class="ml-3">{{data.requestorDetails[0].name}}</span></p>
+          <p> Name:<span class="ml-3">{{data.requestorName}}</span></p>
           <p> Organisation:<span class="ml-3">{{data.hospitalNgo}}</span></p>
           <p> City:<span class="ml-3">{{data.city}}</span></p>
           <p> Date by which PPE is required:<span class="ml-3">{{data.date}}</span></p>

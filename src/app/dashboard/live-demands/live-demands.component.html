@@ -21,7 +21,7 @@
         <div class="col-2 font-weight-bold"><p class="px-3">Become a Supplier</p></div>
       </div>
       <div *ngFor="let row of tableData" class="row py-1">
-        <div class="col-2"><p class="px-3">{{row.requestorDetails[0].name}}  {{row.hospitalNgo}}</p></div>
+        <div class="col-2"><p class="px-3">{{row.requestorName}}  {{row.hospitalNgo}}</p></div>
         <div class="col-4"><p class="px-3">{{row.ppe}}</p></div>
         <div class="col-2"><p class="px-3">{{row.city}}</p></div>
         <div class="col-2"><p class="px-3">{{row.date}}</p></div>
@@ -32,7 +32,7 @@
     <!-- Mobile View -->
     <div *ngFor = "let row of tableData" class="live-demands__mobile d-block d-lg-none px-3 px-sm-5 mx-auto pb-3" >
       <div class="card">
-        <div class="card-header"><h5>{{row.requestorDetails[0].name}} {{row.hospitalNgo}}</h5></div>
+        <div class="card-header"><h5>{{row.requestorName}} {{row.hospitalNgo}}</h5></div>
         <div class="card-body">
           <div class="row py-1">
             <div class="col-12 col-sm-3 py-1 font-weight-bold">PPE Needed</div>

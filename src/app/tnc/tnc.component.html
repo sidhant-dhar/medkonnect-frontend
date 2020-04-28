@@ -1,14 +1,24 @@
-<div class="container about-us">
-<div class="d-flex mb-5 page-header">
-  <div class="w-100 px-0 position-relative">
-    <img
-      src="assets/images/about-us-page-header.png"
-      alt="About us"
-      class="w-100"
-    />
-    <div class="carousel-caption">
-      <h1 class="d-none d-sm-block pb-lg-4 headerText header">Terms And Conditions</h1>
+<div class="d-flex flex-column about-us">
+  <div class="d-flex mb-5 page-header">
+    <div class="w-100 px-0 position-relative item">
+      <img
+        src="assets/images/about-us-page-header.png"
+        alt="About us"
+        class="w-100"
+      />
+      <div class="carousel-caption">
+        <h1 class="d-none d-sm-block pb-lg-4 headerText header">Terms And Conditions</h1>
+      </div>
     </div>
   </div>
-</div>
+  <div class="d-flex flex-column align-items-center container px-3 mb-4">
+    <h3 class="heading font-weight-bold">TERMS AND CONDITIONS FOR MEDKONNECT</h3>
+    <div class="mt-4" *ngFor = "let block of tncArray">
+      <h3 class="mt-lg-3 mt-2 heading font-weight-bold">{{block.heading}}</h3>
+      <div *ngFor = "let text of block.text">
+      <p class="text tncText pt-3">
+        {{text}}
+      </p>
+    </div>
+    </div>
 </div>
