@@ -86,7 +86,7 @@
         </div> -->
       
         <div formGroupName="materialsRequired">
-          <div class="form-group formStyle p-5 mb-5 firstCard">
+          <div class="form-group formStyle p-5 mb-3 firstCard">
             <label class="mk-required" for="PPE">What Do You Need</label>
             <div *ngFor="let ppe of needppeForm.controls.materialsRequired['controls']; let i = index " [formGroupName]="i">
               <div class="row" *ngIf="ppeList[i].ppe !== 'Others'">
@@ -97,7 +97,7 @@
                     {{ppeList[i].ppe}}
                   </label>
                 </div>
-                <div class="col-lg-4 col-md-6 mt-2 mb-md-2 mb-4">
+                <div class="col-lg-4 col-md-6 mt-2 mb-md-2 mb-3">
                   <label>
                     <input ncovNumeric type="text" class="form-control" placeholder="Quantity" [formControlName]="ppeList[i].required" >
                   </label>
@@ -111,10 +111,10 @@
                     {{ppeList[i].ppe}}
                   </label>
                 </div>
-                <div class="col-lg-4 col-md-6 mt-2 mb-md-2 mb-4">
+                <div class="col-lg-4 col-md-6 mt-2 mb-md-2 mb-3">
                   <input ncovAlphaNumeric type="text" class="form-control no-border w-100" placeholder="Other PPE Item" [formControlName]="ppeList[i].otherPpe" (change)="onTogglePpe(i)" >
                 </div>
-                <div class="col-lg-4 col-md-6 mt-2 mb-md-2 mb-4 ml-md-auto">
+                <div class="col-lg-4 col-md-6 mt-2 mb-md-2 mb-3 ml-md-auto">
                   <input ncovNumeric type="text" class="form-control" placeholder="Quantity" [formControlName]="ppeList[i].required">
                 </div>
               </div>
@@ -124,7 +124,7 @@
           </div>
         </div>
 
-        <div class="form-group formStyle p-5 mt-md-5 mb-5">
+        <div class="form-group formStyle p-5 mt-md-3 mb-3">
           <label class="mk-required" for="state">This PPE is requested by?</label>
           <select class="mk-select" formControlName="hospitalNgo" id="hospitalNgo" >
             <option class="mk-select-option" *ngFor="let organisation of organisations" [value]="organisation">{{organisation}}</option>
@@ -132,7 +132,7 @@
         </div>
 
           <!-- home made -->
-          <div class="form-group formStyle p-5 mt-md-5 mb-5">
+          <div class="form-group formStyle p-5 mt-md-3 mb-3">
             <label class="mk-required" for="homemade PPE">Are You Willing to Accept HomeMade or Uncertified PPE</label>
             <div class="px-3 px-md-4 mt-md-5 mt-2">
               <label class="mk-required" for="homeMade_true" class="mk-radio-yes mk-radio-container" >
@@ -149,14 +149,14 @@
           </div>
           <!-- home made ends -->
 
-          <div class="form-group formStyle p-5 mt-md-5 mb-5">
+          <div class="form-group formStyle p-5 mt-md-3 mb-3">
             <label class="mk-required pl-sm-2" for="InputName">Date by which PPE is Required</label>
             <input ncovAlphaNumeric id="InputDate" type="date" class="form-control mt-md-5 mt-2 no-border" aria-describedby="Yourname"
               placeholder="date" formControlName="needBy" [min]="getToday()">
             <small class="text-danger" *ngIf="needppeForm.controls.needBy.touched && needppeForm.controls.needBy.errors?.required">This is a required field</small>
           </div>
 
-          <div class="form-group formStyle p-5 mt-md-5 mb-5">
+          <div class="form-group formStyle p-5 mt-md-3 mb-3">
             <label class="mk-required pl-sm-2" for="InputName">City In which PPE is required</label>
             <input ncovAlphaNumeric id="InputCity" type="text" class="form-control mt-md-5 mt-2 no-border" aria-describedby="Yourcity"
               placeholder="City" formControlName="city">

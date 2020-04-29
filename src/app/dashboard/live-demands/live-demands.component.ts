@@ -52,6 +52,7 @@ export class LiveDemandsComponent implements OnInit {
       const userId = Object.values(this.pick(cur, ['hospitalNgo', 'certifiedPpe', 'date'])).join();
       if (cache.includes(userId)) {
       // const index = acc.findIndex(v => v['requestorDetails'][0]['userId'] === userId);
+      // tslint:disable-next-line: max-line-length
       const index = acc.findIndex(v => v['hospitalNgo'] === cur['hospitalNgo'] && v['certifiedPpe'] === cur['certifiedPpe'] && v['date'] === cur['date']);
       console.log('index ', index);
       console.log('acc ', acc);

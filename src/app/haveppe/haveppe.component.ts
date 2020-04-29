@@ -54,7 +54,7 @@ export class HaveppeComponent implements OnInit {
       state: ['Andaman and Nicobar Islands', [ Validators.required ]],
       address: [''],
       phoneNo: ['', [ Validators.required ]],
-      tnc: ['false', [ Validators.required ]]
+      tnc: [false, [ Validators.required ]]
     });
       this.dataService.getStates().subscribe((res: {indianStates: string[]}) => {
        this.states = res.indianStates;

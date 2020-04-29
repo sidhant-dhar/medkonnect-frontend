@@ -47,7 +47,7 @@ export class NeedppeComponent implements OnInit {
       // pinCode: ['', [ Validators.required ]],
       certifiedPpe : ['true', [ Validators.required ]],
       needBy: ['', [ Validators.required ]],
-      tnc: ['false', [ Validators.required ]],
+      tnc: [false, [ Validators.required ]],
       hospitalNgo: ['Hospitals'],
       maxPrice: ['1', Validators.required],
       city: ['', Validators.required], // Handle this from profile information
