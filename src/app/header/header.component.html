@@ -8,7 +8,8 @@
   <div class="collapse navbar-collapse text-right" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item border-right border-white pr-lg-4 pr-md-2">
-        <a class="header nav-link" href="#" [routerLink]="'/home'">Login/SignUp</a>
+        <a *ngIf = "isLoggedIn" class="header nav-link" href="#" [routerLink]="'/dash'">Dashboard</a>
+        <button *ngIf = "!isLoggedIn" class="mk-btn-primary mk-btn-login" data-toggle="modal" data-target="#getstartedModal">Login/SignUp</button>
       </li>
       <li class="nav-item border-right border-white pr-lg-4 pl-lg-4 pr-md-2 pl-md-2">
         <a class="nav-link header" href="#" [routerLink]="'/build'">Build</a>
@@ -19,5 +20,166 @@
           </ul>
       </div>
 </nav>
+
+
+ <!-- The Initial Modal ------>
+ <div class="modal fade" id="getstartedModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="text-center pt-3">
+        <img src="assets/images/Logo.png" alt="medkonnect logo">
+      </div>
+    
+      <div class="row pb-md-5 pb-3">
+        <div class="d-none d-md-block col-md-6 mt-5 pr-0">
+          <img src="assets/images/modalLogin.png" alt="popup image" class="w-100"/>
+        </div>
+        <div class="col-md-6 col-12 mt-5">
+          <div class="row mx-3">
+            <h4 class="modal-title col-12 header text-center mb-md-4 mb-3">GET STARTED</h4>
+            <button type="button" class="mk-btn-primary col-12 mb-md-4 mb-3" data-dismiss="modal" data-toggle="modal" data-target="#signUp">SIGN UP</button>
+            <button type="button" class="mk-btn-primary col-12 mb-md-4 mb-3" data-dismiss="modal" data-toggle="modal" data-target="#login">LOGIN</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!------------ENDS------------>
+
+<!-------SignUp Modal--------->
+<div class="modal fade" id="signUp">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-center">
+
+      
+      <div class="text-center pt-3">
+        <img src="assets/images/Logo.png" alt="medkonnect logo">
+      </div>
+    
+      <!-- Modal Header -->
+      <div class="modal-header mx-auto">
+        <h4 class="modal-title header">Sign Up</h4>
+      </div>
+      
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form [formGroup] = "signupForm">
+          <div class="form-group formStyle">
+            <input type="text" class="form-control" placeholder="Enter Email"
+              formControlName="email">
+              <small class="text-danger" *ngIf="this.signupForm.controls.email.touched && this.signupForm.controls.email.errors?.required" >
+                This field is required
+              </small>
+              <small class="text-danger" *ngIf="this.signupForm.controls.email.touched && this.signupForm.controls.email.errors?.email" >
+                Please input a valid Email address.
+              </small>
+            </div>
+
+            <div class="form-group formStyle">
+              <input type="password" class="form-control" placeholder="Enter New Password"
+                formControlName="password">
+                <small class="text-danger" *ngIf="this.signupForm.controls.password.touched && this.signupForm.controls.password.errors?.required" >
+                  This field is required
+                </small>
+                <small class="text-danger" *ngIf="this.signupForm.controls.password.touched && this.signupForm.controls.password.errors?.min" >
+                  Please input a password of at least 6 characters.
+                </small>
+              </div>
+               
+              <div class="form-group formStyle">
+                <input type="password" class="form-control" placeholder="Confirm Password"
+                  formControlName="confirmPassword">
+                  <small class="text-danger" *ngIf="this.signupForm.controls.confirmPassword.touched && this.signupForm.controls.confirmPassword.errors?.required" >
+                    This field is required
+                  </small>
+                  <small class="text-danger" *ngIf="this.signupForm.controls.confirmPassword.touched && this.signupForm.controls.confirmPassword.errors?.min" >
+                    Please input a password of at least 6 characters.
+                  </small>
+                  <small class="text-danger" *ngIf="this.signupForm.controls.errors?.invalid" >
+                    Please ensure the passwords are matching.
+                  </small>
+                </div>
+
+                <button type="button" class="mk-btn-primary mx-auto"
+            (click)="onSubmit('signUp')" [disabled]="!signupForm.valid" data-dismiss="modal">SIGN UP</button>
+
+        </form>
+      </div>
+      
+      <!-- Modal footer -->
+      <div class="modal-footer mx-auto">
+        <span class = "text">Already existing user?</span>
+        <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#login" class="medkonnect-landing__modalLink text">Login</a>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+
+<!------------SIGNUP ENDS------------>
+
+<!----------LOGIN------------->
+
+<div class="modal fade" id="login">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-center">
+
+      
+      <div class="text-center pt-3">
+        <img src="assets/images/Logo.png" alt="medkonnect logo">
+      </div>
+    
+      <!-- Modal Header -->
+      <div class="modal-header mx-auto">
+        <h4 class="modal-title header">Login</h4>
+      </div>
+      
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form [formGroup] = "loginForm">
+          <div class="form-group formStyle">
+            <input type="text" class="form-control" placeholder="Enter Email"
+              formControlName="email">
+              <small class="text-danger" *ngIf="this.loginForm.controls.email.touched && this.loginForm.controls.email.errors?.required" >
+                This field is required
+              </small>
+              <small class="text-danger" *ngIf="this.loginForm.controls.email.touched && this.loginForm.controls.email.errors?.email" >
+                Please input a valid Email address.
+              </small>
+            </div>
+
+            <div class="form-group formStyle">
+              <input type="password" class="form-control" placeholder="Enter New Password"
+                formControlName="password">
+                <small class="text-danger" *ngIf="this.loginForm.controls.password.touched && this.loginForm.controls.password.errors?.required" >
+                  This field is required
+                </small>
+                <small class="text-danger" *ngIf="this.loginForm.controls.password.touched && this.loginForm.controls.password.errors?.min" >
+                  Please input a password of at least 6 characters.
+                </small>
+              </div>
+                <button type="button" class="mk-btn-primary mx-auto"
+           (click)="onSubmit('login')" [disabled]="!loginForm.valid" data-dismiss="modal" >LOGIN</button>
+
+        </form>
+      </div>
+      
+      <!-- Modal footer -->
+      <div class="modal-footer mx-auto">
+        <span class = "text">New user?</span>
+        <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#signUp" class="medkonnect-landing__modalLink text">Sign Up</a>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+<!------------LOGIN ENDS------------>
 
 

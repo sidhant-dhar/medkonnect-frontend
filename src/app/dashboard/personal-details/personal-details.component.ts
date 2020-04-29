@@ -10,6 +10,7 @@ export class PersonalDetailsComponent implements OnInit {
 
   public personalData: any;
   public logoutFlag: boolean;
+  public showRegistration = true;
   constructor(
     private authService: AuthService
   ) {
@@ -17,6 +18,9 @@ export class PersonalDetailsComponent implements OnInit {
       if (x) {
       this.personalData = x.userData.profile[0];
       console.log(this.personalData, 'personal data');
+      if (this.personalData.company_registration_number === '') {
+        this.showRegistration = false;
+      }
       this.logoutFlag = false;
     }
     });

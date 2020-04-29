@@ -25,7 +25,9 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/.htaccess"
+              "src/.htaccess",
+              "src/appspec.yml",
+              "src/scriptsCICD"
             ],
             "styles": [
               "src/styles.scss"
