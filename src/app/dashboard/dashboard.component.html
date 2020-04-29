@@ -32,9 +32,13 @@
           <li class="nav-item mb-3">
             <a class="nav-link" id="supply-history-tab" data-toggle="tab" href="#supplyhistory" role="tab" aria-controls="contact" aria-selected="false">Supply History</a>
           </li> -->
-          <li class="nav-item">
+          <li class="nav-item mb-3">
             <a class="nav-link" id="notifications-tab" data-toggle="tab" href="#notifications" role="tab" aria-controls="contact" aria-selected="false">Latest Updates</a>
           </li>
+          <li class="nav-item ">
+            <a class="nav-link"  role="tab" aria-controls="contact" aria-selected="false" [routerLink]="'/about'">About Us</a>
+          </li>
+         
           <button type="button" class="btn btn-outline-light logoutBtn row ml-2 mx-auto d-flex justify-content-center mt-lg-5 mt-2 " (click) = logout()>LOGOUT</button>
 
         </ul>

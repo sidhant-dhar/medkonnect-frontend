@@ -77,3 +77,14 @@
  }
 }
 
+.firstCard {
+  border-top: 10px solid $btn-primary;
+    margin-top: 100px; 
+}
+
+.titleImage{
+  @include media-breakpoint-up(lg){
+    height: 250px;
+  }
+}
+
