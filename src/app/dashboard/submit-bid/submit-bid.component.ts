@@ -62,45 +62,12 @@ export class SubmitBidComponent implements OnInit {
 
   }
 
-  public submitdummy() {
-   const object = {                     // how payload must be sent
-     // logisticsHelp: false,
-     // hospitalNgo: 'Hospitals',
-     // requesterId: 'ae482a48-f294-4527-8338-2ceb312f2835',
-      ppes: [
-        {
-          ppeName: 'respirators',
-          ppeCost: 123
-        },
-        {
-          ppeName:  'Surgical Masks',
-          ppeCost: 234
-        },
-        {
-          ppeName: 'Gloves',
-          ppeCost: 2233
-        }
-      ],
-     // 's3Key': null
-    };
-
-    this.submitBidService.submit(object)
-    .subscribe((res) => {
-      console.log(res);
-    });
-
-  }
-
   public onTogglePpe(index: number): void {
     const ppeFormArray = this.submitbidForm.get('ppes') as FormArray;
     const ppeFormArrayValue = ppeFormArray.value;
     const ppeName = this.newlist[index].ppeName;
     if (ppeFormArrayValue[index][ppeName]) {
       ppeFormArray.controls[index]['controls'].ppeCost.enable();
-      // if (ppeName === 'Others') {
-      //   ppeFormArray.controls[index]['controls'].other.enable();
-      // }
-      // Adds validators when ppe item is checked
       ppeFormArray.controls[index]['controls'].ppeCost.setValidators([Validators.required]);
      } // else {
     //   if (ppeName === 'Others') {
@@ -136,6 +103,7 @@ export class SubmitBidComponent implements OnInit {
       }
       return acc;
     }, []);
+    console.log(matRequired);
     // delete reqBody.materialsRequired;
     // delete reqBody.tnc;
     // const finalBody =  {
@@ -143,10 +111,10 @@ export class SubmitBidComponent implements OnInit {
     //   ppes: ''
     // };
     // finalBody.ppes = Object.assign(matRequired);
-    // this.ppeItemSelected = matRequired.ppes.length > 0;
-    // if (!this.ppeItemSelected) {
-    //   return;
-    // // }
+    this.ppeItemSelected = matRequired.length > 0;
+    if (!this.ppeItemSelected) {
+      return;
+     }
     // reqBody.push(matRequired);
     delete reqBody.ppes;
     reqBody.ppes = matRequired;

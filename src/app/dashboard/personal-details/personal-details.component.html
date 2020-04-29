@@ -3,7 +3,7 @@
     <nav class="navbar navbar-expand-lg navbar-light w-100">
       <span class="navbar-brand pl-md-3 pl-2">Personal Details</span>
     </nav>
-    <div class="mt-5">
+    <div class="mt-4">
       <p class="profileHeading ml-3">FULL NAME</p>
       <p class="profileDetails ml-3 w-50 pt-2 pb-2 pl-2 pr-5">{{personalData.name}}</p>
       <p class="profileHeading ml-3">Email</p>
@@ -18,8 +18,8 @@
       <p class="profileDetails ml-3 w-50 pt-2 pb-2 pl-2 pr-5">{{personalData.pin_code}}</p>
       <p class="profileHeading ml-3">Phone number</p>
       <p class="profileDetails ml-3 w-50 pt-2 pb-2 pl-2 pr-5">{{personalData.phone_no}}</p>
-      <p class="profileHeading ml-3">Company Registration Number</p>
-      <p class="profileDetails ml-3 w-50 pt-2 pb-2 pl-2 pr-5">{{personalData.company_registration_number}}</p>
+      <p *ngIf = "showRegistration" class="profileHeading ml-3">Company Registration Number</p>
+      <p *ngIf = "showRegistration" class="profileDetails ml-3 w-50 pt-2 pb-2 pl-2 pr-5">{{personalData.company_registration_number}}</p>
     </div>
   </div>
 </div>

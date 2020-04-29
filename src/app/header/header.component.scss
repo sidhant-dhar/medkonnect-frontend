@@ -29,6 +29,11 @@
     }
 }
 
+.mk-btn-login{
+  background-color: transparent;
+  width: 150px;
+}
+
 /****************************Sticky Header Class********************************/
 
 .active{
@@ -54,6 +59,11 @@
         background-color: rgba(135, 135, 236, 0.8);
       }
     }
+
+    
+.mk-btn-login{
+  background-color: $btn-primary;
+}
 }
 
 .active .navbar-nav .nav-link{

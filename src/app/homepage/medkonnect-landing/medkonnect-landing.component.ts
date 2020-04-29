@@ -107,9 +107,9 @@ export class MedkonnectLandingComponent implements OnInit {
   //   this.router.navigate([route]);
   // }
 
-  public passwordConfirming(c: AbstractControl): { invalid: boolean } {
-    if (c.get('password').value !== c.get('confirmPassword').value) {
-        return {invalid: true};
-    }
-}
+    public passwordConfirming(c: AbstractControl): { invalid: boolean } {
+      if (c.get('password').value !== c.get('confirmPassword').value) {
+          return {invalid: true};
+      }
+  }
 }
