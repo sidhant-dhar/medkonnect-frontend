@@ -28,6 +28,7 @@ export class LiveDemandsComponent implements OnInit {
 
     this.livedemandsService.dashboardDetails()
     .subscribe((data: any[]) => {
+      console.log(data, 'result');
       this.dashboardArray = data;
       this.dashboardArray.map(obj => {
         const format = 'dd/MM/yyyy';
@@ -35,8 +36,8 @@ export class LiveDemandsComponent implements OnInit {
         const formattedDate = formatDate(obj.needBy, format, locale);
         obj.date = formattedDate;
       });
-      console.log('date dekho ', this.dashboardArray);
-      this.tableData = this.getResultantArray(data);
+      // console.log('date dekho ', this.dashboardArray);
+      this.tableData = this.getResultantArray(this.dashboardArray);
       console.log('result ', this.tableData);
     }, error => {
       console.log(error);
@@ -48,10 +49,10 @@ export class LiveDemandsComponent implements OnInit {
     const cache = [];
     return res.reduce((acc, cur) => {
       // const userId = cur['requestorDetails'][0]['userId'];
-      const userId = Object.values(this.pick(cur, ['hospitalNgo', 'certifiedPpe'])).join();
+      const userId = Object.values(this.pick(cur, ['hospitalNgo', 'certifiedPpe', 'date'])).join();
       if (cache.includes(userId)) {
       // const index = acc.findIndex(v => v['requestorDetails'][0]['userId'] === userId);
-      const index = acc.findIndex(v => v['hospitalNgo'] === cur['hospitalNgo'] && v['certifiedPpe'] === cur['certifiedPpe']);
+      const index = acc.findIndex(v => v['hospitalNgo'] === cur['hospitalNgo'] && v['certifiedPpe'] === cur['certifiedPpe'] && v['date'] === cur['date']);
       console.log('index ', index);
       console.log('acc ', acc);
       if (index !== -1) {
