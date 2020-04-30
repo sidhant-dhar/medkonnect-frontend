@@ -26,7 +26,7 @@ export class NeedppeComponent implements OnInit {
   public mciVerifiedFlag = false;
   public data: any;
 
-  public organisations = ['Hospitals', 'NGOs', 'Asha Workers'];
+  public organisations = ['Hospitals', 'NGOs', 'Asha Workers', 'Police', 'Suppliers', 'Others'];
   // tslint:disable-next-line: max-line-length
   public emailValidationRegex = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(?!hotmail|gmail|yahoo)(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
   constructor(

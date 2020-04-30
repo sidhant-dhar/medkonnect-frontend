@@ -22,7 +22,7 @@
         <div class="col-2 font-weight-bold text-center"><p class="px-3">Make a Proposal</p></div>
       </div>
       <div *ngFor="let row of tableData" class="row py-1">
-        <div class="col-2"><p class="px-3 text-center">{{row.requestorName}}  {{row.hospitalNgo}}</p></div>
+        <div class="col-2"><p class="px-3 text-center">{{row.requestorName}} ({{row.hospitalNgo}})</p></div>
         <div class="col-2"><p class="px-3 text-center">{{row.ppe}}</p></div>
         <div class="col-2"><p class="px-3 text-center">{{row.certifiedPpe ? 'Yes' : 'No'}}</p></div>
         <div class="col-2"><p class="px-3 text-center">{{row.city}}</p></div>
