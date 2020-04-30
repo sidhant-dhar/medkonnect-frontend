@@ -14,18 +14,20 @@
     <!-- Desktop view -->
     <div class="d-none d-lg-block">
       <div class="row columnHeading">
-        <div class="col-2 font-weight-bold"><p class="px-3">Requested By</p></div>
-        <div class="col-4 font-weight-bold"><p class="px-3">PPE Needed</p></div>
-        <div class="col-2 font-weight-bold"><p class="px-3">Location</p></div>
-        <div class="col-2 font-weight-bold"><p class="px-3">Required By</p></div>
-        <div class="col-2 font-weight-bold"><p class="px-3">Become a Supplier</p></div>
+        <div class="col-2 font-weight-bold text-center"><p class="px-3">Requested By</p></div>
+        <div class="col-2 font-weight-bold text-center"><p class="px-3">PPE Needed</p></div>
+        <div class="col-2 font-weight-bold text-center"><p class="px-3">Certified PPE</p></div>
+        <div class="col-2 font-weight-bold text-center"><p class="px-3">Location</p></div>
+        <div class="col-2 font-weight-bold text-center"><p class="px-3">Required By</p></div>
+        <div class="col-2 font-weight-bold text-center"><p class="px-3">Make a Proposal</p></div>
       </div>
       <div *ngFor="let row of tableData" class="row py-1">
-        <div class="col-2"><p class="px-3">{{row.requestorName}}  {{row.hospitalNgo}}</p></div>
-        <div class="col-4"><p class="px-3">{{row.ppe}}</p></div>
-        <div class="col-2"><p class="px-3">{{row.city}}</p></div>
-        <div class="col-2"><p class="px-3">{{row.date}}</p></div>
-        <div class="col-2"><button type="button" class="mk-btn-primary mx-auto w-100"  (click)="onSelectRow(row)" >Submit</button></div>
+        <div class="col-2"><p class="px-3 text-center">{{row.requestorName}}  {{row.hospitalNgo}}</p></div>
+        <div class="col-2"><p class="px-3 text-center">{{row.ppe}}</p></div>
+        <div class="col-2"><p class="px-3 text-center">{{row.certifiedPpe ? 'Yes' : 'No'}}</p></div>
+        <div class="col-2"><p class="px-3 text-center">{{row.city}}</p></div>
+        <div class="col-2"><p class="px-3 text-center">{{row.date}}</p></div>
+        <div class="col-2"><button type="button" class="mk-btn-primary mx-auto w-100"  (click)="onSelectRow(row)" >Supply</button></div>
       </div>
     </div>
     <!-- Desktop view ends -->
