@@ -49,11 +49,11 @@ export class LiveDemandsComponent implements OnInit {
     const cache = [];
     return res.reduce((acc, cur) => {
       // const userId = cur['requestorDetails'][0]['userId'];
-      const userId = Object.values(this.pick(cur, ['hospitalNgo', 'certifiedPpe', 'date'])).join();
+      const userId = Object.values(this.pick(cur, ['hospitalNgo', 'certifiedPpe', 'date', 'city'])).join();
       if (cache.includes(userId)) {
       // const index = acc.findIndex(v => v['requestorDetails'][0]['userId'] === userId);
       // tslint:disable-next-line: max-line-length
-      const index = acc.findIndex(v => v['hospitalNgo'] === cur['hospitalNgo'] && v['certifiedPpe'] === cur['certifiedPpe'] && v['date'] === cur['date']);
+      const index = acc.findIndex(v => v['hospitalNgo'] === cur['hospitalNgo'] && v['certifiedPpe'] === cur['certifiedPpe'] && v['date'] === cur['date'] && v['city'] === cur['city']);
       console.log('index ', index);
       console.log('acc ', acc);
       if (index !== -1) {
