@@ -45,7 +45,7 @@ export class NeedppeComponent implements OnInit {
       // address: ['', [ Validators.required ]],
       // state: ['Andaman and Nicobar Islands', [ Validators.required ]],
       // pinCode: ['', [ Validators.required ]],
-      certifiedPpe : ['true', [ Validators.required ]],
+      certifiedPpe : [true, [ Validators.required ]],
       needBy: ['', [ Validators.required ]],
       tnc: [false, [ Validators.required ]],
       hospitalNgo: ['Hospitals'],

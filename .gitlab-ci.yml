@@ -40,7 +40,7 @@ deploy:
     - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
     - aws configure set region us-east-1
     - ls -la -F
-    - mv dist/isso-ncov-frontend/appspec.yml dist/
+    - mv dist/isso-ncov-frontend/* dist/
     - cd dist
     - ls -al -F
     - cd ..
