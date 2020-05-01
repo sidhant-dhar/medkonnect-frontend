@@ -25,7 +25,7 @@ export class SubmitBidComponent implements OnInit {
   public addFlag = true;
   public ppeItemSelected = true;
   public data: any;
-  public ppeList: PPEListInterface[];
+  public ppeList: any;
   public newlist: any;
 
   constructor(
@@ -46,9 +46,9 @@ export class SubmitBidComponent implements OnInit {
     console.log(this.data);
 
     this.ppeList = this.data.ppe.split(',');
-    this.newlist = this.strings_to_object(this.ppeList);
+    const trimmedList = this.ppeList.map(obj => obj.trim());
+    this.newlist = this.strings_to_object(trimmedList);
     this.newlist.map(obj => {
-
       obj.ppeCost = 'ppeCost';
     });
     console.log(this.newlist);
@@ -86,11 +86,10 @@ export class SubmitBidComponent implements OnInit {
     const result = Object.assign({}, this.submitbidForm.value);
     result.ppes = Object.assign({}, result.ppes);
     const reqBody = {...this.submitbidForm.value};
-    console.log(reqBody, 'reqbody');
     const matRequired = reqBody.ppes.reduce((acc, cur) => {
       const ppeItem = Object.keys(cur)[0];
       const lastElementOfString = ppeItem.split(' ').slice(1).join(' '); // remove quantity and returns only ppeName
-      console.log(lastElementOfString);
+      console.log(lastElementOfString, 'final');
       if (cur.ppeCost && cur[ppeItem]) {
         acc.push({
           ppeCost: cur.ppeCost,
@@ -99,24 +98,15 @@ export class SubmitBidComponent implements OnInit {
         //  needBy: result.needBy,
         //  city: result.city,
         //  hospitalNgo: result.hospitalNgo,
-          ppeName: ppeItem === 'Others' ? cur.other : lastElementOfString
+          ppeName: lastElementOfString
         });
       }
       return acc;
     }, []);
-    console.log(matRequired);
-    // delete reqBody.materialsRequired;
-    // delete reqBody.tnc;
-    // const finalBody =  {
-    //   ...reqBody ,
-    //   ppes: ''
-    // };
-    // finalBody.ppes = Object.assign(matRequired);
     this.ppeItemSelected = matRequired.length > 0;
     if (!this.ppeItemSelected) {
       return;
      }
-    // reqBody.push(matRequired);
     delete reqBody.ppes;
     reqBody.ppes = matRequired;
     console.log(reqBody);
@@ -145,7 +135,6 @@ export class SubmitBidComponent implements OnInit {
   }
 
   public toggleAdd(element) {
-    console.log('toggleAdd: ', this.submitbidForm);
     if (this.addFlag) {
       this.submitbidForm.controls['ppes'].disable();
       this.addFlag = !this.addFlag;
@@ -162,7 +151,6 @@ export class SubmitBidComponent implements OnInit {
   }
 
   public createRequiredPPeList(): void {
-    console.log('new list ', this.newlist);
     this.newlist.forEach((item: PPEListInterface, i) => {
       const fg = this.formBuilder.group({});
       fg.addControl(this.newlist[i].ppeName, this.formBuilder.control(false));
@@ -188,6 +176,10 @@ export class SubmitBidComponent implements OnInit {
     // Return the new array
     return objects;
   }
+
+  public trim(str) {
+    return str.replace(/^\s+|\s+$/g, '');
+}
 
   public ngOnInit() {
 
