@@ -89,7 +89,8 @@ export class SubmitBidComponent implements OnInit {
     console.log(reqBody, 'reqbody');
     const matRequired = reqBody.ppes.reduce((acc, cur) => {
       const ppeItem = Object.keys(cur)[0];
-      const lastElementOfString = ppeItem.split(/[, ]+/).pop();
+      const lastElementOfString = ppeItem.split(' ').slice(1).join(' '); // remove quantity and returns only ppeName
+      console.log(lastElementOfString);
       if (cur.ppeCost && cur[ppeItem]) {
         acc.push({
           ppeCost: cur.ppeCost,
