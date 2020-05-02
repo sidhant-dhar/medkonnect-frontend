@@ -1,0 +1,32 @@
+.demands-dashboard{
+    @import '../../../scss/bootstrap';
+
+    &__heading{
+        font-family: 'OpenSans-Regular';
+        font-size: $spacer * 2.125;
+    }
+
+    .spinner-grow{
+        height: 2.5rem;
+        width: 2.5rem;
+    }
+    
+    &__cardHeading{
+        background-color: $btn-primary;
+        border-top-left-radius: $spacer * 0.9375;
+        border-top-right-radius: $spacer * 0.9375;
+    }
+
+    &__cardHeading>h5 {
+        color: $white;
+    }
+
+    &__card{
+        border-radius: $spacer * 0.9375;
+    }
+
+    &__bottomText{
+        font-size: $spacer;
+        font-weight: 500;
+    }
+}

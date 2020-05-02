@@ -1,0 +1,43 @@
+<div class = "demands-dashboard">
+  <div class="container-fluid">
+    <div class="row justify-content-center mt-lg-5 mt-3">
+    <div class="spinner-grow text-danger mr-2" role="status">
+      <span class="sr-only">Live Demands</span>
+    </div>
+    <h2 class="demands-dashboard__heading font-weight-bold">Active Demands</h2>
+  </div>
+  <div class="row justify-content-center mt-2 mt-lg-4">
+    <h6 class="heading text-center">You can view live demands here and propose offers, By clicking on “Supply Button”.</h6>
+    <h6 class="heading text-center">These Demands are raised by the Requesters of PPE across the Country.</h6>
+  </div>
+  <div class = "row mt-2 mt-lg-5 mb-2 mb-lg-5">
+      <div class="col-lg-4 col-md-6 col-12 d-flex align-items-stretch justify-content-center" *ngFor = "let row of tableData">
+      <div class="card mx-3 mb-4 demands-dashboard__card demands-dashboard__heartbeat">
+        <div class="card-header demands-dashboard__cardHeading"><h5 class="text-center">{{row.requestorName}} ({{row.hospitalNgo}})</h5></div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-5 font-weight-bold">PPE Needed</div>
+            <div class="col-7">{{row.ppe}}</div>
+          </div>
+          <div class="row">
+            <div class="col-5 py-1 font-weight-bold">Location</div>
+            <div class="col-7 py-1">{{row.city}}</div>
+          </div>
+          <div class="row py-1">
+            <div class="col-5 py-1 font-weight-bold">Required By</div>
+            <div class="col-7 py-1">{{row.date}}</div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-6 mx-auto">
+              <button type="button" class="mk-btn-primary mx-auto w-100">Supply</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 d-block ">
+    <p class="heading float-right mx-4 demands-dashboard__bottomText">for more Click Here</p>
+  </div>
+  </div>
+  </div>
+</div>

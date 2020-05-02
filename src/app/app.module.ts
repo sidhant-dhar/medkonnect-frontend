@@ -28,6 +28,7 @@ import { JwtInterceptorService } from './common/services/authentication/jwt-inte
 import { LiveDemandsComponent } from './dashboard/live-demands/live-demands.component';
 import { PersonalDetailsComponent } from './dashboard/personal-details/personal-details.component';
 import { SubmitBidComponent } from './dashboard/submit-bid/submit-bid.component';
+import { DemandsDashboardComponent } from './homepage/demands-dashboard/demands-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { SubmitBidComponent } from './dashboard/submit-bid/submit-bid.component'
     DashboardComponent,
     LiveDemandsComponent,
     PersonalDetailsComponent,
-    SubmitBidComponent
+    SubmitBidComponent,
+    DemandsDashboardComponent
   ],
   imports: [
     BrowserModule,
