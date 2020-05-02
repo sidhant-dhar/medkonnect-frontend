@@ -176,11 +176,6 @@ export class SubmitBidComponent implements OnInit {
     // Return the new array
     return objects;
   }
-
-  public trim(str) {
-    return str.replace(/^\s+|\s+$/g, '');
-}
-
   public ngOnInit() {
 
   }
