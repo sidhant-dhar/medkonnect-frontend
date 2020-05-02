@@ -34,7 +34,7 @@
     <!-- Mobile View -->
     <div *ngFor = "let row of tableData" class="live-demands__mobile d-block d-lg-none px-3 px-sm-5 mx-auto pb-3" >
       <div class="card">
-        <div class="card-header"><h5>{{row.requestorName}} {{row.hospitalNgo}}</h5></div>
+        <div class="card-header"><h5>{{row.requestorName}} ({{row.hospitalNgo}})</h5></div>
         <div class="card-body">
           <div class="row py-1">
             <div class="col-12 col-sm-3 py-1 font-weight-bold">PPE Needed</div>
@@ -46,11 +46,11 @@
           </div>
           <div class="row py-1">
             <div class="col-12 col-sm-3 py-1 font-weight-bold">Required By</div>
-            <div class="col-12 col-sm-9 py-1">{{row.needBy | date: 'dd/MM/yyyy'}}</div>
+            <div class="col-12 col-sm-9 py-1">{{row.date}}</div>
           </div>
           <div class="row">
             <div class="col-6 ml-auto">
-              <button type="button" class="mk-btn-primary mx-auto w-100"  (click)="onSelectRow(row)">Submit</button>
+              <button type="button" class="mk-btn-primary mx-auto w-100"  (click)="onSelectRow(row)">Supply</button>
             </div>
           </div>
         </div>
