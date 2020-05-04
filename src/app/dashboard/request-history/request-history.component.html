@@ -19,14 +19,80 @@
         <div class="col-2"><p class="px-3 text-center">{{row.quantity}}</p></div>
         <div class="col-2"><p class="px-3 text-center">{{row.date}}</p></div>
         <div class="col-2"><p class="px-3 text-center">{{row.ppe_cost}}</p></div>
-        <div class="col-2"><button type="button" class="mk-btn-primary mx-auto w-100"  (click)="onSelectsRow(row)" >Info</button></div>
+        <div class="col-2"><button type="button" class="mk-btn-primary mx-auto w-100"  data-toggle="modal" data-target="#requestHistoryModal" >Info</button></div>
+        <!-- Modal -->
+<div class="modal fade" id="requestHistoryModal" tabindex="-1" role="dialog" aria-labelledby="requestHistoryModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header ">
+        <h5 class="modal-title mx-auto" ><u>Supplier Details</u></h5>
+      </div>
+      <div class="modal-body">
+              <div class="row">
+                <div class="col-5">
+                  Name
+                </div>
+                <div class="col-7">
+                  {{row.name}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-5">
+                  Email
+                </div>
+                <div class="col-7">
+                  {{row.email}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-5">
+                  Phone No.
+                </div>
+                <div class="col-7">
+                  {{row.phone_no}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-5">
+                  City
+                </div>
+                <div class="col-7">
+                  {{row.city}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-5">
+                  State
+                </div>
+                <div class="col-7">
+                  {{row.state}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-5">
+                  Logistics Help
+                </div>
+                <div class="col-7">
+                  {{row.logistics_help}}
+                </div>
+              </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!----------------------------------------->
       </div>
     </div>
     <!-- Desktop view ends -->
 
 </div>
 <div class="request-history__help mx-auto mt-3">
-  <h6><u>Need Help<i class="far fa-question-circle"></i></u></h6>
-  <h6 class="mt-3"><u>Have an issue with a Request Order?</u></h6>
-</div>
+  <a class="request-history__help-link" href="https://api.whatsapp.com/send?phone=919911224333">
+    <h6><u>Need Help<i class="far fa-question-circle"></i></u></h6>
+    <h6 class="mt-3"><u>Have an issue with a Request Order?</u></h6>  
+  </a>
+  </div>
 </div>

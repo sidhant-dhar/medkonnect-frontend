@@ -27,9 +27,9 @@ export class LiveDemandsComponent implements OnInit {
     this.sharedService.bidData.subscribe( data => this.data = data);
 
     this.livedemandsService.dashboardDetails()
-    .subscribe((res: any[]) => {
-      console.log(res, 'result');
-      this.dashboardArray = res;
+    .subscribe((data: any[]) => {
+      console.log(data, 'result');
+      this.dashboardArray = data;
       this.dashboardArray.map(obj => {
         const format = 'dd/MM/yyyy';
         const locale = 'en-US';
@@ -76,6 +76,7 @@ export class LiveDemandsComponent implements OnInit {
 }
 
 public onSelectRow(row) {
+  this.onChangeData(row);
   this.router.navigate(['/submitbid']);
 
 }
