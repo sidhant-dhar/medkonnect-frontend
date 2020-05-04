@@ -1,0 +1,32 @@
+<div class="request-history">
+  <nav class="navbar navbar-expand-lg navbar-light w-100">
+    <div class="navbar-brand pl-md-3 pl-2 mx-auto mr-md-auto">Request History</div>
+  </nav>
+  <div class="liveDemandsTable mx-auto mt-md-5 mt-3">
+<!-- Desktop view -->
+    <div class="d-none d-lg-block request-history__table">
+      <div class="row columnHeading pt-2">
+        <div class="col-2 font-weight-bold text-center"><p class="px-3">No.</p></div>
+        <div class="col-2 font-weight-bold text-center"><p class="px-3">PPE Name</p></div>
+        <div class="col-2 font-weight-bold text-center"><p class="px-3">Requested Quantity</p></div>
+        <div class="col-2 font-weight-bold text-center"><p class="px-3">Date of Request</p></div>
+        <div class="col-2 font-weight-bold text-center"><p class="px-3">Cost Offered</p></div>
+        <div class="col-2 font-weight-bold text-center"><p class="px-3">Supplier Details</p></div>
+      </div>
+      <div *ngFor="let row of orderDetails; let i = index" class="row py-1">
+        <div class="col-2"><p class="px-3 text-center">{{i+1}}</p></div>
+        <div class="col-2"><p class="px-3 text-center">{{row.ppe_name}}</p></div>
+        <div class="col-2"><p class="px-3 text-center">{{row.quantity}}</p></div>
+        <div class="col-2"><p class="px-3 text-center">{{row.date}}</p></div>
+        <div class="col-2"><p class="px-3 text-center">{{row.ppe_cost}}</p></div>
+        <div class="col-2"><button type="button" class="mk-btn-primary mx-auto w-100"  (click)="onSelectsRow(row)" >Info</button></div>
+      </div>
+    </div>
+    <!-- Desktop view ends -->
+
+</div>
+<div class="request-history__help mx-auto mt-3">
+  <h6><u>Need Help<i class="far fa-question-circle"></i></u></h6>
+  <h6 class="mt-3"><u>Have an issue with a Request Order?</u></h6>
+</div>
+</div>

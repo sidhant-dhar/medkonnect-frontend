@@ -29,6 +29,7 @@ import { LiveDemandsComponent } from './dashboard/live-demands/live-demands.comp
 import { PersonalDetailsComponent } from './dashboard/personal-details/personal-details.component';
 import { SubmitBidComponent } from './dashboard/submit-bid/submit-bid.component';
 import { DemandsDashboardComponent } from './homepage/demands-dashboard/demands-dashboard.component';
+import { RequestHistoryComponent } from './dashboard/request-history/request-history.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { DemandsDashboardComponent } from './homepage/demands-dashboard/demands-
     LiveDemandsComponent,
     PersonalDetailsComponent,
     SubmitBidComponent,
-    DemandsDashboardComponent
+    DemandsDashboardComponent,
+    RequestHistoryComponent
   ],
   imports: [
     BrowserModule,

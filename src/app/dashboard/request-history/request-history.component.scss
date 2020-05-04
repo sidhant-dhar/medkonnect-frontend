@@ -1,0 +1,41 @@
+.request-history{
+    @import "../../../scss/bootstrap";
+    .navbar-light{
+        background-color: #C8E0F5;
+    }
+    
+    .navbar-light div{
+        font-family: 'Roboto-Regular';
+        font-style: italic;
+        font-weight: bold;
+    }
+
+    .columnHeading{
+        background-color: #ACA9A9;
+        font-family: 'Montserrat-Regular';
+    }
+
+    .liveDemandsTable{
+        width: 90%;
+        background-color: $white;
+        border-radius: 10px 10px 0px 0px;
+        @include media-breakpoint-down(md){
+            width: 100%;
+        }
+        @include media-breakpoint-up(lg){
+            overflow:auto;
+            height: 70vh;
+        }
+    
+        @include media-breakpoint-only(md){
+            overflow:auto;
+            height: 60vh;
+        }
+    
+    }
+
+    &__help{
+        width: 90%;
+        font-family: 'Montserrat-Regular';
+    }
+}
