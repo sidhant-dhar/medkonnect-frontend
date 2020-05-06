@@ -21,7 +21,7 @@ export class RequestHistoryComponent implements OnInit {
       this.orderDetails.map(obj => {
         const format = 'dd/MM/yyyy';
         const locale = 'en-US';
-        const formattedDate = formatDate(obj.created_timestamp, format, locale);
+        const formattedDate = formatDate(obj.need_by, format, locale);
         obj.date = formattedDate;
       });
       console.log(this.orderDetails, 'orderDetails');
