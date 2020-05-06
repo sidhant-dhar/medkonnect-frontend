@@ -28,7 +28,7 @@
         <h5 class="modal-title mx-auto" ><u>Supplier Details</u></h5>
       </div>
       <div class="modal-body">
-              <div class="row">
+              <div class="row pt-2">
                 <div class="col-5">
                   Name
                 </div>
@@ -36,7 +36,7 @@
                   {{row.name}}
                 </div>
               </div>
-              <div class="row">
+              <div class="row pt-2">
                 <div class="col-5">
                   Email
                 </div>
@@ -44,7 +44,7 @@
                   {{row.email}}
                 </div>
               </div>
-              <div class="row">
+              <div class="row pt-2">
                 <div class="col-5">
                   Phone No.
                 </div>
@@ -52,7 +52,7 @@
                   {{row.phone_no}}
                 </div>
               </div>
-              <div class="row">
+              <div class="row pt-2">
                 <div class="col-5">
                   City
                 </div>
@@ -60,7 +60,7 @@
                   {{row.city}}
                 </div>
               </div>
-              <div class="row">
+              <div class="row pt-2">
                 <div class="col-5">
                   State
                 </div>
@@ -68,17 +68,17 @@
                   {{row.state}}
                 </div>
               </div>
-              <div class="row">
+              <div class="row pt-2">
                 <div class="col-5">
                   Logistics Help
                 </div>
                 <div class="col-7">
-                  {{row.logistics_help}}
+                  {{row.logistics_help ? 'Yes' : 'No'}}
                 </div>
               </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn mk-btn-primary mx-auto" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
