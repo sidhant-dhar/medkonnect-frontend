@@ -31,7 +31,7 @@ export class LiveDemandsComponent implements OnInit {
       console.log(data, 'result');
       this.dashboardArray = data;
       this.dashboardArray.map(obj => {
-        const format = 'dd/MM/yyyy';
+        const format = 'yyyy-MM-dd';
         const locale = 'en-US';
         const formattedDate = formatDate(obj.needBy, format, locale);
         obj.date = formattedDate;
