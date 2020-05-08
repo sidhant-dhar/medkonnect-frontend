@@ -39,6 +39,8 @@ export class SubmitBidComponent implements OnInit {
       logisticsHelp: ['false'],
       hospitalNgo: [''],
       requesterId: [''],
+      city: [''],
+      timedate: [''],
       ppes : new FormArray([]),
       s3Key: [null]
     });
@@ -54,7 +56,9 @@ export class SubmitBidComponent implements OnInit {
     console.log(this.newlist);
     this.submitbidForm.patchValue({
       hospitalNgo: this.data.hospitalNgo,
-      requesterId: this.data.requestorId
+      requesterId: this.data.requestorId,
+      city: this.data.city,
+      timedate: this.data.date
     });
     this.createRequiredPPeList();
 
